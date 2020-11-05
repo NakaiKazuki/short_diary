@@ -4,14 +4,19 @@ services:
     build: .
     env_file:
       - ./environments/selenium.env
+      - ./environments/db.env
     volumes:
       - .:/short_diary_docker
+      - public-data:/short_diary_docker/public
+      - tmp-data:/short_diary_docker/tmp
+      - log-data:/short_diary_docker/log
     ports:
       - "3000:3000"
-    tty: true
     depends_on:
       - selenium_chrome
-    command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
+      - db
+    tty: true
+    command: bundle exec puma -C config/puma.rb
 
   selenium_chrome:
     image: selenium/standalone-chrome-debug
@@ -19,3 +24,30 @@ services:
       driver: none
     ports:
       - "4444:4444"
+
+  db:
+    # イメージを指定（後述）
+    image: mysql
+    env_file:
+      - ./environments/db.env
+    # ボリュームをマウント（後述）
+    volumes:
+      - db-data:/var/lib/mysql
+      - ./mysql-confd:/etc/mysql/conf.d
+
+  nginx:
+    build: containers/nginx
+    volumes:
+      - public-data:/short_diary_docker_docker/public
+      - tmp-data:/short_diary_docker_docker/tmp
+    # ホスト:コンテナのポートを指定
+    ports:
+      - "80:80"
+    depends_on:
+      - webapp
+# ボリュームとして扱うボリューム名
+volumes:
+  public-data:
+  tmp-data:
+  log-data:
+  db-data:
