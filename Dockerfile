@@ -22,7 +22,7 @@ RUN CHROMEDRIVER_VERSION=`curl -sS chromedriver.storage.googleapis.com/LATEST_RE
     && mv chromedriver /usr/local/bin/
 
 RUN apt-get update -qq && \
-    apt-get install -y build-essential nodejs imagemagick sqlite3 libsqlite3-dev
+    apt-get install -y build-essential nodejs imagemagick
 
 RUN mkdir /short_diary_docker
 
