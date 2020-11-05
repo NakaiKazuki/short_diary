@@ -1,0 +1,21 @@
+version: '3'
+services:
+  webapp:
+    build: .
+    env_file:
+      - ./environments/selenium.env
+    volumes:
+      - .:/short_diary_docker
+    ports:
+      - "3000:3000"
+    tty: true
+    depends_on:
+      - selenium_chrome
+    command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
+
+  selenium_chrome:
+    image: selenium/standalone-chrome-debug
+    logging:
+      driver: none
+    ports:
+      - "4444:4444"
