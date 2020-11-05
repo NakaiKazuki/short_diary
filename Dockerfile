@@ -1,10 +1,8 @@
 FROM ruby:2.7.2
 
 # yarnパッケージ管理ツールをインストール
-RUN apt-get update && apt-get install -y curl apt-transport-https wget && \
-    curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - && \
-    echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list && \
-    apt-get update && apt-get install -y yarn
+RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - \
+    && echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
 
 # Node.jsをインストール
 RUN curl https://deb.nodesource.com/setup_12.x | bash
@@ -22,7 +20,7 @@ RUN CHROMEDRIVER_VERSION=`curl -sS chromedriver.storage.googleapis.com/LATEST_RE
     && mv chromedriver /usr/local/bin/
 
 RUN apt-get update -qq && \
-    apt-get install -y build-essential nodejs imagemagick
+    apt-get install -y build-essential  imagemagick nodejs yarn
 
 RUN mkdir /short_diary_docker
 
@@ -38,10 +36,6 @@ RUN bundle install
 
 COPY . $APP_ROOT
 
-# コンテナが実行されるたびに実行されるスクリプト
-COPY entrypoint.sh /usr/bin/
-RUN chmod +x /usr/bin/entrypoint.sh
-ENTRYPOINT ["entrypoint.sh"]
-EXPOSE 3000
+RUN mkdir -p tmp/sockets
 
-CMD ["rails", "server", "-b", "0.0.0.0"]
+EXPOSE 3000

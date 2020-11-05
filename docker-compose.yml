@@ -26,11 +26,9 @@ services:
       - "4444:4444"
 
   db:
-    # イメージを指定（後述）
     image: mysql
     env_file:
       - ./environments/db.env
-    # ボリュームをマウント（後述）
     volumes:
       - db-data:/var/lib/mysql
       - ./mysql-confd:/etc/mysql/conf.d
@@ -40,12 +38,11 @@ services:
     volumes:
       - public-data:/short_diary_docker_docker/public
       - tmp-data:/short_diary_docker_docker/tmp
-    # ホスト:コンテナのポートを指定
     ports:
       - "80:80"
     depends_on:
       - webapp
-# ボリュームとして扱うボリューム名
+      
 volumes:
   public-data:
   tmp-data:
