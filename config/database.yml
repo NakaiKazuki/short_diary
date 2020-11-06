@@ -1,0 +1,23 @@
+default: &default
+  adapter: mysql2
+  encoding: utf8mb4
+  timeout: 5000
+  reconnect: false
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  username: root
+  password: password
+  host: db
+
+development:
+  <<: *default
+  database: short_diary_docker_development
+
+test:
+  <<: *default
+  database: short_diary_docker_test
+
+production:
+  <<: *default
+  database: short_diary_docker_production
+  username: short_diary_docker
+  password: <%= ENV['SHORT_DIARY_DOCKER_DATABASE_PASSWORD'] %>

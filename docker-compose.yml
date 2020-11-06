@@ -11,9 +11,8 @@ services:
       - tmp-data:/short_diary_docker/tmp
       - log-data:/short_diary_docker/log
     ports:
-      - "3000:3000"
+      - 3000:3000
     depends_on:
-      - selenium_chrome
       - db
     tty: true
     command: bundle exec puma -C config/puma.rb
@@ -23,7 +22,7 @@ services:
     logging:
       driver: none
     ports:
-      - "4444:4444"
+      - 4444:4444
 
   db:
     image: mysql
@@ -39,10 +38,10 @@ services:
       - public-data:/short_diary_docker_docker/public
       - tmp-data:/short_diary_docker_docker/tmp
     ports:
-      - "80:80"
+      - 80:80
     depends_on:
       - webapp
-      
+
 volumes:
   public-data:
   tmp-data:
