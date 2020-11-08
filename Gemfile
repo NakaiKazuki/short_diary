@@ -16,10 +16,6 @@ gem "bootstrap"
 gem "jquery-rails"
 gem "bcrypt"
 gem "rails-i18n"
-gem 'devise'
-gem 'omniauth-twitter'
-gem 'omniauth-facebook'
-gem 'omniauth-google-oauth2'
 
 group :development, :test do
   gem "mysql2"

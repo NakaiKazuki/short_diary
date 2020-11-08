@@ -4,7 +4,8 @@ FROM ruby:2.7.2
 RUN apt-get update -qq && \
     apt-get install -y build-essential \
                        nodejs \
-                       imagemagick
+                       imagemagick \
+                       vim
 
 # yarnパッケージ管理ツールインストール
 RUN apt-get update && apt-get install -y curl apt-transport-https wget && \
