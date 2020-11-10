@@ -11,14 +11,12 @@ gem "webpacker"
 gem "turbolinks"
 gem "jbuilder"
 gem "bootsnap", require: false
-gem "rails-i18n"
 gem "bootstrap"
 gem "jquery-rails"
 gem "bcrypt"
 gem "rails-i18n"
 
 group :development, :test do
-  gem "mysql2"
   gem "byebug", platforms: [:mri, :mingw, :x64_mingw]
   gem "rspec-rails"
   gem "factory_bot_rails"
