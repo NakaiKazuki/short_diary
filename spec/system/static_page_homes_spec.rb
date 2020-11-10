@@ -11,8 +11,8 @@ RSpec.describe "StaticPageHomes", type: :system do
       expect(page).to have_link "アカウントを作成する",href: signup_path
     end
 
-    it "ゲストとしてログインするボタンがある" do
-      expect(page).to have_link "ゲストとしてログイン",href: login_path
-    end
+    # it "ゲストとしてログインするボタンがある" do
+    #   expect(page).to have_link "ゲストとしてログイン",href: login_path
+    # end
   end
 end
