@@ -4,15 +4,14 @@
     <title><%= full_title(yield(:title)) %></title>
     <%= render "layouts/rails_default" %>
     <%= render "layouts/shim" %>
+    <%= render "layouts/javascript"%>
   </head>
   <body>
-    <%= render 'layouts/header' %>
-    <div class="container-fluid">
-      <% flash.each do |message_type, message| %>
-        <%= tag.div message, class: "alert alert-#{message_type}" %>
-      <% end %>
+    <%= render "layouts/header" %>
+    <div class="container-field">
+      <%= render "shared/flash" %>
       <%= yield %>
-      <%= debug(params) if Rails.env.development? %>
     </div>
+    <%= debug(params) if Rails.env.development? %>
   </body>
 </html>

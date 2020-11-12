@@ -39,13 +39,16 @@ RSpec.configure do |config|
   # ---Helperを使うために追加---
   config.include ApplicationHelpers
   # ------
-  # ---FactoryBotのために追加---
+
+  # ---記述少なくするために追加---
   config.include FactoryBot::Syntax::Methods
+  config.include Devise::Test::IntegrationHelpers, type: :request
   # ------
+  
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
 
   config.use_transactional_fixtures = true
-  
+
 #---RSspecを動かすのに必要---
   config.before(:each, type: :system) do
     driven_by :rack_test

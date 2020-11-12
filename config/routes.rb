@@ -1,6 +1,4 @@
 Rails.application.routes.draw do
+  devise_for :users
   root "static_pages#home"
-  get  "/signup" , to: "users#new"
-  post  "/signup",  to: "users#create"
-  resources :users,only: [:new,:create,:destroy]
 end

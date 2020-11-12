@@ -16,7 +16,9 @@
 // 共通
 body{
  background-image: image-url("background.jpg");
+ padding-top: 4.22875rem;
 }
+
 // header
 .navbar-extend {
   margin-bottom: 0;
@@ -24,7 +26,6 @@ body{
   ul li a button {
     padding: 0.375rem 1.5rem;
   }
-  margin-bottom:6rem;
 }
 
 .navbar-brand{
@@ -37,23 +38,42 @@ body{
   letter-spacing: 0.07rem;
 }
 
-.btn-extend{
-  font-size: 1.43rem;
-  background-color:white;
-  padding: 0.28rem 0.92rem 0.42rem 0.92rem;
-  margin: 0.14rem;
-  border-radius: 0.63rem;
-  letter-spacing: 0.07rem;
+.nav-item-extend{
+  a{
+    margin-left: 1rem;
+    float: right;
+    margin-top: 0.6rem;
+  }
+  .btn-extend{
+    font-size: 1.43rem;
+    padding: 0.28rem 0.92rem 0.42rem 0.92rem;
+    margin: 0.14rem;
+    border-radius: 0.63rem;
+    letter-spacing: 0.07rem;
+  }
 }
 
+// Alert
+ .alert{
+   margin:2rem 0;
+   text-align: center;
+   padding: 1.3rem 0;
+ }
+ .alert-notice{
+   color: #155724;
+   background-color: #d4edda;
+ }
+ .alert-alert{
+   color: #721c24;
+   background-color: #f8d7da;
+ }
+
 // jumbotron
-.jumbotron{
-  margin-top:3.49rem;
+.jumbotron-extend {
   background-image: image-url("note.jpg");
   background-size: cover;
   background-repeat: no-repeat;
   .container {
-    margin-top: 6rem;
     h1,p {
       color:black;
       margin-bottom: 0.75rem;
@@ -71,10 +91,42 @@ body{
   }
 }
 
-// signup
+// Form
+.form-group:first-of-type{
+  margin-top: 1.8rem;
+}
+.form-group{
+  padding:0.4rem 0;
+}
+.form-submit{
+  font-size:1.2rem;
+}
 
-.signup-container {
-  width: 100%;
-  margin-top: 6rem;
-  padding-top: 1rem !important;
+// Formエラー表示
+#error_explanation {
+  text-align: center;
+  color: red;
+  ul {
+    display: inline-block;
+    text-align: left;
+    color: red;
+    padding:1rem 0 ;
+  }
+}
+.field_with_errors .form-control {
+  border-color: red;
+}
+
+// Signup
+.signup-container,.login-container{
+  margin-top:5rem;
+  padding:3.5rem;
+  background-color:white;
+  border: 0.63rem solid skyblue;
+  border-radius: 4.4rem;
+  text-align: center;
+  .title-container{
+    color:lightskyblue;
+    letter-spacing: 0.15rem;
+  }
 }

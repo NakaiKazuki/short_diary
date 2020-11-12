@@ -6,7 +6,11 @@
   </button>
   <div id="menu" class="collapse navbar-collapse">
     <ul class="navbar-nav ml-auto">
-      <li class="nav-item nav-item-extend"><%= link_to "Login", "#", class: "btn btn-outline-info btn-extend" %></li>
+      <% if user_signed_in? %>
+        <%= render "layouts/login_user_header" %>
+      <% else %>
+        <%= render "layouts/logout_user_header" %>
+      <% end %>
     </ul>
   </div>
 </nav>
