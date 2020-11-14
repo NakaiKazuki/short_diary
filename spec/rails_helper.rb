@@ -3,7 +3,8 @@ ENV['RAILS_ENV'] ||= 'test'
 require File.expand_path('../config/environment', __dir__)
 abort("The Rails environment is running in production mode!") if Rails.env.production?
 require 'rspec/rails'
-
+# devise追加
+# require 'devise'
 #---ブラウザテストでメールのテストをするために---
 Capybara.server_host = "webapp"
 Capybara.server_port = 3001
@@ -43,8 +44,12 @@ RSpec.configure do |config|
   # ---記述少なくするために追加---
   config.include FactoryBot::Syntax::Methods
   config.include Devise::Test::IntegrationHelpers, type: :request
+  config.include Devise::Test::IntegrationHelpers, type: :system
   # ------
-  
+
+  config.include Devise::Test::IntegrationHelpers, type: :request
+  config.include Devise::Test::IntegrationHelpers, type: :system
+
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
 
   config.use_transactional_fixtures = true
