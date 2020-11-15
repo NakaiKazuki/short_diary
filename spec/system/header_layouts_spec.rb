@@ -9,6 +9,7 @@ RSpec.describe "SiteLayouts", type: :system do
       visit root_path
       expect(page).to have_title "Short Diary"
     end
+    
     context "ログアウト状態でアクセスした場合" do
       before do
         visit root_path
