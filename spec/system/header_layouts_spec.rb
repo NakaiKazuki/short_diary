@@ -9,7 +9,7 @@ RSpec.describe "SiteLayouts", type: :system do
       visit root_path
       expect(page).to have_title "Short Diary"
     end
-    
+
     context "ログアウト状態でアクセスした場合" do
       before do
         visit root_path
@@ -33,13 +33,13 @@ RSpec.describe "SiteLayouts", type: :system do
       it "ログインページへのリンクはない" do
         expect(page).not_to have_link "Login" , href: new_user_session_path
       end
-      describe "ログアウトボタンがある" do
 
+      describe "ログアウトボタンがある" do
         it "ログアウトボタンがある" do
           expect(page).to have_link "Logout" , href: destroy_user_session_path
         end
 
-        it "クリックでログアウトメッセージ表示" do
+        it "クリックでログアウト完了メッセージ表示" do
           find_link("Logout").click
           expect(page).to have_selector ".alert-notice"
         end

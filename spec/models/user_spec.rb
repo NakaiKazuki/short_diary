@@ -2,7 +2,11 @@ require 'rails_helper'
 
 RSpec.describe User, type: :model do
 
-  let(:user) { create(:user) }
+  let(:user) { User.new(
+    email: "user@example.com",
+    password: "password",
+    password_confirmation: "password"
+  ) }
 
   describe "User" do
     it "有効" do

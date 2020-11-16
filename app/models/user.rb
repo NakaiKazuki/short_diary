@@ -1,6 +1,7 @@
 class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable
+         :recoverable, :rememberable, :validatable,
+         :confirmable
          # 未使用 :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
 
   before_save :downcase_email

@@ -45,6 +45,16 @@ RSpec.describe "DeviseLogins", type: :system do
         visit new_user_session_path
       end
 
+      describe "ページ内のリンク表示確認" do
+        it "アカウント登録ページへのリンク" do
+          expect(page).to have_link "アカウントが無い方はこちら", href: new_user_registration_path
+        end
+
+        it "チェックボックス" do
+          expect(page).to have_text "次からログインを省略する"
+        end
+      end
+
       context "無効なパラメータを送信した場合" do
         it "同じ画面が表示" do
           submit_with_invalid_information
@@ -85,26 +95,20 @@ RSpec.describe "DeviseLogins", type: :system do
         before  do
           submit_with_valid_information
         end
+
         it "ホーム画面に移動する" do
           expect(current_path).to eq root_path
         end
+
         describe "ログイン完了メッセージが表示される" do
           it "ログイン完了メッセージを表示" do
             expect(page).to have_selector ".alert-notice"
           end
+
           it "ページ再表示でログイン完了メッセージ消滅" do
             visit new_user_session_path
             expect(page).not_to have_selector ".alert-notice"
           end
-        end
-      end
-
-      describe "ページ内のリンク表示確認" do
-        it "アカウント登録ページへのリンク" do
-          expect(page).to have_link "アカウントが無い方はこちら", href: new_user_registration_path
-        end
-        it "チェックボックス" do
-          expect(page).to have_text "次からログインを省略する"
         end
       end
     end
@@ -123,6 +127,7 @@ RSpec.describe "DeviseLogins", type: :system do
       it "自動でホームへ移動" do
         expect(current_path).to eq root_path
       end
+      
       describe "アラートが表示される" do
         it "アラートが表示" do
           expect(page).to have_selector ".alert-alert"

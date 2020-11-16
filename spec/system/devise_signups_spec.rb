@@ -1,8 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe "DeviseSignups", type: :system do
-  let(:user) { create(:user) }
-  
+
+  let(:user) { create(:user,:confirmed_nil) }
+  let(:activate_user) { create(:user) }
+
   # 全てが無効なパラメータ
   def submit_with_invalid_information
     fill_in "メールアドレス（例：email@example.com）", with: "user@invalid"
@@ -63,7 +65,7 @@ RSpec.describe "DeviseSignups", type: :system do
         expect(current_path).to eq new_user_registration_path
       end
 
-      describe "ページ内要素の表示確認" do
+      describe "ページ内リンクの表示確認" do
         it "ログインページへのリンク" do
           expect(page).to have_link "アカウントをお持ちの方はこちら",href: new_user_session_path
         end
@@ -121,26 +123,31 @@ RSpec.describe "DeviseSignups", type: :system do
         end
 
         describe "アカウント登録に付随する処理" do
-          before do
-            submit_with_valid_information
+          it "メールが送信される" do
+            expect{
+              submit_with_valid_information
+              }.to change{ ActionMailer::Base.deliveries.size }.by(1)
           end
 
           it "ホーム画面に移動" do
+            submit_with_valid_information
             expect(current_path).to eq root_path
           end
 
-          it "登録完了メッセージが表示" do
+          it "本登録用メール送信メッセージが表示" do
+            submit_with_valid_information
             expect(page).to have_selector ".alert-notice"
           end
         end
       end
 
-      context "登録完了メッセージ表示後ページを再表示した場合" do
+      context "本登録用メール送信メッセージの表示後ページを再表示した場合" do
         before do
           submit_with_valid_information
           visit root_path
         end
-        it "登録完了メッセージは消える" do
+
+        it "メール送信メッセージは消える" do
           expect(page).not_to have_selector ".alert-notice"
         end
       end
@@ -149,7 +156,7 @@ RSpec.describe "DeviseSignups", type: :system do
     context "ログイン状態でアクセスした場合" do
       # ユーザーがログイン後登録画面に移動
       before do
-        sign_in user
+        sign_in activate_user
         visit new_user_registration_path
       end
 
