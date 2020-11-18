@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "DeviseLogins", type: :system do
   let(:user) { create(:user) }
-
+  let(:non_activate) { create(:user,:non_activate) }
   # 全て無効なパラメータ
   def submit_with_invalid_information
     fill_in "メールアドレス", with: ""
@@ -32,7 +32,7 @@ RSpec.describe "DeviseLogins", type: :system do
   end
 
   # 全て有効なパラメータ
-  def submit_with_valid_information
+  def submit_with_valid_information(user)
     fill_in "メールアドレス", with: user.email
     fill_in "パスワード", with: user.password
     find(".form-submit").click
@@ -45,9 +45,17 @@ RSpec.describe "DeviseLogins", type: :system do
         visit new_user_session_path
       end
 
-      describe "ページ内のリンク表示確認" do
+      describe "ページ内の要素の表示確認" do
         it "アカウント登録ページへのリンク" do
           expect(page).to have_link "アカウントが無い方はこちら", href: new_user_registration_path
+        end
+
+        it "パスワードリセットページへのリンク" do
+          expect(page).to have_link "パスワードを忘れた方はこちら", href: new_user_password_path
+        end
+
+        it "認証メール再送信ページへのリンク" do
+          expect(page).to have_link "再度認証メールを送信する方はこちら", href: new_user_confirmation_path
         end
 
         it "チェックボックス" do
@@ -61,7 +69,7 @@ RSpec.describe "DeviseLogins", type: :system do
           expect(page).to have_selector ".login-container"
         end
 
-        describe "アラートが表示される" do
+        describe "警告メッセージが表示" do
           it "全項目が無効" do
             submit_with_invalid_information
             expect(page).to have_selector ".alert-alert"
@@ -82,10 +90,9 @@ RSpec.describe "DeviseLogins", type: :system do
             expect(page).to have_selector ".alert-alert"
           end
 
-          it "ページ再表示でアラート消滅" do
-            submit_with_invalid_information
-            visit new_user_session_path
-            expect(page).not_to have_selector ".alert-alert"
+          it "認証前のログインは無効" do
+            submit_with_valid_information(non_activate)
+            expect(page).to have_selector ".alert-alert"
           end
         end
       end
@@ -93,7 +100,7 @@ RSpec.describe "DeviseLogins", type: :system do
       context "有効なパラメータを送信した場合" do
         # 有効なパラメータを送信
         before  do
-          submit_with_valid_information
+          submit_with_valid_information(user)
         end
 
         it "ホーム画面に移動する" do
@@ -127,16 +134,9 @@ RSpec.describe "DeviseLogins", type: :system do
       it "自動でホームへ移動" do
         expect(current_path).to eq root_path
       end
-      
-      describe "アラートが表示される" do
-        it "アラートが表示" do
-          expect(page).to have_selector ".alert-alert"
-        end
 
-        it "ページ再表示でアラート消滅" do
-          visit root_path
-          expect(page).not_to have_selector ".alert-alert"
-        end
+      it "警告メッセージが表示" do
+        expect(page).to have_selector ".alert-alert"
       end
     end
   end

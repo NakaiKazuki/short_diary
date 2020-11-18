@@ -5,8 +5,11 @@ FactoryBot.define do
     password_confirmation{"password"}
     confirmed_at { Date.today }
 
-    trait :confirmed_nil do
+    trait :non_activate do
       confirmed_at { nil }
+    end
+    trait :another_email  do
+      email{"another@example.com"}
     end
   end
 end

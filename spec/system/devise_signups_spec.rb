@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "DeviseSignups", type: :system do
 
-  let(:user) { create(:user,:confirmed_nil) }
+  let(:user) { create(:user,:non_activate) }
   let(:activate_user) { create(:user) }
 
   # 全てが無効なパラメータ
@@ -69,6 +69,10 @@ RSpec.describe "DeviseSignups", type: :system do
         it "ログインページへのリンク" do
           expect(page).to have_link "アカウントをお持ちの方はこちら",href: new_user_session_path
         end
+
+        it "認証メール再送信ページへのリンク" do
+          expect(page).to have_link "再度認証メールを送信する方はこちら", href: new_user_confirmation_path
+        end
       end
 
       context "無効なパラメータを送信した場合" do
@@ -82,7 +86,7 @@ RSpec.describe "DeviseSignups", type: :system do
           expect(page).to have_selector ".alert-danger"
         end
 
-        describe "アカウントは登録されない" do
+        describe "各項目が無効な値の場合ユーザーは登録されない" do
           it "全項目が無効" do
             expect{
               submit_with_invalid_information
@@ -134,21 +138,10 @@ RSpec.describe "DeviseSignups", type: :system do
             expect(current_path).to eq root_path
           end
 
-          it "本登録用メール送信メッセージが表示" do
+          it "アカウント有効化メール送信メッセージが表示" do
             submit_with_valid_information
             expect(page).to have_selector ".alert-notice"
           end
-        end
-      end
-
-      context "本登録用メール送信メッセージの表示後ページを再表示した場合" do
-        before do
-          submit_with_valid_information
-          visit root_path
-        end
-
-        it "メール送信メッセージは消える" do
-          expect(page).not_to have_selector ".alert-notice"
         end
       end
     end
@@ -168,7 +161,7 @@ RSpec.describe "DeviseSignups", type: :system do
         expect(current_path).to eq root_path
       end
 
-      it "アラートが表示" do
+      it "警告メッセージが表示" do
         expect(page).to have_selector ".alert-alert"
       end
     end
