@@ -8,6 +8,7 @@ RSpec.describe "DeviseConfirmations", type: :system do
 
   let(:user) { create(:user) }
   let!(:non_activate) { create(:user,:non_activate,:another_email) }
+
   #メールアドレス未入力
   def submit_with_invalid_information
     fill_in "登録したメールアドレス", with: ""
