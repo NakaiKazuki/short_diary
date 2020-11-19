@@ -91,6 +91,23 @@ body{
   }
 }
 
+// フォームがある画面
+.signup-container,
+.login-container,
+.retransmission-container,
+.password-reset-container{
+  margin-top:3rem;
+  padding:3.5rem;
+  background-color:white;
+  border: 0.63rem solid skyblue;
+  border-radius: 4.4rem;
+  text-align: center;
+  .title-container{
+    color:lightskyblue;
+    letter-spacing: 0.15rem;
+  }
+}
+
 // Form
 .form-group:first-of-type{
   margin-top: 1.8rem;
@@ -115,18 +132,4 @@ body{
 }
 .field_with_errors .form-control {
   border-color: red;
-}
-
-// Signup
-.signup-container,.login-container,.retransmission-container{
-  margin-top:3rem;
-  padding:3.5rem;
-  background-color:white;
-  border: 0.63rem solid skyblue;
-  border-radius: 4.4rem;
-  text-align: center;
-  .title-container{
-    color:lightskyblue;
-    letter-spacing: 0.15rem;
-  }
 }

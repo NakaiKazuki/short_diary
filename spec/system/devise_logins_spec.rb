@@ -45,7 +45,7 @@ RSpec.describe "DeviseLogins", type: :system do
         visit new_user_session_path
       end
 
-      describe "ページ内の要素の表示確認" do
+      describe "ページ内のリンクの表示確認" do
         it "アカウント登録ページへのリンク" do
           expect(page).to have_link "アカウントが無い方はこちら", href: new_user_registration_path
         end
