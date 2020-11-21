@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "Devise_Session_News", type: :system do
+RSpec.describe "DeviseSessionNews", type: :system do
   let(:user) { create(:user) }
   let(:non_activate) { create(:user,:non_activate) }
 

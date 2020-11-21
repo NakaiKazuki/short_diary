@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "Account_Activation_Mails", type: :system do
+RSpec.describe "AccountActivationMails", type: :system do
   before do
     ActionMailer::Base.deliveries.clear
   end
@@ -13,7 +13,7 @@ RSpec.describe "Account_Activation_Mails", type: :system do
     find(".form-submit").click
   end
 
-  describe "アカウント有効化Email layout" do
+  describe "アカウント有効化メール layout" do
     # 本登録用のメールを送信しメールを開く
     before do
       user_create
