@@ -57,7 +57,7 @@ RSpec.describe "DevisePasswordNews", type: :system do
 
         it "同じ画面が表示される" do
           submit_with_invalid_information
-          expect(page).to have_selector ".password-reset-container"
+          expect(page).to have_selector ".password-reset-new-container"
         end
 
         describe "メールは送信されない" do
