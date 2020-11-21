@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "Account_Activations", type: :system do
+RSpec.describe "Account_Activation_Mails", type: :system do
   before do
     ActionMailer::Base.deliveries.clear
   end

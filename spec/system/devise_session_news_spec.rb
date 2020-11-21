@@ -1,8 +1,9 @@
 require 'rails_helper'
 
-RSpec.describe "DeviseLogins", type: :system do
+RSpec.describe "Devise_Session_News", type: :system do
   let(:user) { create(:user) }
   let(:non_activate) { create(:user,:non_activate) }
+
   # 全て無効なパラメータ
   def submit_with_invalid_information
     fill_in "メールアドレス", with: ""

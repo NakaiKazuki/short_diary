@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "DeviseConfirmations", type: :system do
+RSpec.describe "Devise_Confirmation_News", type: :system do
 
   before do
     ActionMailer::Base.deliveries.clear

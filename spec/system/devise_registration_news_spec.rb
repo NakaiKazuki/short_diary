@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "DeviseSignups", type: :system do
+RSpec.describe "Devise_Registration_News", type: :system do
 
   let(:user) { create(:user,:non_activate) }
   let(:activate_user) { create(:user) }

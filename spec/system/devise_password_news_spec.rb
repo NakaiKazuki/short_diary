@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "DevisePasswordResets", type: :system do
+RSpec.describe "Devise_Password_News", type: :system do
 
   let(:user) { create(:user) }
 
