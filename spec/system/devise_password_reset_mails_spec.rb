@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "PasswordResetMails", type: :system do
+RSpec.describe "DevisePasswordResetMails", type: :system do
   before do
     driven_by(:rack_test)
   end
