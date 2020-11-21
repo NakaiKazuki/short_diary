@@ -28,6 +28,7 @@ class Users::ConfirmationsController < Devise::ConfirmationsController
   # end
 
   private
+  # ログインしているユーザーに対するアクセス制限
   def logout_user
     if user_signed_in?
       flash[:alert] = "ログイン時にはアクセスできません。"

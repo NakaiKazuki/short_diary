@@ -26,7 +26,7 @@ RSpec.describe "DevisePasswordResets", type: :system do
   end
 
   describe "users/password/new layout" do
-    context "非ログイン状態でアクセスした場合" do
+    context "ログアウト状態でアクセスした場合" do
       before do
         visit new_user_password_path
       end

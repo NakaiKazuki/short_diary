@@ -34,7 +34,7 @@ RSpec.describe "DeviseConfirmations", type: :system do
   end
 
   describe "/users/confirmation/new layout" do
-    context "非ログイン状態でアクセスした場合" do
+    context "ログアウト状態でアクセスした場合" do
       before do
         visit new_user_confirmation_path
       end
