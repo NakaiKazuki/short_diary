@@ -7,7 +7,7 @@ RSpec.describe "DeviseConfirmationNews", type: :system do
   end
 
   let(:user) { create(:user) }
-  let!(:non_activate) { create(:user,:non_activate,:another_email) }
+  let!(:non_activate) { create(:user,:non_activate,:other_email) }
 
   #メールアドレス未入力
   def submit_with_invalid_information

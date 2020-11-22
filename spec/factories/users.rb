@@ -8,7 +8,7 @@ FactoryBot.define do
     trait :non_activate do
       confirmed_at { nil }
     end
-    trait :another_email  do
+    trait :other_email  do
       email{"another@example.com"}
     end
   end

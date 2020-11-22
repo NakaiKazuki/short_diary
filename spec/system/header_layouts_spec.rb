@@ -36,11 +36,11 @@ RSpec.describe "HeaderLayouts", type: :system do
 
       describe "ログアウトボタンがある" do
         it "ログアウトボタンがある" do
-          expect(page).to have_link "Logout" , href: destroy_user_session_path
+          expect(page).to have_button "Logout"
         end
 
         it "クリックでログアウト完了メッセージ表示" do
-          find_link("Logout").click
+          click_button "Logout"
           expect(page).to have_selector ".alert-notice"
         end
       end

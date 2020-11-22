@@ -12,7 +12,6 @@ gem "turbolinks"
 gem "jbuilder"
 gem "bootsnap", require: false
 gem "bootstrap"
-gem "jquery-rails"
 gem "bcrypt"
 gem "rails-i18n"
 gem 'devise'

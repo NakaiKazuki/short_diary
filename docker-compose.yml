@@ -7,14 +7,12 @@ services:
       - ./environments/db.env
     volumes:
       - .:/short_diary_docker
-      - public-data:/short_diary_docker/public
-      - tmp-data:/short_diary_docker/tmp
-      - log-data:/short_diary_docker/log
     ports:
       - 3000:3000
     depends_on:
       - selenium_chrome
       - db
+      - webpacker
     tty: true
     command: bundle exec puma -C config/puma.rb
 
@@ -43,8 +41,15 @@ services:
     depends_on:
       - webapp
 
+  webpacker:
+    build: .
+    command: bundle exec bin/webpack-dev-server
+    volumes:
+      - .:/short_diary_docker
+    ports:
+      - 8080:8080
+
 volumes:
   public-data:
   tmp-data:
-  log-data:
   db-data:
