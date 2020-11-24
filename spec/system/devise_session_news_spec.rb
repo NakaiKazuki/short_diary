@@ -32,7 +32,7 @@ RSpec.describe "DeviseSessionNews", type: :system do
     find(".form-submit").click
   end
 
-  # repeatの回数連続でパスワードが一致しない
+  # repeatの回数連続でパスワードが一致しないパラメータ送信
   def submit_with_consecutive_password_mismatches(repeat)
     repeat.times{
       submit_with_password_is_not_matching_information
@@ -109,27 +109,40 @@ RSpec.describe "DeviseSessionNews", type: :system do
         end
 
         context "連続でパスワードが一致しない場合" do
-          it "4連続はメールが送信されない" do
-            expect{
+          before do
+            ActionMailer::Base.deliveries.clear
+          end
+          
+          context "4連続不一致" do
+            it "4連続はメールが送信されない" do
+              expect{
+                submit_with_consecutive_password_mismatches(4)
+              }.to change { ActionMailer::Base.deliveries.size }.by(0)
+            end
+
+            it "アカウント凍結の予告メッセージが」表示" do
               submit_with_consecutive_password_mismatches(4)
-            }.to change { ActionMailer::Base.deliveries.size }.by(0)
+              expect(page).to have_content "もう一回誤るとアカウントがロックされます。"
+            end
           end
 
-          it "5連続で失敗後メールが送信される" do
-            expect{
+          context "5連続で失敗" do
+            it "メールが送信される" do
+              expect{
+                submit_with_consecutive_password_mismatches(5)
+              }.to change { ActionMailer::Base.deliveries.size }.by(1)
+            end
+
+            it "アカウント凍結メッセージ表示" do
               submit_with_consecutive_password_mismatches(5)
-            }.to change { ActionMailer::Base.deliveries.size }.by(1)
-          end
+              expect(page).to have_content "アカウントは凍結されています。"
+            end
 
-          it "5連続失敗後アカウント凍結メッセージ表示" do
-            submit_with_consecutive_password_mismatches(5)
-            expect(page).to have_content "アカウントは凍結されています。"
-          end
-
-          it "アカウント凍結後は正しいパラメータでもログイン不可" do
-            submit_with_consecutive_password_mismatches(5)
-            submit_with_valid_information(user)
-            expect(page).to have_content "アカウントは凍結されています。"
+            it "アカウント凍結後は正しいパラメータでもログイン不可" do
+              submit_with_consecutive_password_mismatches(5)
+              submit_with_valid_information(user)
+              expect(page).to have_content "アカウントは凍結されています。"
+            end
           end
         end
       end
