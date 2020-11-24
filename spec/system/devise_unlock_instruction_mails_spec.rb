@@ -61,7 +61,7 @@ RSpec.describe "DeviseUnlockInstructionMails", type: :system do
         expect(current_path).to eq user_unlock_path
       end
 
-      it "警告メッセージが表示" do
+      it "エラーメッセージが表示" do
         expect(page).to have_selector ".alert-danger"
       end
     end

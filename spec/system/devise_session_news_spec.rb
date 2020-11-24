@@ -32,6 +32,13 @@ RSpec.describe "DeviseSessionNews", type: :system do
     find(".form-submit").click
   end
 
+  # repeatの回数連続でパスワードが空白のパラメータ送信
+  def submit_with_consecutive_password_empty(repeat)
+    repeat.times{
+      submit_with_password_is_invalid_information
+     }
+  end
+
   # repeatの回数連続でパスワードが一致しないパラメータ送信
   def submit_with_consecutive_password_mismatches(repeat)
     repeat.times{
@@ -108,9 +115,15 @@ RSpec.describe "DeviseSessionNews", type: :system do
           end
         end
 
-        context "連続でパスワードが一致しない場合" do
+        context "連続で入力されたパスワードが一致しない場合" do
           before do
             ActionMailer::Base.deliveries.clear
+          end
+
+          it "パスワードが5連続空白は含まれない" do
+            expect{
+              submit_with_consecutive_password_empty(5)
+            }.to change { ActionMailer::Base.deliveries.size }.by(0)
           end
 
           context "4連続不一致" do

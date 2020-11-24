@@ -89,12 +89,13 @@ body{
   }
 }
 
-// フォームがある画面
+// Formがある画面
 .signup-container,
 .login-container,
-.retransmission-container,
+.authenticationret-retransmission-container,
 .password-reset-new-container,
-.password-reset-edit-container{
+.password-reset-edit-container,
+.unlock-container{
   margin-top:3rem;
   padding:3.5rem;
   background-color:white;
