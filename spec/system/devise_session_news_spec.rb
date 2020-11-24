@@ -112,7 +112,7 @@ RSpec.describe "DeviseSessionNews", type: :system do
           before do
             ActionMailer::Base.deliveries.clear
           end
-          
+
           context "4連続不一致" do
             it "4連続はメールが送信されない" do
               expect{
@@ -120,7 +120,7 @@ RSpec.describe "DeviseSessionNews", type: :system do
               }.to change { ActionMailer::Base.deliveries.size }.by(0)
             end
 
-            it "アカウント凍結の予告メッセージが」表示" do
+            it "アカウント凍結の予告メッセージが表示" do
               submit_with_consecutive_password_mismatches(4)
               expect(page).to have_content "もう一回誤るとアカウントがロックされます。"
             end
