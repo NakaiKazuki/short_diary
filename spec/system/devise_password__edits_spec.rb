@@ -79,6 +79,10 @@ RSpec.describe "DevisePasswordEdits", type: :system do
       it "認証メール再送信ページへのリンク" do
         expect(page).to have_link "再度認証メールを送信する方はこちら", href: new_user_confirmation_path
       end
+
+      it "凍結解除メール再送信ページへのリンク" do
+        expect(page).to have_link "再度凍結解除メールを送信する方はこちら", href: new_user_unlock_path
+      end
     end
 
     context "無効なパラメータを送信した場合" do

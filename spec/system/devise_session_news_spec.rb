@@ -32,6 +32,13 @@ RSpec.describe "DeviseSessionNews", type: :system do
     find(".form-submit").click
   end
 
+  # repeatの回数連続でパスワードが一致しない
+  def submit_with_consecutive_password_mismatches(repeat)
+    repeat.times{
+      submit_with_password_is_not_matching_information
+     }
+  end
+
   # 全て有効なパラメータ
   def submit_with_valid_information(user)
     fill_in "メールアドレス", with: user.email
@@ -57,6 +64,10 @@ RSpec.describe "DeviseSessionNews", type: :system do
 
         it "認証メール再送信ページへのリンク" do
           expect(page).to have_link "再度認証メールを送信する方はこちら", href: new_user_confirmation_path
+        end
+
+        it "凍結解除メール再送信ページへのリンク" do
+          expect(page).to have_link "再度凍結解除メールを送信する方はこちら", href: new_user_unlock_path
         end
 
         it "チェックボックス" do
@@ -94,6 +105,31 @@ RSpec.describe "DeviseSessionNews", type: :system do
           it "認証前のログインは無効" do
             submit_with_valid_information(non_activate)
             expect(page).to have_selector ".alert-alert"
+          end
+        end
+
+        context "連続でパスワードが一致しない場合" do
+          it "4連続はメールが送信されない" do
+            expect{
+              submit_with_consecutive_password_mismatches(4)
+            }.to change { ActionMailer::Base.deliveries.size }.by(0)
+          end
+
+          it "5連続で失敗後メールが送信される" do
+            expect{
+              submit_with_consecutive_password_mismatches(5)
+            }.to change { ActionMailer::Base.deliveries.size }.by(1)
+          end
+
+          it "5連続失敗後アカウント凍結メッセージ表示" do
+            submit_with_consecutive_password_mismatches(5)
+            expect(page).to have_content "アカウントは凍結されています。"
+          end
+
+          it "アカウント凍結後は正しいパラメータでもログイン不可" do
+            submit_with_consecutive_password_mismatches(5)
+            submit_with_valid_information(user)
+            expect(page).to have_content "アカウントは凍結されています。"
           end
         end
       end
