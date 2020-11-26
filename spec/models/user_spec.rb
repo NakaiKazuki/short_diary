@@ -81,4 +81,17 @@ RSpec.describe User, type: :model do
       expect(user).to be_valid
     end
   end
+
+  describe "アソシエーション" do
+    before do
+      user.save
+      user.microposts.create(content: "アソシエーションのテスト",posted_date: Date.today)
+    end
+
+    it "アカウント削除で紐づいたMicropostデータ削除" do
+      expect{
+        user.destroy
+      }.to change { Micropost.count }.by(-1)
+    end
+  end
 end

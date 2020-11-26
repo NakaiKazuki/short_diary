@@ -2,8 +2,21 @@ ja:
   activerecord:
     models:
       user: ユーザ
+      micropost: 投稿
     attributes:
       user:
         email: メールアドレス
         password: パスワード
         password_confirmation: パスワード（再入力）
+    micropost:
+        posted_date: 日付
+        content: 投稿
+        picture: 画像
+        user_id: ユーザーID
+  views:
+    pagination:
+      first: "&laquo; 最初"
+      last: "最後 &raquo;"
+      previous: "&lsaquo; 前"
+      next: "次 &rsaquo;"
+      truncate: "..."

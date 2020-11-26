@@ -1,9 +1,10 @@
 class User < ApplicationRecord
+  has_many :microposts, dependent: :destroy
+  
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable,
          :confirmable, :lockable, :timeoutable
          # 未使用:trackable and :omniauthable
-
   before_save :downcase_email
 
   validates :email,

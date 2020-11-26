@@ -19,6 +19,9 @@ body{
  padding-top: 4.22875rem;
 }
 
+.container-fluid{
+  padding:0;
+}
 // header
 .navbar-extend {
   margin-bottom: 0;
@@ -132,4 +135,18 @@ body{
 }
 .field_with_errors .form-control {
   border-color: red;
+}
+
+// home
+
+.micropost-form{
+  background-color: red;
+}
+
+.micropost-index{
+  background-color: yellow;
+}
+
+.link-list{
+  background-color: blue;
 }
