@@ -1,3 +1,5 @@
 <% flash.each do |message_type, message| %>
-  <%= tag.div message, class: "alert alert-#{message_type}" %>
+  <% unless message_type.to_s == 'timedout' %>
+    <%= tag.div message, class: "alert alert-#{message_type}" %>
+  <% end %>
 <% end %>
