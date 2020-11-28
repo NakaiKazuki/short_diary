@@ -60,10 +60,12 @@ body{
    text-align: center;
    padding: 1.3rem 0;
  }
+ 
  .alert-notice{
    color: #155724;
    background-color: #d4edda;
  }
+
  .alert-alert{
    color: #721c24;
    background-color: #f8d7da;
@@ -130,7 +132,7 @@ body{
     display: inline-block;
     text-align: left;
     color: red;
-    padding:1rem 0 ;
+    padding:1rem 0;
   }
 }
 .field_with_errors .form-control {
@@ -138,9 +140,18 @@ body{
 }
 
 // home
+.home-container{
+  .micropost-form{
+    background-color: green;
+    padding-left:2rem;
+    .content-form{
+      height: 7rem;
+    }
+  }
+}
 
-.micropost-form{
-  background-color: red;
+.micropost-form-area{
+  background-color: white;
 }
 
 .micropost-index{

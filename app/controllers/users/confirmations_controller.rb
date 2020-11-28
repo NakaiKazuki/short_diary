@@ -32,7 +32,7 @@ class Users::ConfirmationsController < Devise::ConfirmationsController
   def logout_user
     if user_signed_in?
       flash[:alert] = "ログイン時にはアクセスできません。"
-      redirect_to root_path
+      redirect_to root_url
     end
   end
 end

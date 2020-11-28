@@ -139,7 +139,7 @@ RSpec.describe "DeviseSessionNews", type: :system do
             end
           end
 
-          context "5連続で失敗" do
+          context "5連続不一致" do
             it "メールが送信される" do
               expect{
                 submit_with_consecutive_password_mismatches(5)

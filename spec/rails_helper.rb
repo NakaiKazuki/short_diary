@@ -38,11 +38,7 @@ rescue ActiveRecord::PendingMigrationError => e
 end
 
 RSpec.configure do |config|
-  # ---Helperを使うために追加---
-  config.include ApplicationHelpers
-  # ------
-
-  # ---記述少なくするために追加---
+  # ---追加---
   config.include FactoryBot::Syntax::Methods
   config.include Devise::Test::IntegrationHelpers, type: :request
   config.include Devise::Test::IntegrationHelpers, type: :system

@@ -8,9 +8,9 @@ ja:
         email: メールアドレス
         password: パスワード
         password_confirmation: パスワード（再入力）
-    micropost:
-        posted_date: 日付
-        content: 投稿
+      micropost:
+        posted_date: 投稿日
+        content: 日記の内容
         picture: 画像
         user_id: ユーザーID
   views:

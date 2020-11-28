@@ -5,12 +5,16 @@ class Micropost < ApplicationRecord
 
   validates :content,
     presence: true,
-    length: { maximum: 40 }
+    length: { maximum: 50 }
   validates :posted_date,
     presence: true
   validates :user_id,
     presence: true
   validate :validate_picture
+
+  def resize_picture
+    return self.picture.variant(resize: '400x400').processed
+  end
 
   private
   #画像の拡張子とサイズの制限をしている
