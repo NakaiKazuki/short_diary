@@ -60,7 +60,7 @@ body{
    text-align: center;
    padding: 1.3rem 0;
  }
- 
+
  .alert-notice{
    color: #155724;
    background-color: #d4edda;
@@ -142,10 +142,17 @@ body{
 // home
 .home-container{
   .micropost-form{
-    background-color: green;
-    padding-left:2rem;
+    padding: 1.5rem 0 0 2rem;
+    background-color: white;
+    .micropost-form-title{
+      font-family:cursive,Century;
+    }
     .content-form{
       height: 7rem;
+    }
+    .image-form{
+      height:auto;
+      margin:0.4rem 0;
     }
   }
 }

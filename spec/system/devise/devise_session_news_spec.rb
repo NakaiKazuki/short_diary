@@ -166,7 +166,7 @@ RSpec.describe "DeviseSessionNews", type: :system do
           submit_with_valid_information(user)
         end
 
-        it "ホーム画面に移動する" do
+        it "ホーム画面に移動" do
           expect(current_path).to eq root_path
         end
 
