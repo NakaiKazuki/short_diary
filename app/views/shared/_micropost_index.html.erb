@@ -1,0 +1,13 @@
+<h1 class="micropost-index-title">Diary</h1>
+<%= paginate @microposts %>
+<ul class="microposts">
+  <% @microposts.each do |micropost| %>
+    <li>
+      <%= micropost.content %>
+      <% if micropost.user_id == current_user.id %>
+        | <%= link_to "削除", micropost_path(micropost), method: :delete,
+                                data: { confirm: "選択した投稿を削除しますか？" } ,class: "micropost-delete-link" %>
+      <% end %>
+    </li>
+  <% end %>
+</ul>

@@ -31,10 +31,6 @@ RSpec.describe "MicropostDestroys", type: :request do
         delete micropost_path(micropost)
       end
 
-      it "警告メッセージが表示" do
-        expect(flash[:danger]).to be_truthy
-      end
-
       it "ホーム画面へ移動" do
         follow_redirect!
         expect(request.fullpath).to eq root_path

@@ -129,7 +129,7 @@ RSpec.describe "DevisePasswordEdits", type: :system do
 
       # sessionの情報を利用して確認したいけど、わからないからログアウトボタンがあるかで代用
       it "ログインされている" do
-        expect(page).to have_button "Logout"
+        expect(page).to have_link "Logout", href: destroy_user_session_path
       end
     end
   end

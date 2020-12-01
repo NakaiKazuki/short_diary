@@ -12,7 +12,7 @@ services:
     depends_on:
       - selenium_chrome
       - db
-      - webpacker
+      # - webpacker
     tty: true
     command: bundle exec puma -C config/puma.rb
 
@@ -41,13 +41,13 @@ services:
     depends_on:
       - webapp
 
-  webpacker:
-    build: .
-    command: bundle exec bin/webpack-dev-server
-    volumes:
-      - .:/short_diary_docker
-    ports:
-      - 8080:8080
+  # webpacker:
+  #   build: .
+  #   command: bundle exec bin/webpack-dev-server
+  #   volumes:
+  #     - .:/short_diary_docker
+  #   ports:
+  #     - 8080:8080
 
 volumes:
   public-data:

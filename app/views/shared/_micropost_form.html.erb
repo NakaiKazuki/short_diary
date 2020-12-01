@@ -1,17 +1,19 @@
-<%= form_with(model: @micropost, url: microposts_path, local: true) do |f| %>
-  <h1 class="micropost-form-title"> Form</h1>
-  <%= render 'shared/error_messages', object: f.object %>
-  <div><%= f.hidden_field :posted_date,value: Date.today %></div>
+<div class="col-lg-3  micropost-form">
+  <%= form_with(model: @micropost, url: microposts_path, local: true) do |f| %>
+    <h1 class="micropost-form-title"> Form</h1>
+    <%= render 'shared/error_messages', object: f.object %>
+    <div><%= f.hidden_field :posted_date,value: Date.today %></div>
 
-  <div class="form-group">
-    <%= f.text_area :content, autofocus: true, autocomplete: "content", placeholder: "50文字以内で今日の出来事を入力してください。", class: "form-control content-form" %>
-  </div>
+    <div class="form-group">
+      <%= f.text_area :content, autofocus: true, autocomplete: "content", placeholder: "50文字以内で今日の出来事を入力してください。", class: "form-control content-form" %>
+    </div>
 
-  <span class="form-group">
-    <%= f.file_field :picture, accept: 'image/jpeg,image/gif,image/png',class: "form-control image-form" %>
-  </span>
+    <span class="form-group">
+      <%= f.file_field :picture, accept: 'image/jpeg,image/gif,image/png',class: "form-control image-form" %>
+    </span>
 
-  <div class="form-group">
-    <%= f.submit "今日の日記を書く", class: "btn btn-outline-info form-control form-submit" %>
-  </div>
-<% end %>
+    <div class="form-group">
+      <%= f.submit "今日の日記を書く", class: "btn btn-outline-info form-control form-submit" %>
+    </div>
+  <% end %>
+</div>

@@ -139,32 +139,31 @@ body{
   border-color: red;
 }
 
-// home
+// home shared/_micropost-form
 .home-container{
-  .micropost-form{
-    padding: 1.5rem 0 0 2rem;
-    background-color: white;
-    .micropost-form-title{
-      font-family:cursive,Century;
-    }
-    .content-form{
-      height: 7rem;
-    }
-    .image-form{
-      height:auto;
-      margin:0.4rem 0;
-    }
-  }
-}
-
-.micropost-form-area{
   background-color: white;
 }
 
+.micropost-form{
+  padding: 1.5rem 0 0 2rem;
+  .micropost-form-title{
+    font-family:cursive,Century;
+  }
+  .content-form{
+    height: 7rem;
+  }
+  .image-form{
+    height:auto;
+    margin:0.4rem 0;
+  }
+}
+
 .micropost-index{
-  background-color: yellow;
+  padding-top: 1.5rem;
+  .micropost-index-title{
+    font-family:cursive,Century;
+  }
 }
 
 .link-list{
-  background-color: blue;
 }
