@@ -8,8 +8,15 @@ class MicropostsController < ApplicationController
       flash[:success] = "今日の日記が作成されました！"
       redirect_to root_url
     else
+      @microposts = current_user.microposts.page(params[:page]).per(10)
       render 'static_pages/home'
     end
+  end
+
+  def index
+    @micropost = current_user.microposts.build(micropost_params) if user_signed_in?
+    @microposts = current_user.microposts.page(params[:page]).per(10)
+    render 'static_pages/home'
   end
 
   def destroy

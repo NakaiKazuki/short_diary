@@ -11,7 +11,6 @@ gem "webpacker"
 gem "turbolinks"
 gem "jbuilder"
 gem "bootsnap", require: false
-gem "bootstrap"
 gem "bcrypt"
 gem "rails-i18n"
 gem "devise"
@@ -20,6 +19,9 @@ gem "kaminari"
 gem "kaminari-bootstrap"
 gem "aws-sdk-s3", require: false
 gem "mini_magick"
+gem 'uglifier'
+gem 'jquery-rails'
+gem 'bootstrap'
 
 group :development, :test do
   gem "byebug", platforms: [:mri, :mingw, :x64_mingw]
