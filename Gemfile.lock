@@ -61,7 +61,7 @@ GEM
     autoprefixer-rails (10.0.3.0)
       execjs
     aws-eventstream (1.1.0)
-    aws-partitions (1.401.0)
+    aws-partitions (1.402.0)
     aws-sdk-core (3.109.3)
       aws-eventstream (~> 1, >= 1.0.2)
       aws-partitions (~> 1, >= 1.239.0)
@@ -245,7 +245,7 @@ GEM
     selenium-webdriver (3.142.7)
       childprocess (>= 0.5, < 4.0)
       rubyzip (>= 1.2.2)
-    semantic_range (2.3.0)
+    semantic_range (2.3.1)
     spring (2.1.1)
     spring-watcher-listen (2.0.1)
       listen (>= 2.7, < 4.0)
