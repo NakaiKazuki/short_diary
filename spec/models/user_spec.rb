@@ -85,7 +85,7 @@ RSpec.describe User, type: :model do
   describe "アソシエーション" do
     before do
       user.save
-      user.microposts.create(content: "アソシエーションのテスト",posted_date: Date.today)
+      user.microposts.create(content: "アソシエーションのテスト")
     end
 
     it "アカウント削除で紐づいたMicropostデータ削除" do

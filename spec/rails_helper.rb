@@ -47,8 +47,6 @@ RSpec.configure do |config|
   config.include Devise::Test::IntegrationHelpers, type: :request
   config.include Devise::Test::IntegrationHelpers, type: :system
 
-  config.fixture_path = "#{::Rails.root}/spec/fixtures"
-
   config.use_transactional_fixtures = true
 
 #---RSspecを動かすのに必要---

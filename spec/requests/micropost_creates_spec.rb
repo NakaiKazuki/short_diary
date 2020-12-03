@@ -8,37 +8,14 @@ RSpec.describe "MicropostCreates", type: :request do
     post microposts_path,params:{
         micropost:{
         content: nil,
-        posted_date: nil
       }
     }
   end
-
-  # contentが無効なパラメータ
-  def post_content_is_invalid_information
-    post microposts_path,params:{
-      micropost:{
-        content: nil,
-        posted_date: Date.today
-      }
-    }
-  end
-
-  # posted_dateが無効なパラメータ
-  def post_posted_date_is_invalid_information
-    post microposts_path,params:{
-      micropost:{
-        content: "テストcontent",
-        posted_date: nil
-      }
-    }
-  end
-
   # 有効なパラメータ
   def post_valid_information
     post microposts_path,params:{
       micropost:{
         content: "テストcontent",
-        posted_date: Date.today
       }
     }
   end
@@ -48,8 +25,7 @@ RSpec.describe "MicropostCreates", type: :request do
     post microposts_path,params:{
       micropost:{
         content: "テストcontent",
-        posted_date: Date.today,
-        picture: fixture_file_upload("images/test.jpg")
+        picture: Rack::Test::UploadedFile.new(Rails.root.join("spec", "fixtures", "images", "test.jpg"))
       }
     }
   end
@@ -91,24 +67,10 @@ RSpec.describe "MicropostCreates", type: :request do
           expect(micropost.errors).to be_of_kind(:content, :blank)
         end
 
-        describe "各項目が無効なパラメータだと投稿データは作成されない" do
-          it "全て無効" do
-            expect{
-              post_invalid_information
-            }.to change { Micropost.count }.by(0)
-          end
-
-          it "contentが無効" do
-            expect{
-              post_content_is_invalid_information
-            }.to change { Micropost.count }.by(0)
-          end
-
-          it "posted_dateが無効" do
-            expect{
-              post_posted_date_is_invalid_information
-            }.to change { Micropost.count }.by(0)
-          end
+        it "各項目が無効なパラメータだと投稿データは作成されない" do
+          expect{
+            post_invalid_information
+          }.to change { Micropost.count }.by(0)
         end
       end
 
@@ -129,6 +91,7 @@ RSpec.describe "MicropostCreates", type: :request do
           post_valid_information
           expect(flash[:success]).to be_truthy
         end
+
         it "ホーム画面へ移動" do
           post_valid_information
           follow_redirect!

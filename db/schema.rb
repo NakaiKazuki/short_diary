@@ -35,7 +35,6 @@ ActiveRecord::Schema.define(version: 2020_11_27_005506) do
 
   create_table "microposts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.text "content", null: false
-    t.date "posted_date", null: false
     t.string "picture"
     t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false

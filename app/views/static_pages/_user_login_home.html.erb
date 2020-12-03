@@ -1,11 +1,13 @@
 <div class="container-fluid home-container">
   <div class="row">
-    <%= render 'shared/micropost_form' %>
+    <div class="col-lg-3  micropost-form">
+      <%= render 'shared/micropost_form' %>
+    </div>
     <div class="col-lg-7  micropost-index">
       <%= render 'shared/micropost_index' %>
     </div>
     <div class="col-lg-2  link-list">
-      リンク一覧
+      <%= render 'shared/link_list' %>
     </div>
   </div>
 </div>

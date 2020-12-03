@@ -22,6 +22,7 @@ body{
 .container-fluid{
   padding:0;
 }
+
 // header
 .navbar-extend {
   margin-bottom: 0;
@@ -139,7 +140,7 @@ body{
   border-color: red;
 }
 
-// home shared/_micropost-form
+// shared/_micropost-form
 .home-container{
   background-color: white;
 }
@@ -158,12 +159,58 @@ body{
   }
 }
 
+// shared/_micropost-index
 .micropost-index{
   padding-top: 1.5rem;
   .micropost-index-title{
+    padding-left: 1.8rem;
+    margin-bottom:2rem;
     font-family:cursive,Century;
+  }
+  .microposts{
+    list-style: none;
+    text-align: left;
+    li{
+      overflow: auto;
+      padding: 0.65rem 0;
+      border: 0.065rem solid darkturquoise;
+      .micropost-date{
+        font-family:cursive,Century;
+      }
+      .micropost-delete{
+        text-align: right;
+      }
+      .micropost-content{
+        padding-top:0.2rem;
+        white-space: pre-line;
+      }
+      .micropost-picture{
+        padding-top:1rem;
+        text-align: center;
+      }
+    }
   }
 }
 
 .link-list{
+  padding-top: 1.5rem;
+}
+
+// Pagination
+.pagination{
+  justify-content: center;
+  .page-item {
+    &.active .page-link{
+      background:darkturquoise;
+   }
+   .page-link{
+     border:none;
+     margin:0 0.04rem;
+     border-radius: 10%;
+     &:hover{
+       color:black;
+       background:darkturquoise;
+     }
+   }
+ }
 }

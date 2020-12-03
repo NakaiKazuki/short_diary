@@ -1,22 +1,19 @@
 class Micropost < ApplicationRecord
   belongs_to :user
   has_one_attached :picture
-  default_scope { order(posted_date: :desc) }
+  default_scope { order(created_at: :desc) }
 
   validates :content,
     presence: true,
     length: { maximum: 50 }
-  validates :posted_date,
-    presence: true
   validates :user_id,
     presence: true
   validate :validate_picture
 
   def resize_picture
-    return self.picture.variant(resize: '400x400').processed
+    return self.picture.variant(resize: '300x300').processed
   end
 
-  private
   #画像の拡張子とサイズの制限をしている
     def validate_picture
       if picture.attached?

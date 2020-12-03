@@ -2,7 +2,7 @@ require "rails_helper"
 
 RSpec.describe Micropost, type: :model do
   let(:user) { create(:user)}
-  let(:micropost) { user.microposts.build(content: "テストcontent", posted_date: Date.today, user_id: user.id)}
+  let(:micropost) { user.microposts.build(content: "テストcontent", user: user)}
 
   describe "Micropost" do
     it "有効" do
@@ -11,10 +11,10 @@ RSpec.describe Micropost, type: :model do
 
     it "投稿日が新しい投稿が最初に来る" do
       date =  Date.today
-      create(:micropost, user: user, posted_date: date -3 )
-      create(:micropost, user: user, posted_date: date -2 )
-      create(:micropost, user: user, posted_date: date -1 )
-      micropost_4 = create(:micropost,user: user, posted_date: date )
+      create(:micropost, user: user, created_at: date -3 )
+      create(:micropost, user: user, created_at: date -2 )
+      create(:micropost, user: user, created_at: date -1 )
+      micropost_4 = create(:micropost,user: user, created_at: date )
       expect(Micropost.first).to eq micropost_4
     end
   end
@@ -32,18 +32,6 @@ RSpec.describe Micropost, type: :model do
 
     it "50文字以下は有効" do
       micropost.content = "a" * 50
-      expect(micropost).to be_valid
-    end
-  end
-
-  describe "posted_date" do
-    it "空白は無効" do
-      micropost.posted_date = nil
-      expect(micropost).to be_invalid
-    end
-
-    it "有効" do
-      micropost.posted_date = Date.today
       expect(micropost).to be_valid
     end
   end

@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "HomeMicropostForms", type: :system do
+RSpec.describe "SharedMicropostForms", type: :system do
   let(:user) { create(:user) }
 
   # 無効なパラメータ
