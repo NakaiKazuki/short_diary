@@ -3,7 +3,7 @@
   <%= paginate @microposts %>
   <ul class="microposts">
     <% @microposts.each do |micropost| %>
-      <li class="row",id ="micropost-<%= micropost.id %>" >
+      <li class="row micropost",id ="micropost-<%= micropost.id %>" >
         <div class="col-10 micropost-date"><%= micropost.created_at.strftime("%Y年%-m月%-d日") %></div>
         <span class= "col-2 micropost-delete">
           <% if micropost.user_id == current_user.id %>
