@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe "MicropostIndices", type: :system do
-  let(:user) { create(:user) }
+  let!(:user) { create(:user) }
 
   describe "GET /microposts layout" do
     context "ログアウト状態の場合" do
@@ -17,7 +17,7 @@ RSpec.describe "MicropostIndices", type: :system do
         expect(current_path).to eq new_user_session_path
       end
     end
-    
+
     context "ログイン状態の場合" do
       before do
         sign_in user
