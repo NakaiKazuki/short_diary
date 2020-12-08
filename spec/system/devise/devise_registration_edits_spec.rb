@@ -1,7 +1,12 @@
 require 'rails_helper'
 
 RSpec.describe "DeviseRegistrationEdits", type: :system do
+  before do
+    ActionMailer::Base.deliveries.clear
+  end
+  
   let(:user) { create(:user) }
+  let(:guest) { create(:guest) }
 
   # 全てが無効なパラメータ
   def submit_with_invalid_information
@@ -182,6 +187,32 @@ RSpec.describe "DeviseRegistrationEdits", type: :system do
           page.accept_confirm "アカウントを削除してもよろしいですか？（投稿内容も全て削除されます）"
           expect(page).to have_selector ".alert-notice"
         end
+      end
+    end
+
+    context "ゲストユーザーでログインした場合",js:true do
+      before do
+        sign_in guest
+        visit edit_user_registration_path
+      end
+
+      it "ゲストユーザーは削除できない" do
+        expect{
+          find_button("Delete Account").click
+          page.accept_confirm "アカウントを削除してもよろしいですか？（投稿内容も全て削除されます）"
+        }.to change { User.count }.by(0)
+      end
+
+      it "削除実行後ホーム画面へ移動" do
+        find_button("Delete Account").click
+        page.accept_confirm "アカウントを削除してもよろしいですか？（投稿内容も全て削除されます）"
+        expect(current_path).to eq root_path
+      end
+
+      it "アカウント削除しようとすると削除不可メッセージが表示" do
+        find_button("Delete Account").click
+        page.accept_confirm "アカウントを削除してもよろしいですか？（投稿内容も全て削除されます）"
+        expect(page).to have_selector ".alert-alert"
       end
     end
   end

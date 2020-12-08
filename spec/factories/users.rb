@@ -3,7 +3,7 @@ FactoryBot.define do
     email{ "user@example.com" }
     password{ "password" }
     password_confirmation{ "password" }
-    confirmed_at { Date.today }
+    confirmed_at { Time.now }
 
     trait :non_activate do
       confirmed_at { nil }
@@ -14,7 +14,15 @@ FactoryBot.define do
     end
 
     trait :account_freeze do
-      locked_at { Date.today }
+      locked_at { Time.now }
     end
   end
+
+  factory :guest, class: User do
+    email{ "guest@example.com" }
+    password{ "password" }
+    password_confirmation{ "password" }
+    confirmed_at { Time.now }
+  end
+
 end

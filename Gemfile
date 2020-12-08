@@ -41,4 +41,5 @@ group :test do
   gem "capybara"
   gem "capybara-email"
   gem "webdrivers"
+  gem 'database_cleaner'
 end

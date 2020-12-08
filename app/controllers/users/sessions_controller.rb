@@ -17,11 +17,18 @@ class Users::SessionsController < Devise::SessionsController
   # def destroy
   #   super
   # end
-
   # protected
 
   # If you have extra params to permit, append them to the sanitizer.
   # def configure_sign_in_params
   #   devise_parameter_sanitizer.permit(:sign_in, keys: [:attribute])
   # end
+
+  # テストのために@userで使用userで可能
+  def new_guest
+    @user = User.guest
+    sign_in @user
+    flash[:notice] = 'ゲストユーザーとしてログインしました。'
+    redirect_to root_path
+  end
 end

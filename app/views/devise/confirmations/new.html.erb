@@ -16,7 +16,9 @@
           <%= f.submit "認証メールを再送信する", class: "btn btn-outline-info form-control form-submit" %>
         </div>
       <% end %>
-      <%= render "devise/shared/links" %>
+      <% unless user_signed_in? %>
+        <%= render "devise/shared/links" %>
+      <% end %>
     </div>
   </div>
 </div>

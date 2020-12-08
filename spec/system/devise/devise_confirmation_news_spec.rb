@@ -108,12 +108,26 @@ RSpec.describe "DeviseConfirmationNews", type: :system do
         visit new_user_confirmation_path
       end
 
-      it "ホーム画面へ移動" do
-        expect(current_path).to eq root_path
+      it "アクセス可能" do
+        expect(current_path).to eq new_user_confirmation_path
       end
 
-      it "警告メッセージが表示" do
-        expect(page).to have_selector ".alert-alert"
+      describe "ページ内リンクが存在しない" do
+        it "ログインページへのリンク" do
+          expect(page).not_to have_link "アカウントをお持ちの方はこちら",href: new_user_session_path
+        end
+
+        it "パスワードリセットページへのリンク" do
+          expect(page).not_to have_link "パスワードを忘れた方はこちら", href: new_user_password_path
+        end
+
+        it "パスワードリセットページへのリンク" do
+          expect(page).not_to have_link "パスワードを忘れた方はこちら", href: new_user_password_path
+        end
+
+        it "凍結解除メール再送信ページへのリンク" do
+          expect(page).not_to have_link "再度凍結解除メールを送信する方はこちら", href: new_user_unlock_path
+        end
       end
     end
   end

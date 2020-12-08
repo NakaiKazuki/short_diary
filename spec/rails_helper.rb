@@ -38,18 +38,17 @@ rescue ActiveRecord::PendingMigrationError => e
 end
 
 RSpec.configure do |config|
-  # ---追加---
+  config.use_transactional_fixtures = true
+  config.infer_spec_type_from_file_location!
+  config.filter_rails_from_backtrace!
+
+  # ---FactoryBot Devise追加---
   config.include FactoryBot::Syntax::Methods
   config.include Devise::Test::IntegrationHelpers, type: :request
   config.include Devise::Test::IntegrationHelpers, type: :system
   # ------
 
-  config.include Devise::Test::IntegrationHelpers, type: :request
-  config.include Devise::Test::IntegrationHelpers, type: :system
-
-  config.use_transactional_fixtures = true
-
-#---RSspecを動かすのに必要---
+  #---RSspecを動かすのに必要---
   config.before(:each, type: :system) do
     driven_by :rack_test
   end
@@ -58,8 +57,13 @@ RSpec.configure do |config|
     driven_by :remote_chrome
     Capybara.app_host = "http://#{Capybara.server_host}:#{Capybara.server_port}"
   end
-#------
+  #------
 
-  config.infer_spec_type_from_file_location!
-  config.filter_rails_from_backtrace!
+  #---Database Cleaner設定---
+  # テスト全体が始まる前に実行
+  config.before(:suite) do
+    DatabaseCleaner.strategy = :transaction
+    DatabaseCleaner.clean_with(:truncation)
+  end
+  #------
 end
