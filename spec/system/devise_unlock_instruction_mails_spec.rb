@@ -5,7 +5,7 @@ RSpec.describe "DeviseUnlockInstructionMails", type: :system do
 
   # repeatの回数連続でパスワードが一致しないパラメータ送信
   def submit_with_consecutive_password_mismatches
-    5.times{
+    5.times {
       fill_in "メールアドレス", with: user.email
       fill_in "パスワード", with: "password_is_not_matching"
       find(".form-submit").click

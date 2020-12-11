@@ -72,13 +72,13 @@ Rails.application.configure do
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.default_url_options = { host: Rails.application.credentials.host_server[:ip] }
   ActionMailer::Base.smtp_settings = {
-    :address        => 'smtp.gmail.com',
-    :port           => '587',
-    :authentication => :plain,
-    :user_name      => Rails.application.credentials.gmail[:user_name],
-    :password       => Rails.application.credentials.gmail[:password],
-    :domain         => 'gmail.com',
-    :enable_starttls_auto => true
+    address:          'smtp.gmail.com',
+    port:            '587',
+    authentication:  :plain,
+    user_name:       Rails.application.credentials.gmail[:user_name],
+    password:        Rails.application.credentials.gmail[:password],
+    domain:          'gmail.com',
+    enable_starttls_auto: true
   }
 
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to

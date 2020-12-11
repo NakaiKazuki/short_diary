@@ -61,25 +61,25 @@ RSpec.describe "SharedMicropostForms", type: :system do
 
       describe "各項目が無効なパラメータだと投稿データは作成されない" do
         it "contentが空白" do
-          expect{
+          expect {
             submit_with_invalid_information
           }.to change { Micropost.count }.by(0)
         end
 
         it "contentが51文字" do
-          expect{
+          expect {
             submit_with_content_is_51_characters_invalid_information
           }.to change { Micropost.count }.by(0)
         end
 
         it "6MBを超える画像ファイルが含まれるため無効" do
-          expect{
+          expect {
             submit_with_invalid_information_add_6mb_picture
           }.to change { Micropost.count }.by(0)
         end
 
         it "画像ファイル以外が含まれるため無効" do
-          expect{
+          expect {
             submit_with_invalid_information_add_invalid_file
           }.to change { Micropost.count }.by(0)
         end
@@ -88,13 +88,13 @@ RSpec.describe "SharedMicropostForms", type: :system do
 
     context "有効なパラメータを送信した場合" do
       it "投稿が作成される" do
-        expect{
+        expect {
           submit_with_valid_information
         }.to change { Micropost.count }.by(1)
       end
 
       it "5MB以下の画像の場合は投稿が作成される" do
-        expect{
+        expect {
           submit_with_valid_information_when_add_picture
         }.to change { Micropost.count }.by(1)
       end

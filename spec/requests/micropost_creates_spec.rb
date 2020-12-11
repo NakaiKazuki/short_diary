@@ -33,7 +33,7 @@ RSpec.describe "MicropostCreates", type: :request do
   describe "Post /microposts" do
     context "ログアウト状態の場合" do
       it "ログアウト時は無効" do
-        expect{
+        expect {
           post_valid_information
         }.to change { Micropost.count }.by(0)
       end
@@ -68,7 +68,7 @@ RSpec.describe "MicropostCreates", type: :request do
         end
 
         it "各項目が無効なパラメータだと投稿データは作成されない" do
-          expect{
+          expect {
             post_invalid_information
           }.to change { Micropost.count }.by(0)
         end
@@ -76,13 +76,13 @@ RSpec.describe "MicropostCreates", type: :request do
 
       context "有効" do
         it "有効なパラメータで投稿が作成" do
-          expect{
+          expect {
             post_valid_information
           }.to change { Micropost.count }.by(1)
         end
 
         it "有効なパラメータで投稿が作成（画像追加）" do
-          expect{
+          expect {
             post_valid_information_add_picture
           }.to change { Micropost.count }.by(1)
         end

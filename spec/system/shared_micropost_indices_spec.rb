@@ -27,7 +27,7 @@ RSpec.describe "SharedMicropostIndices", type: :system do
     end
 
     it "投稿削除成功メッセージが表示", js:true do
-      expect{
+      expect {
         find_link("削除", href: micropost_path(micropost)).click
         page.accept_confirm "選択した投稿を削除しますか？"
         expect(page).to have_selector ".alert-success"

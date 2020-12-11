@@ -110,7 +110,7 @@ RSpec.describe "DeviseRegistrationEdits", type: :system do
         end
 
         it "メールアドレスが無効の場合は確認用メールが送信されない" do
-          expect{
+          expect {
             submit_with_email_is_invalid_information
           }.to change { ActionMailer::Base.deliveries.size }.by(0)
         end
@@ -140,7 +140,7 @@ RSpec.describe "DeviseRegistrationEdits", type: :system do
 
       context "有効なパラメータを送信した場合" do
         it "メールアドレスを変更すると確認メールが送信される" do
-          expect{
+          expect {
             submit_with_valid_information
           }.to change { ActionMailer::Base.deliveries.size }.by(1)
         end
@@ -169,7 +169,7 @@ RSpec.describe "DeviseRegistrationEdits", type: :system do
         end
 
         it "アカウント削除ボタンでアカウント削除",js:true do
-          expect{
+          expect {
             find_button("Delete Account").click
             page.accept_confirm "アカウントを削除してもよろしいですか？（投稿内容も全て削除されます）"
             expect(page).to have_selector ".alert-notice"
@@ -197,7 +197,7 @@ RSpec.describe "DeviseRegistrationEdits", type: :system do
       end
 
       it "ゲストユーザーは削除できない" do
-        expect{
+        expect {
           find_button("Delete Account").click
           page.accept_confirm "アカウントを削除してもよろしいですか？（投稿内容も全て削除されます）"
         }.to change { User.count }.by(0)

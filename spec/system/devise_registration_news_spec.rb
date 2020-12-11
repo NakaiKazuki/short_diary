@@ -92,31 +92,31 @@ RSpec.describe "DeviseRegistrationNews", type: :system do
 
         describe "各項目が無効な値の場合ユーザーは登録されない" do
           it "全項目が無効" do
-            expect{
+            expect {
               submit_with_invalid_information
             }.to change { User.count }.by(0)
           end
 
           it "メールアドレスが無効" do
-            expect{
+            expect {
               submit_with_email_is_invalid_information
             }.to change { User.count }.by(0)
           end
 
           it "パスワードが無効" do
-            expect{
+            expect {
               submit_with_password_is_invalid_information
             }.to change { User.count }.by(0)
           end
 
           it "確認用パスワードが無効" do
-            expect{
+            expect {
               submit_with_password_confirmation_is_invalid_information
             }.to change { User.count }.by(0)
           end
 
           it "パスワードと確認用パスワードの不一致は無効" do
-            expect{
+            expect {
               submit_with_password_confirmation_is_not_matching_information
             }.to change { User.count }.by(0)
           end
@@ -125,16 +125,16 @@ RSpec.describe "DeviseRegistrationNews", type: :system do
 
       context "有効なパラメータを送信した場合" do
         it "アカウント登録される" do
-          expect{
+          expect {
             submit_with_valid_information
           }.to change { User.count }.by(1)
         end
 
         describe "アカウント登録に付随する処理" do
           it "メールが送信される" do
-            expect{
+            expect {
               submit_with_valid_information
-              }.to change{ ActionMailer::Base.deliveries.size }.by(1)
+              }.to change { ActionMailer::Base.deliveries.size }.by(1)
           end
 
           it "ホーム画面に移動" do

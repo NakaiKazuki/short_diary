@@ -1,8 +1,8 @@
 require "rails_helper"
 
 RSpec.describe Micropost, type: :model do
-  let(:user) { create(:user)}
-  let(:micropost) { user.microposts.build(content: "テストcontent", user: user)}
+  let(:user) { create(:user) }
+  let(:micropost) { user.microposts.build(content: "テストcontent", user: user) }
 
   describe "Micropost" do
     it "有効" do

@@ -66,13 +66,13 @@ RSpec.describe "DevisePasswordNews", type: :system do
 
         describe "メールは送信されない" do
           it "メールアドレスが空" do
-            expect{
+            expect {
               submit_with_invalid_information
             }.to change { ActionMailer::Base.deliveries.size }.by(0)
           end
 
           it "登録されていないメールアドレス" do
-            expect{
+            expect {
               submit_with_unregistered_email_information
             }.to change { ActionMailer::Base.deliveries.size }.by(0)
           end
@@ -81,7 +81,7 @@ RSpec.describe "DevisePasswordNews", type: :system do
 
       context "有効なパラメータを送信した場合" do
         it "メールが送信" do
-          expect{
+          expect {
             submit_with_valid_information
           }.to change { ActionMailer::Base.deliveries.size }.by(1)
         end

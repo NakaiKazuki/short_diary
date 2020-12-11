@@ -89,7 +89,7 @@ RSpec.describe User, type: :model do
     end
 
     it "アカウント削除で紐づいたMicropostデータ削除" do
-      expect{
+      expect {
         user.destroy
       }.to change { Micropost.count }.by(-1)
     end
