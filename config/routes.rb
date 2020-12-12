@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   root 'static_pages#home'
   get 'users', to: 'static_pages#home'
   get 'microposts', to: 'static_pages#home'
+  get 'users/password', to: 'static_pages#home'
   devise_for :users, controllers: {
     confirmations: 'users/confirmations',
     registrations: 'users/registrations'
