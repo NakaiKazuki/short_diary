@@ -10,16 +10,16 @@ RSpec.describe "StaticPageHomes", type: :system do
       end
 
       it "アカウント作成ページへのリンクがある" do
-        expect(page).to have_link "アカウントを作成する",href: new_user_registration_path
+        expect(page).to have_link "アカウントを作成する", href: new_user_registration_path
       end
 
       it "ゲストとしてログインするボタンがある" do
-        expect(page).to have_link "ゲストとしてログイン",href: users_guest_sign_in_path
+        expect(page).to have_link "ゲストとしてログイン", href: users_guest_sign_in_path
       end
 
       it "ゲストとしてログインクリックでログイン" do
-        click_link "ゲストとしてログイン",href: users_guest_sign_in_path
-        expect(page).to have_link "Logout",href: destroy_user_session_path
+        click_link "ゲストとしてログイン", href: users_guest_sign_in_path
+        expect(page).to have_link "Logout", href: destroy_user_session_path
       end
     end
 
@@ -39,6 +39,38 @@ RSpec.describe "StaticPageHomes", type: :system do
 
       it "リンク一覧がある" do
         expect(page).to have_selector ".link-list"
+      end
+    end
+
+    describe "フォーム送信失敗後のurlで再読み込みした場合はホーム画面が表示" do
+      context "/users の場合" do
+        before do
+          get users_path
+        end
+
+        it "アクセス可能" do
+          expect(response).to have_http_status(:success)
+        end
+      end
+
+      context "/users/password の場合" do
+        before do
+          get users_password_path
+        end
+
+        it "アクセス可能" do
+          expect(response).to have_http_status(:success)
+        end
+      end
+
+      context "/microposts の場合" do
+        before do
+          get microposts_path
+        end
+
+        it "アクセス可能" do
+          expect(response).to have_http_status(:success)
+        end
       end
     end
   end
