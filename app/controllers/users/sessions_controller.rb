@@ -24,11 +24,10 @@ class Users::SessionsController < Devise::SessionsController
   #   devise_parameter_sanitizer.permit(:sign_in, keys: [:attribute])
   # end
 
-  # テストのために@userで使用userで可能
+  # テストのために@userで使用。テスト書かない場合はuserで可能
   def new_guest
     @user = User.guest
     sign_in @user
-    flash[:notice] = 'ゲストユーザーとしてログインしました。'
-    redirect_to root_path
+    redirect_to root_path, flash: { notice: 'ゲストユーザーとしてログインしました。' }
   end
 end

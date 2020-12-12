@@ -14,7 +14,8 @@ end
 
 plugin :tmp_restart
 
-app_dir = File.expand_path("../..", __FILE__)
+app_dir = File.expand_path('..', __dir__)
 bind "unix://#{app_dir}/tmp/sockets/puma.sock"
 pidfile "#{app_dir}/tmp/pids/puma.pid"
-stdout_redirect "#{app_dir}/log/puma.stdout.log", "#{app_dir}/log/puma.stderr.log", true
+stdout_redirect "#{app_dir}/log/puma.stdout.log",
+                "#{app_dir}/log/puma.stderr.log", true

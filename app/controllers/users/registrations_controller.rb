@@ -61,10 +61,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
   #   super(resource)
   # end
   private
+
     def check_guest
-      if resource.email == 'guest@example.com'
-        flash[:alert] = 'ゲストユーザーは削除できません。'
-        redirect_to root_path
-      end
+      redirect_to root_path, flash: { alert: 'ゲストユーザーは削除できません。' } if resource.email == 'guest@example.com'
     end
 end

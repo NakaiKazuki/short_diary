@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 class Users::ConfirmationsController < Devise::ConfirmationsController
   before_action :logout_user
   # GET /resource/confirmation/new
@@ -26,13 +27,10 @@ class Users::ConfirmationsController < Devise::ConfirmationsController
   # def after_confirmation_path_for(resource_name, resource)
   #   super(resource_name, resource)
   # end
-
   private
+
   # ログインしているユーザーに対するアクセス制限
-  def logout_user
-    if user_signed_in?
-      flash[:alert] = "ログイン時にはアクセスできません。"
-      redirect_to root_url
+    def logout_user
+      redirect_to root_url, flash: { alert: 'ログイン時にはアクセスできません。' } if user_signed_in?
     end
-  end
 end

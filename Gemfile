@@ -1,46 +1,50 @@
 source 'https://rubygems.org'
-git_source(:github) { |repo| 'https://github.com/#{repo}.git' }
+git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.7.2'
 
-gem 'rails', '~> 6.0.3', '>= 6.0.3.4'
-gem 'mysql2'
-gem 'puma'
-gem 'sassc-rails'
-gem 'webpacker'
-gem 'turbolinks'
-gem 'jbuilder'
-gem 'bootsnap', require: false
+gem 'aws-sdk-s3', require: false
 gem 'bcrypt'
-gem 'rails-i18n'
+gem 'bootsnap', require: false
+gem 'bootstrap'
 gem 'devise'
 gem 'devise-i18n'
+gem 'image_processing', '~> 1.2'
+gem 'jbuilder'
+gem 'jquery-rails'
 gem 'kaminari'
 gem 'kaminari-bootstrap'
-gem 'aws-sdk-s3', require: false
 gem 'mini_magick'
+gem 'mysql2'
+gem 'puma'
+gem 'rails', '~> 6.0.3', '>= 6.0.3.4'
+gem 'rails-i18n'
+gem 'sassc-rails'
+gem 'turbolinks'
 gem 'uglifier'
-gem 'jquery-rails'
-gem 'bootstrap'
-gem 'image_processing', '~> 1.2'
+gem 'webpacker'
 
 group :development, :test do
-  gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
-  gem 'rspec-rails'
+  gem 'byebug', platforms: %i[mri mingw x64_mingw]
   gem 'factory_bot_rails'
+  gem 'rspec-rails'
 end
 
 group :development do
-  gem 'web-console'
   gem 'listen'
+  gem 'overcommit'
+  gem 'rubocop', require: false
+  gem 'rubocop-performance', require: false
+  gem 'rubocop-rails', require: false
+  gem 'rubocop-rspec'
   gem 'spring'
   gem 'spring-watcher-listen'
-  gem 'rubocop', require: false
+  gem 'web-console'
 end
 
 group :test do
   gem 'capybara'
   gem 'capybara-email'
-  gem 'webdrivers'
   gem 'database_cleaner'
+  gem 'webdrivers'
 end
