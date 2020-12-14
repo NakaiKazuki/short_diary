@@ -34,10 +34,6 @@ Rails/FilePath:
     - 'lib/tasks/dev.rake'
     - 'spec/rails_helper.rb'
 
-Rails/LexicallyScopedActionFilter:
-  Exclude:
-    - 'app/controllers/users/*'
-
 ## `and return` の形式を利用できるようにします。基本的には、&& と || を使います。
 Style/AndOr:
   Enabled: false
@@ -175,8 +171,18 @@ Style/Lambda:
 Style/RegexpLiteral:
   Enabled: false
 
-Style/FrozenStringLiteralComment:
-  Enabled: false
 # https://rubocop.readthedocs.io/en/stable/cops_style/#styleslicingwithrange
 Style/SlicingWithRange:
   Enabled: true
+# 追加
+Style/GlobalStdStream:
+  Exclude:
+    - 'config/environments/production.rb'
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
+  
+Rails/LexicallyScopedActionFilter:
+  Exclude:
+    - 'app/controllers/users/*'
+# ここまで
