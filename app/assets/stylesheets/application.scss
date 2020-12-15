@@ -18,8 +18,11 @@ body{
  background-image: image-url("background.jpg");
  padding-top: 4.22875rem;
 }
-.container-fluid{
-  padding:0;
+
+// headerとfooter以外共通
+.remove-all-margin-padding{
+  margin:0 ! important;
+  padding:0 ! important;
 }
 
 // header
@@ -158,6 +161,7 @@ body{
 .home-container{
   background-color: white;
   padding-left: 1rem;
+  margin:0 ! important;
 }
 
 // shared/_micropost-form
