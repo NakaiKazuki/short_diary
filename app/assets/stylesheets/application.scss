@@ -1,28 +1,9 @@
-/*
- * This is a manifest file that'll be compiled into application.css, which will include all the files
- * listed below.
- *
- * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
- * vendor/assets/stylesheets directory can be referenced here using a relative path.
- *
- * You're free to add application-wide styles to this file and they'll appear at the bottom of the
- * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
- * files in this directory. Styles in this file should be added after the last require_* statement.
- * It is generally better to create a new file per style scope.
- *
- */
 @import "bootstrap";
 
 // 共通
 body{
  background-image: image-url("background.jpg");
  padding-top: 4.22875rem;
-}
-
-// headerとfooter以外共通
-.remove-all-margin-padding{
-  margin:0 ! important;
-  padding:0 ! important;
 }
 
 // header
@@ -54,6 +35,12 @@ body{
     border-radius: 0.63rem;
     letter-spacing: 0.07rem;
   }
+}
+
+// headerとfooter以外共通
+.remove-all-margin-padding{
+  margin:0 ! important;
+  padding:0 ! important;
 }
 
 // Alert
@@ -200,11 +187,10 @@ body{
         text-align: right;
       }
       .micropost-content{
-        padding-top:0.2rem;
         white-space: pre-line;
       }
       .micropost-picture{
-        padding-top:1rem;
+        padding-top:0.7rem;
         text-align: center;
       }
     }
