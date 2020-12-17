@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe 'HeaderLayouts', type: :system do
-  describe 'GET /' do
+  describe '全画面共通' do
     let(:user) { create(:user) }
 
     # 共通
