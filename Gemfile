@@ -3,7 +3,6 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.7.2'
 
-gem 'aws-sdk-s3', require: false
 gem 'bcrypt'
 gem 'bootsnap', require: false
 gem 'bootstrap'
@@ -45,4 +44,8 @@ group :test do
   gem 'capybara-email'
   gem 'database_cleaner'
   gem 'webdrivers'
+end
+
+group :production do
+  gem 'aws-sdk-s3', require: false
 end
