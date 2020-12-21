@@ -4,12 +4,6 @@ require File.expand_path('../config/environment', __dir__)
 abort('The Rails environment is running in production mode!') if Rails.env.production?
 require 'rspec/rails'
 require 'capybara/email/rspec'
-# devise追加
-# require 'devise'
-#---ブラウザテストでメールのテストをするために---
-Capybara.server_host = 'webapp'
-Capybara.server_port = 3001
-#------
 
 Dir[Rails.root.join('spec', 'support', '**', '*.rb')].sort.each { |f|
   require f
@@ -56,6 +50,8 @@ RSpec.configure do |config|
 
   config.before(:each, type: :system, js: true) do
     driven_by :remote_chrome
+    Capybara.server_host = IPSocket.getaddress(Socket.gethostname)
+    Capybara.server_port = 3001
     Capybara.app_host = "http://#{Capybara.server_host}:#{Capybara.server_port}"
   end
   #------
