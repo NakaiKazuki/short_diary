@@ -5,11 +5,11 @@ jobs:
       - image: circleci/ruby:2.7.2-node-browsers-legacy
         environment:
           - BUNDLER_VERSION: 2.1.4
-          - RAILS_ENV: 'test'
+          - RAILS_ENV: test
       - image: circleci/mysql:8.0.22
         environment:
-          - MYSQL_ROOT_PASSWORD: 'password'
-          - MYSQL_USER: 'root'
+          - MYSQL_ROOT_PASSWORD: password
+          - MYSQL_USER: root
 
     working_directory: ~/repo
     steps:
