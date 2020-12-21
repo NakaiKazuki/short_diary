@@ -7,15 +7,17 @@ jobs:
           - BUNDLER_VERSION: 2.1.4
           - RAILS_ENV: test
           - SELENIUM_DRIVER_URL: http://selenium_chrome:4444/wd/hub
-      - image: circleci/mysql:8.0.22
+      - image: circleci/mysql:8.0
         command: |
           mysqld --default-authentication-plugin=mysql_native_password
         environment:
-          - MYSQL_ROOT_PASSWORD: password
+          - MYSQL_ALLOW_EMPTY_PASSWORD: true
           - MYSQL_USER: root
           - MYSQL_ROOT_HOST: '%'
+      - image: selenium/standalone-chrome-debug:latest
+        name: chrome
 
-    working_directory: ~/repo
+    working_directory: ~/short_diary_circleci
     steps:
       - checkout
 
@@ -37,9 +39,9 @@ jobs:
 
       - run: mv config/database.yml.ci config/database.yml
 
-      # Database setup
-      - run: bundle exec rake db:create
-      - run: bundle exec rake db:schema:load
+      - run:
+          name: データベースを作成
+          command: bundle exec rails db:create || bundle exec rails db:migrate
 
 # rubocopを走らせる記述です。
       - run:
@@ -49,7 +51,7 @@ jobs:
 # rspecを走らせる記述です。
       # run tests!
       - run:
-          name: run rspec
+          name: RSpec test
           command: |
             mkdir /tmp/test-results
             TEST_FILES="$(circleci tests glob "spec/**/*_spec.rb" | \

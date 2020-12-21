@@ -40,8 +40,8 @@ Rails.application.configure do
   # The :test delivery method accumulates sent emails in the
   # ActionMailer::Base.deliveries array.
   config.action_mailer.delivery_method = :test
-  config.action_mailer.default_url_options = { host: 'webapp', port: 3001,
-                                               protocol: 'http' }
+  config.action_mailer.default_url_options = { host: IPSocket.getaddress(Socket.gethostname),
+                                               port: 4444 }
   # Print deprecation notices to the stderr.
   config.active_support.deprecation = :stderr
 

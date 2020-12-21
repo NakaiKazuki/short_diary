@@ -25,7 +25,6 @@ gem 'uglifier'
 group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
   gem 'factory_bot_rails'
-  gem 'rspec_junit_formatter'
   gem 'rspec-rails'
 end
 
@@ -44,6 +43,7 @@ group :test do
   gem 'capybara'
   gem 'capybara-email'
   gem 'database_cleaner'
+  gem 'rspec_junit_formatter'
   gem 'webdrivers'
 end
 

@@ -3,19 +3,18 @@ services:
   webapp:
     build: .
     env_file:
-      - ./environments/selenium.env
       - ./environments/db.env
     volumes:
       - .:/short_diary_docker
     ports:
       - 3000:3000
     depends_on:
-      - selenium_chrome
+      - chrome
       - db
     tty: true
     command: bundle exec puma -C config/puma.rb
 
-  selenium_chrome:
+  chrome:
     image: selenium/standalone-chrome-debug
     logging:
       driver: none

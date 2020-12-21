@@ -11,7 +11,7 @@ Dir[Rails.root.join('spec', 'support', '**', '*.rb')].sort.each { |f|
 
 #---コンテナ上でRspec動かすのに必要---
 Capybara.register_driver :remote_chrome do |app|
-  url = ENV.fetch('SELENIUM_DRIVER_URL')
+  url = 'http://chrome:4444/wd/hub'
   caps = ::Selenium::WebDriver::Remote::Capabilities.chrome(
     'goog:chromeOptions' => {
       'args' => [
@@ -51,13 +51,13 @@ RSpec.configure do |config|
   config.before(:each, type: :system, js: true) do
     driven_by :remote_chrome
     Capybara.server_host = IPSocket.getaddress(Socket.gethostname)
-    Capybara.server_port = 3001
+    Capybara.server_port = 4444
     Capybara.app_host = "http://#{Capybara.server_host}:#{Capybara.server_port}"
   end
   #------
 
   #---Database Cleaner設定---
-  # データ毎にidが+1になるのが気持ち悪いから導入。
+  # データ作成毎にidが+1になるのが気持ち悪いから導入。
   # テスト全体が始まる前に実行
   config.before(:suite) do
     DatabaseCleaner.strategy = :transaction
