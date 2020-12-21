@@ -7,7 +7,7 @@ jobs:
           - BUNDLER_VERSION: 2.1.4
           - RAILS_ENV: test
           - SELENIUM_DRIVER_URL: http://selenium_chrome:4444/wd/hub
-          
+          - Capybara.server_host: 127.0.0.1
       - image: circleci/mysql:8.0.22
         command: |
           mysqld --default-authentication-plugin=mysql_native_password
