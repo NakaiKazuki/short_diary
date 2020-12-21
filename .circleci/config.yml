@@ -2,10 +2,12 @@ version: 2.1
 jobs:
   build:
     docker:
-      - image: circleci/ruby:2.7.2-node-browsers-legacy
+      - image: circleci/ruby:2.7.2-node-browsers
         environment:
           - BUNDLER_VERSION: 2.1.4
           - RAILS_ENV: test
+          - SELENIUM_DRIVER_URL: http://selenium_chrome:4444/wd/hub
+          
       - image: circleci/mysql:8.0.22
         command: |
           mysqld --default-authentication-plugin=mysql_native_password
@@ -13,7 +15,7 @@ jobs:
           - MYSQL_ROOT_PASSWORD: password
           - MYSQL_USER: root
           - MYSQL_ROOT_HOST: '%'
-          
+
     working_directory: ~/repo
     steps:
       - checkout
@@ -48,7 +50,7 @@ jobs:
 # rspecを走らせる記述です。
       # run tests!
       - run:
-          name: run tests
+          name: run rspec
           command: |
             mkdir /tmp/test-results
             TEST_FILES="$(circleci tests glob "spec/**/*_spec.rb" | \
