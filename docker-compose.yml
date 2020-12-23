@@ -15,7 +15,7 @@ services:
     command: bundle exec puma -C config/puma.rb
 
   chrome:
-    image: selenium/standalone-chrome-debug
+    image: selenium/standalone-chrome
     logging:
       driver: none
     ports:

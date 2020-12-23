@@ -44,7 +44,7 @@ group :test do
   gem 'capybara-email'
   gem 'database_cleaner'
   gem 'rspec_junit_formatter'
-  gem 'webdrivers'
+  gem 'selenium-webdriver'
 end
 
 group :production do
