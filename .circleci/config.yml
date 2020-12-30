@@ -14,7 +14,7 @@ jobs:
           - MYSQL_ROOT_PASSWORD: password
           - MYSQL_USER: root
           - MYSQL_ROOT_HOST: '%'
-      - image: selenium/standalone-chrome-debug:latest
+      - image: selenium/standalone-chrome:latest
         name: chrome
 
     working_directory: ~/short_diary_circleci
