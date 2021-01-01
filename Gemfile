@@ -24,11 +24,11 @@ gem 'uglifier'
 
 group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
-  gem 'capistrano'
-  gem 'capistrano3-unicorn'
-  gem 'capistrano-bundler'
-  gem 'capistrano-rails'
-  gem 'capistrano-rbenv'
+  # gem 'capistrano'
+  # gem 'capistrano3-unicorn'
+  # gem 'capistrano-bundler'
+  # gem 'capistrano-rails'
+  # gem 'capistrano-rbenv'
   gem 'factory_bot_rails'
   gem 'rspec-rails'
 end

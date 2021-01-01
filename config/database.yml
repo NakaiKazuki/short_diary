@@ -18,6 +18,7 @@ test:
 
 production:
   <<: *default
-  adapter: postgresql
-  encoding: unicode
-  pool: 5
+  database: <%= Rails.application.credentials.production_db[:database_name] %>
+  username: <%= Rails.application.credentials.production_db[:user_name] %>
+  password: <%= Rails.application.credentials.production_db[:password] %>
+  host: <%= Rails.application.credentials.production_db[:host_name] %>
