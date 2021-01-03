@@ -1,0 +1,24 @@
+version: '3'
+services:
+  webapp:
+    build: ./Dockerfile.production
+    env_file:
+      - ./environments/db.env
+    volumes:
+      - .:/short_diary_docker
+    tty: true
+    command: bundle exec puma -e production -C config/puma.rb
+
+  db:
+    image: mysql
+    env_file:
+      - ./environments/db.env
+    volumes:
+      - ./mysql-confd:/etc/mysql/conf.d
+
+  nginx:
+    build: containers/nginx
+    ports:
+      - 80:80
+    depends_on:
+      - webapp
