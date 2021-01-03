@@ -6,8 +6,6 @@ services:
       - ./environments/db.env
     volumes:
       - .:/short_diary_docker
-    ports:
-      - 3000:3000
     depends_on:
       - chrome
       - db
@@ -18,8 +16,6 @@ services:
     image: selenium/standalone-chrome
     logging:
       driver: none
-    ports:
-      - 4444:4444
 
   db:
     image: mysql
@@ -31,15 +27,10 @@ services:
 
   nginx:
     build: containers/nginx
-    volumes:
-      - public-data:/short_diary_docker_docker/public
-      - tmp-data:/short_diary_docker_docker/tmp
     ports:
       - 80:80
     depends_on:
       - webapp
 
 volumes:
-  public-data:
-  tmp-data:
   db-data:

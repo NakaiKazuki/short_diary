@@ -22,5 +22,3 @@ RUN bundle install
 COPY . $APP_ROOT
 
 RUN mkdir -p tmp/sockets
-
-EXPOSE 3000
