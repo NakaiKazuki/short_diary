@@ -24,16 +24,18 @@ gem 'uglifier'
 
 group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
-  # gem 'capistrano'
-  # gem 'capistrano3-unicorn'
-  # gem 'capistrano-bundler'
-  # gem 'capistrano-rails'
-  # gem 'capistrano-rbenv'
   gem 'factory_bot_rails'
   gem 'rspec-rails'
 end
 
 group :development do
+  # gem 'capistrano', require: false
+  # gem 'capistrano3-puma'
+  # gem 'capistrano-rails', require: false
+  # gem 'capistrano-rails-collection', require: false
+  # gem 'capistrano-rails-console', require: false
+  # gem 'capistrano-rake', require: false
+  # gem 'capistrano-rbenv'
   gem 'listen'
   gem 'rubocop', require: false
   gem 'rubocop-performance', require: false

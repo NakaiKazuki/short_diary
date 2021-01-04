@@ -6,7 +6,7 @@ RUN apt-get update -qq && \
                        nodejs \
                        imagemagick \
                        vim
-                       
+
 RAILS_ENV=production
 
 RUN mkdir /short_diary_docker
@@ -19,7 +19,7 @@ COPY Gemfile $APP_ROOT/Gemfile
 COPY Gemfile.lock $APP_ROOT/Gemfile.lock
 
 RUN gem install bundler
-RUN bundle install
+RUN bundle install --without development test
 
 COPY . $APP_ROOT
 

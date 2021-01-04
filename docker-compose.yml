@@ -1,36 +1,47 @@
 version: '3'
 services:
+  chrome:
+    image: selenium/standalone-chrome
+    logging:
+      driver: none
+
   webapp:
     build: .
     env_file:
       - ./environments/db.env
     volumes:
       - .:/short_diary_docker
+      - public-data:/short_diary_docker/public
+      - tmp-data:/short_diary_docker/tmp
+      - log-data:/short_diary_docker/log
     depends_on:
       - chrome
-      - db
     tty: true
     command: bundle exec puma -C config/puma.rb
 
-  chrome:
-    image: selenium/standalone-chrome
-    logging:
-      driver: none
-
   db:
-    image: mysql
+    image: mysql:8.0
     env_file:
       - ./environments/db.env
     volumes:
       - db-data:/var/lib/mysql
       - ./mysql-confd:/etc/mysql/conf.d
-
-  nginx:
-    build: containers/nginx
-    ports:
-      - 80:80
     depends_on:
       - webapp
 
+  nginx:
+    build:
+      context: containers/nginx
+    volumes:
+      - public-data:/short_diary_docker/public
+      - tmp-data:/short_diary_docker/tmp
+    ports:
+      - 80:80
+    depends_on:
+      - db
+
 volumes:
+  public-data:
+  tmp-data:
+  log-data:
   db-data:
