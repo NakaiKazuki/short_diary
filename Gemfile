@@ -8,7 +8,7 @@ gem 'bootsnap', require: false
 gem 'bootstrap'
 gem 'devise'
 gem 'devise-i18n'
-gem 'image_processing', '~> 1.2'
+gem 'image_processing'
 gem 'jbuilder'
 gem 'jquery-rails'
 gem 'kaminari'
@@ -29,13 +29,13 @@ group :development, :test do
 end
 
 group :development do
-  # gem 'capistrano', require: false
-  # gem 'capistrano3-puma'
-  # gem 'capistrano-rails', require: false
-  # gem 'capistrano-rails-collection', require: false
-  # gem 'capistrano-rails-console', require: false
-  # gem 'capistrano-rake', require: false
-  # gem 'capistrano-rbenv'
+  gem 'capistrano'
+  gem 'capistrano3-puma'
+  gem 'capistrano-bundler'
+  gem 'capistrano-rails'
+  gem 'capistrano-rails-collection'
+  gem 'capistrano-rbenv'
+  gem 'capistrano-rbenv-vars'
   gem 'listen'
   gem 'rubocop', require: false
   gem 'rubocop-performance', require: false
