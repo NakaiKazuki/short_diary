@@ -29,13 +29,14 @@ group :development, :test do
 end
 
 group :development do
+  gem 'bcrypt_pbkdf'
   gem 'capistrano'
   gem 'capistrano3-puma'
   gem 'capistrano-bundler'
   gem 'capistrano-rails'
-  gem 'capistrano-rails-collection'
   gem 'capistrano-rbenv'
   gem 'capistrano-rbenv-vars'
+  gem 'ed25519'
   gem 'listen'
   gem 'rubocop', require: false
   gem 'rubocop-performance', require: false

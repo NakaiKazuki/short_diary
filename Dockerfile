@@ -21,4 +21,8 @@ RUN bundle install
 
 COPY . $APP_ROOT
 
+COPY entrypoint.sh /usr/bin/
+RUN chmod +x /usr/bin/entrypoint.sh
+ENTRYPOINT ["entrypoint.sh"]
+
 RUN mkdir -p tmp/sockets
