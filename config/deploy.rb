@@ -20,19 +20,17 @@ set :puma_error_log, "#{shared_path}/log/puma.access.log"
 
 # タスクでsudoなどを行う際に必要
 set :pty, true
-# シンボリックリンクをはるファイル。(※後述)
-set :linked_files, fetch(:linked_files, []).push('config/settings.yml')
 # シンボリックリンクをはるフォルダ。(※後述)
-set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', 'public/system')
+append :linked_dirs, 'log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'public/system', 'public/uploads', 'public/storage'
 # 保持するバージョンの個数(※後述)
 set :keep_releases, 3
 # 環境変数の設定
-set :default_env, { path: "/usr/local/rbenv/shims:/usr/local/rbenv/bin:$PATH" }
+set :default_env, { path: '/usr/local/rbenv/shims:/usr/local/rbenv/bin:$PATH' }
 
 # rubyのバージョン
 set :rbenv_ruby, '2.7.2'
 
-#出力するログのレベル。
+# 出力するログのレベル。
 set :log_level, :debug
 
 namespace :deploy do
@@ -43,7 +41,7 @@ namespace :deploy do
 
   desc 'Create database'
   task :db_create do
-    on roles(:db) do |host|
+    on roles(:db) do |_host|
       with rails_env: fetch(:rails_env) do
         within current_path do
           execute :bundle, :exec, :rake, 'db:create'
