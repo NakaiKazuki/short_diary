@@ -42,4 +42,11 @@ namespace :puma do
       invoke! 'puma:start'
     end
   end
+
+  desc 'start application'
+  task :start do
+    on roles(:app), in: :sequence, wait: 5 do
+      invoke! 'puma:start'
+    end
+  end
 end
