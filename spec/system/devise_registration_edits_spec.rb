@@ -13,7 +13,7 @@ RSpec.describe 'DeviseRegistrationEdits', type: :system do
     fill_in '新しいメールアドレス（例：email@example.com）', with: 'user@invalid'
     fill_in '新しいパスワード（6文字以上）', with: 'foo'
     fill_in '新しいパスワード（再入力）', with: 'bar'
-    fill_in '使用中のパスワード', with: 'hogehoge'
+    fill_in '現在使用中のパスワード', with: 'hogehoge'
     find('.form-submit').click
   end
 
@@ -23,7 +23,7 @@ RSpec.describe 'DeviseRegistrationEdits', type: :system do
     fill_in '新しいメールアドレス（例：email@example.com）', with: 'user@invalid'
     fill_in '新しいパスワード（6文字以上）', with: 'foobar'
     fill_in '新しいパスワード（再入力）', with: 'foobar'
-    fill_in '使用中のパスワード', with: user.password
+    fill_in '現在使用中のパスワード', with: user.password
     find('.form-submit').click
   end
 
@@ -32,7 +32,7 @@ RSpec.describe 'DeviseRegistrationEdits', type: :system do
     fill_in '新しいメールアドレス（例：email@example.com）', with: ''
     fill_in '新しいパスワード（6文字以上）', with: 'foobar'
     fill_in '新しいパスワード（再入力）', with: 'foobar'
-    fill_in '使用中のパスワード', with: user.password
+    fill_in '現在使用中のパスワード', with: user.password
     find('.form-submit').click
   end
 
@@ -41,7 +41,7 @@ RSpec.describe 'DeviseRegistrationEdits', type: :system do
     fill_in '新しいメールアドレス（例：email@example.com）', with: user.email
     fill_in '新しいパスワード（6文字以上）', with: 'foobar'
     fill_in '新しいパスワード（再入力）', with: 'foobar'
-    fill_in '使用中のパスワード', with: 'not_matting_password'
+    fill_in '現在使用中のパスワード', with: 'not_matting_password'
     find('.form-submit').click
   end
 
@@ -50,7 +50,7 @@ RSpec.describe 'DeviseRegistrationEdits', type: :system do
     fill_in '新しいメールアドレス（例：email@example.com）', with: user.email
     fill_in '新しいパスワード（6文字以上）', with: 'foobar'
     fill_in '新しいパスワード（再入力）', with: 'foobar'
-    fill_in '使用中のパスワード', with: ''
+    fill_in '現在使用中のパスワード', with: ''
     find('.form-submit').click
   end
 
@@ -60,7 +60,7 @@ RSpec.describe 'DeviseRegistrationEdits', type: :system do
     fill_in '新しいメールアドレス（例：email@example.com）', with: 'user@valid.com'
     fill_in '新しいパスワード（6文字以上）', with: 'foobar'
     fill_in '新しいパスワード（再入力）', with: 'foobar'
-    fill_in '使用中のパスワード', with: user.password
+    fill_in '現在使用中のパスワード', with: user.password
     find('.form-submit').click
   end
 
@@ -69,7 +69,7 @@ RSpec.describe 'DeviseRegistrationEdits', type: :system do
     fill_in '新しいメールアドレス（例：email@example.com）', with: 'user@valid.com'
     fill_in '新しいパスワード（6文字以上）', with: ''
     fill_in '新しいパスワード（再入力）', with: ''
-    fill_in '使用中のパスワード', with: user.password
+    fill_in '現在使用中のパスワード', with: user.password
     find('.form-submit').click
   end
 
