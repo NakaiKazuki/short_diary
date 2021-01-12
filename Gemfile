@@ -44,6 +44,7 @@ group :development do
   gem 'rubocop-rspec'
   gem 'spring'
   gem 'spring-watcher-listen'
+  gem 'sshkit-sudo'
   gem 'web-console'
 end
 
