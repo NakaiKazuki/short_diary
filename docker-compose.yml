@@ -18,10 +18,11 @@ services:
     depends_on:
       - chrome
     tty: true
-    secrets:
-      - ec2_ssh_key
-      - git_hub_ssh_key
     command: bundle exec puma -C config/puma.rb
+    # secretsはgit pushの時はコメントに
+    secrets:
+      - ec2_key
+      - git_key
 
   db:
     image: mysql:8.0
@@ -44,11 +45,12 @@ services:
     depends_on:
       - db
 
+# secretsはgit pushの時はコメントに
 secrets:
-  ec2_ssh_key:
-    file: ${SHORT_DIARY_SSH_KEY}
-  git_hub_ssh_key:
-    file: ${GIT_HUB_SSH}
+  ec2_key:
+    file: ${SHORT_DIARY_KEY}
+  git_key:
+    file: ${GIT_KEY}
 
 volumes:
   public-data:
