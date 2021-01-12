@@ -11,9 +11,9 @@ set :rbenv_type, :user
 set :rbenv_ruby, '2.7.2'
 
 # シンボリックリンクのファイルを指定、具体的にはsharedに入るファイル
-append :linked_files, "config/master.key"
+append :linked_files, 'config/master.key'
 # シンボリックリンクのディレクトリを生成
-append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "public/system", "public/uploads", "public/storage"
+append :linked_dirs, 'log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'public/system', 'public/uploads', 'public/storage'
 # タスクでsudoなどを行う際に必要
 set :pty, true
 # 保持するバージョンの個数(※後述)
