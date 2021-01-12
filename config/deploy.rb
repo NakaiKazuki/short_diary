@@ -32,9 +32,11 @@ namespace :deploy do
       end
     end
   end
+end
 
+namespace :puma do
   desc 'Restart application'
-  task :puma_restart do
+  task :restart do
     on roles(:app), in: :sequence, wait: 5 do
       invoke  'puma:stop'
       invoke! 'puma:start'
