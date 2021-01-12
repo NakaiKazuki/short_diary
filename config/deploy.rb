@@ -22,8 +22,8 @@ set :keep_releases, 3
 set :log_level, :debug
 
 # Nginxの設定ファイル名と置き場所を修正
-set :nginx_config_name, "#{fetch(:application)}.conf"
 set :nginx_sites_enabled_path, '/etc/nginx/conf.d'
+set :nginx_config_name, "#{fetch(:application)}.conf"
 
 namespace :deploy do
   desc 'Create database'
