@@ -75,6 +75,7 @@ Metrics/AbcSize:
   Exclude:
     - 'lib/tasks/dev.rake'
 
+#少し追加してる
 Metrics/BlockLength:
   CountComments: false
   Exclude:
@@ -84,7 +85,7 @@ Metrics/BlockLength:
     - 'app/views/**/*.jbuilder'
     - 'lib/tasks/dev.rake'
     - 'config/environments/*'
-
+    - 'config/deploy.rb'
 Metrics/ClassLength:
   CountComments: false
 
@@ -181,7 +182,7 @@ Style/GlobalStdStream:
 
 Style/FrozenStringLiteralComment:
   Enabled: false
-  
+
 Rails/LexicallyScopedActionFilter:
   Exclude:
     - 'app/controllers/users/*'
