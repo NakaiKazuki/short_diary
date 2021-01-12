@@ -3,7 +3,7 @@ lock '~> 3.15.0'
 # アプリケーション名
 set :application, 'short_diary'
 # githubのurl。プロジェクトのgitホスティング先を指定する
-set :repo_url, 'https://github.com/NakaiKazuki/short_diary.git'
+set :repo_url, 'git@github.com:NakaiKazuki/short_diary.git'
 # デプロイ先のサーバーのディレクトリ。フルパスで指定
 set :deploy_to, '/var/www/rails/short_diary'
 
@@ -21,6 +21,10 @@ set :keep_releases, 3
 # 出力するログのレベル。
 set :log_level, :debug
 
+# Nginxの設定ファイル名と置き場所を修正
+set :nginx_config_name, "#{fetch(:application)}.conf"
+set :nginx_sites_enabled_path, "/etc/nginx/conf.d"
+
 namespace :deploy do
   desc 'Create database'
   task :db_create do
@@ -30,23 +34,6 @@ namespace :deploy do
           execute :bundle, :exec, :rake, 'db:create'
         end
       end
-    end
-  end
-end
-
-namespace :puma do
-  desc 'Restart application'
-  task :puma_restart do
-    on roles(:app), in: :sequence, wait: 5 do
-      invoke  'puma:stop'
-      invoke! 'puma:start'
-    end
-  end
-
-  desc 'start application'
-  task :puma_start do
-    on roles(:app), in: :sequence, wait: 5 do
-      invoke! 'puma:start'
     end
   end
 end
