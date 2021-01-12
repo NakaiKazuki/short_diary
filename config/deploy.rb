@@ -7,19 +7,22 @@ set :repo_url, 'git@github.com:NakaiKazuki/short_diary.git'
 # デプロイ先のサーバーのディレクトリ。フルパスで指定
 set :deploy_to, '/var/www/rails/short_diary'
 
-set :rbenv_type, :user
-set :rbenv_ruby, '2.7.2'
+# Rubyのバージョンを指定
+set :rbenv_ruby, File.read('.ruby-version').strip
 
 # シンボリックリンクのファイルを指定、具体的にはsharedに入るファイル
 append :linked_files, 'config/master.key'
 # シンボリックリンクのディレクトリを生成
-append :linked_dirs, 'log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'public/system', 'public/uploads', 'public/storage'
+append :linked_dirs, 'log', 'tmp/pids', 'tmp/cache', 'tmp/sockets'
 # タスクでsudoなどを行う際に必要
 set :pty, true
 # 保持するバージョンの個数(※後述)
 set :keep_releases, 3
 # 出力するログのレベル。
 set :log_level, :debug
+
+# puma
+set :puma_init_active_record, true
 
 # Nginxの設定ファイル名と置き場所を修正
 set :nginx_sites_enabled_path, '/etc/nginx/conf.d'

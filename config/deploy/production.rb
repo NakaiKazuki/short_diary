@@ -6,6 +6,3 @@ set :ssh_options, {
   keys: %w[~/.ssh/short_diary_key_rsa],
   forward_agent: true
 }
-
-# # puma
-set :puma_init_active_record, true
