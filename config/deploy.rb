@@ -36,7 +36,7 @@ end
 
 namespace :puma do
   desc 'Restart application'
-  task :restart do
+  task :puma_restart do
     on roles(:app), in: :sequence, wait: 5 do
       invoke  'puma:stop'
       invoke! 'puma:start'
@@ -46,7 +46,7 @@ namespace :puma do
   desc 'start application'
   task :start do
     on roles(:app), in: :sequence, wait: 5 do
-      invoke! 'puma:start'
+      invoke! 'puma:puma_start'
     end
   end
 end
