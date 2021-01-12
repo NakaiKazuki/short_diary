@@ -41,4 +41,3 @@ namespace :deploy do
     end
   end
 end
-after 'deploy:finishing', 'deploy:puma_restart'
