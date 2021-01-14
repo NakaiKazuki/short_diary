@@ -16,6 +16,9 @@ jobs:
           - MYSQL_USER: root
           - MYSQL_ROOT_HOST: '%'
 
+      - image: selenium/standalone-chrome:latest
+        name: chrome
+
     working_directory: ~/short_diary_circleci
     steps:
       - checkout
