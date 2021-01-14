@@ -19,7 +19,7 @@ services:
       - chrome
     tty: true
     command: bundle exec puma -C config/puma.rb
-    # secretsはgit pushの時はコメントに
+    # secretsはデプロイ時のみコメントアウト
     secrets:
       - ec2_key
       - git_key
@@ -45,7 +45,7 @@ services:
     depends_on:
       - db
 
-# secretsはgit pushの時はコメントに
+# secretsはデプロイ時のみコメントアウト
 secrets:
   ec2_key:
     file: ${SHORT_DIARY_KEY}

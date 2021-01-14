@@ -3,7 +3,7 @@ lock '~> 3.15.0'
 # アプリケーション名
 set :application, 'short_diary'
 # githubのurl。プロジェクトのgitホスティング先を指定する
-set :repo_url, 'git@github.com:NakaiKazuki/short_diary.git'
+set :repo_url, 'https://github.com/NakaiKazuki/short_diary.git'
 # デプロイ先のサーバーのディレクトリ。フルパスで指定
 set :deploy_to, '/var/www/rails/short_diary'
 
@@ -43,7 +43,7 @@ end
 
 namespace :puma do
   desc 'Restart application'
-  task :puma_restart do
+  task :restart_puma do
     on roles(:app), in: :sequence, wait: 5 do
       invoke 'puma:stop'
       invoke 'puma:start'
