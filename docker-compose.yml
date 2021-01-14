@@ -21,8 +21,8 @@ services:
     command: bundle exec puma -C config/puma.rb
     # secretsはデプロイ時のみコメントアウト
     secrets:
-      - ec2_key
-      - git_key
+      - ec2_rsa
+      - git_rsa
 
   db:
     image: mysql:8.0
@@ -47,9 +47,9 @@ services:
 
 # secretsはデプロイ時のみコメントアウト
 secrets:
-  ec2_key:
+  ec2_rsa:
     file: ${SHORT_DIARY_KEY}
-  git_key:
+  git_rsa:
     file: ${GIT_KEY}
 
 volumes:

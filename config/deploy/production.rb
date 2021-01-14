@@ -1,9 +1,12 @@
 set :rails_env, :production
-server '52.193.58.137', user: 'Kazuki', roles: %w[web app db]
+server Rails.application.credentials.amazon[:ec2_ip],
+       user: Rails.application.credentials.amazon[:ec2_user],
+       roles: %w[web app db]
+
 set :deploy_to, '/var/www/rails/short_diary'
 
 set :ssh_options, {
-  keys: %w[~/.ssh/ec2_key_rsa],
+  keys: %w[~/.ssh/ec2_rsa],
   forward_agent: true
 }
 
