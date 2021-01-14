@@ -1,4 +1,5 @@
 set :rails_env, :production
+
 server Rails.application.credentials.amazon[:ec2_ip],
        user: Rails.application.credentials.amazon[:ec2_user],
        roles: %w[web app db]
