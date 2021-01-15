@@ -1,13 +1,26 @@
 version: 2.1
+
+orbs:
+  ruby: circleci/ruby@1.1.0
+
 jobs:
   build:
     docker:
       - image: circleci/ruby:2.7.2-node-browsers
         environment:
           - BUNDLER_VERSION: 2.1.4
-          - RAILS_ENV: test
           - SELENIUM_DRIVER_URL: http://selenium_chrome:4444/wd/hub
-
+    steps:
+      - checkout
+      - ruby/install-deps
+  test:
+    parallelism: 3
+    docker:
+      - image: circleci/ruby:2.7.2-node-browsers
+        environment:
+          - DB_HOST: 127.0.0.1
+          - RAILS_ENV: test
+          - BUNDLER_VERSION: 2.1.4
       - image: circleci/mysql:8.0
         command: |
           mysqld --default-authentication-plugin=mysql_native_password
@@ -15,59 +28,31 @@ jobs:
           - MYSQL_ROOT_PASSWORD: password
           - MYSQL_USER: root
           - MYSQL_ROOT_HOST: '%'
-
       - image: selenium/standalone-chrome:latest
         name: chrome
 
     working_directory: ~/short_diary_circleci
     steps:
       - checkout
-
-      - restore_cache:
-          keys:
-            - v1-dependencies-{{ checksum "Gemfile.lock" }}
-            # fallback to using the latest cache if no exact match is found
-            - v1-dependencies-
-      - run:
-          name: 依存関係インストール
-          command: |
-            gem install bundler -v 2.1.4
-            bundle install --jobs=4 --retry=3 --path vendor/bundle
-
-      - save_cache:
-          paths:
-            - ./vendor/bundle
-          key: v1-dependencies-{{ checksum "Gemfile.lock" }}
-
+      - ruby/install-deps
       - run: mv config/database.yml.ci config/database.yml
-
       - run:
-          name: データベースを作成
-          command: bundle exec rails db:create || bundle exec rails db:migrate
-
-# rubocopを走らせる記述です。
+          name: Wait for DB
+          command: dockerize -wait tcp://localhost:3306 -timeout 1m
+      - run: bundle exec rake db:create
+      - run: bundle exec rake db:schema:load
+     # Run rspec in parallel
+      - ruby/rspec-test
+      - ruby/rubocop-check
       - run:
           name: Rubocop
           command: bundle exec rubocop
 
-# rspecを走らせる記述です。
-      # run tests!
-      - run:
-          name: RSpec test
-          command: |
-            mkdir /tmp/test-results
-            TEST_FILES="$(circleci tests glob "spec/**/*_spec.rb" | \
-              circleci tests split --split-by=timings)"
-            bundle exec rspec \
-              --format progress \
-              --format RspecJunitFormatter \
-              --out /tmp/test-results/rspec.xml \
-              --format progress \
-              $TEST_FILES
-
-      # collect reports
-      - store_test_results:
-          path: /tmp/test-results
-      - store_artifacts:
-          path: /tmp/test-results
-          destination: test-results
+workflows:
+  version: 2
+  build_and_test:
+    jobs:
+      - build
+      - test:
+          requires:
+            - build
