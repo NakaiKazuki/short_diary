@@ -44,7 +44,7 @@ jobs:
       - run: bundle exec rake db:schema:load
      # Run rspec in parallel
       - ruby/rubocop-check
-      
+# rspecを走らせる記述です。
       # run tests!
       - run:
           name: run RSpec
@@ -52,9 +52,7 @@ jobs:
             mkdir /tmp/test-results
             TEST_FILES="$(circleci tests glob "spec/**/*_spec.rb" | \
               circleci tests split --split-by=timings)"
-
-
-# ③ここでRspecJunitFormatterというgemをインストールしていないとエラーになります。gemfileに記述しましょう。
+              
             bundle exec rspec \
               --format progress \
               --format RspecJunitFormatter \
@@ -68,7 +66,6 @@ jobs:
       - store_artifacts:
           path: /tmp/test-results
           destination: test-results
-
 workflows:
   version: 2
   build_and_test:
