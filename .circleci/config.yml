@@ -32,6 +32,7 @@ jobs:
       - image: selenium/standalone-chrome:latest
         name: chrome
 
+    working_directory: ~/short_diary_circleci
     steps:
       - checkout
       - ruby/install-deps
