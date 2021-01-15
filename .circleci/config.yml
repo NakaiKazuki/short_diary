@@ -48,7 +48,7 @@ jobs:
           name: Rubocop
           command: bundle exec rubocop
       - run:
-          name: run tests
+          name: RSpec
           command: |
             mkdir /tmp/test-results
             TEST_FILES="$(circleci tests glob "spec/**/*_spec.rb" | \
