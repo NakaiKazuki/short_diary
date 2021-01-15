@@ -43,8 +43,8 @@ jobs:
       - run: bundle exec rake db:schema:load
       # Run rspec in parallel
       - ruby/rubocop-check
-      - ruby/rubocop-check
-      
+      - ruby/rspec-test
+
 workflows:
   version: 2
   build_and_test:
