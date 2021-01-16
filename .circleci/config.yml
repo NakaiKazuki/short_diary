@@ -6,7 +6,7 @@ orbs:
 jobs:
   build:
     docker:
-      - image: circleci/ruby:2.7.2-node-browsers
+      - image: circleci/ruby:2.7.2-node
         environment:
           - BUNDLER_VERSION: 2.1.4
     steps:
@@ -16,7 +16,7 @@ jobs:
   test:
     parallelism: 3
     docker:
-      - image: circleci/ruby:2.7.2-node-browsers
+      - image: circleci/ruby:2.7.2-node
         environment:
           - DB_HOST: 127.0.0.1
           - RAILS_ENV: test
@@ -28,6 +28,8 @@ jobs:
           - MYSQL_ROOT_PASSWORD: password
           - MYSQL_USER: root
           - MYSQL_ROOT_HOST: '%'
+      - image: selenium/standalone-chrome:latest
+        name: chrome
 
     steps:
       - checkout
@@ -38,9 +40,6 @@ jobs:
           command: dockerize -wait tcp://localhost:3306 -timeout 1m
       - run: bundle exec rake db:create
       - run: bundle exec rake db:schema:load
-      - run:
-          command: chromedriver
-          background: true
       # Run rspec in parallel
       - ruby/rubocop-check
       - ruby/rspec-test
