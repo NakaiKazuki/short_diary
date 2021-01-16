@@ -15,9 +15,9 @@ set :rbenv_ruby, '2.7.2'
 append :linked_files, 'config/master.key'
 # シンボリックリンクのディレクトリを生成
 append :linked_dirs, 'log', 'tmp/pids', 'tmp/cache', 'tmp/sockets'
-# タスクでsudoを行う際に必要
+# タスクでsudoなどを行う際に必要
 set :pty, true
-# 保持するバージョンの個数
+# 保持するバージョンの個数(※後述)
 set :keep_releases, 3
 # 出力するログのレベル。
 set :log_level, :debug
