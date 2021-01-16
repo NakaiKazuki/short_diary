@@ -9,7 +9,6 @@ jobs:
       - image: circleci/ruby:2.7.2-node-browsers
         environment:
           - BUNDLER_VERSION: 2.1.4
-          - SELENIUM_DRIVER_URL: http://selenium_chrome:4444/wd/hub
     steps:
       - checkout
       - ruby/install-deps
@@ -29,8 +28,6 @@ jobs:
           - MYSQL_ROOT_PASSWORD: password
           - MYSQL_USER: root
           - MYSQL_ROOT_HOST: '%'
-      - image: selenium/standalone-chrome:latest
-        name: chrome
 
     steps:
       - checkout
