@@ -1,7 +1,4 @@
-version: 2.1
-
-orbs:
-  ruby: circleci/ruby@1.1.2
+version: 2
 
 jobs:
   build:
@@ -9,45 +6,57 @@ jobs:
       - image: circleci/ruby:2.7.2-node
         environment:
           - BUNDLER_VERSION: 2.1.4
-    steps:
-      - checkout
-      - ruby/install-deps
-
-  test:
-    parallelism: 3
-    docker:
-      - image: circleci/ruby:2.7.2-node
-        environment:
-          - DB_HOST: 127.0.0.1
-          - RAILS_ENV: test
-          - BUNDLER_VERSION: 2.1.4
+          - RAILS_ENV: 'test'
       - image: circleci/mysql:8.0
-        command: |
-          mysqld --default-authentication-plugin=mysql_native_password
+        command: [--default-authentication-plugin=mysql_native_password]
         environment:
           - MYSQL_ROOT_PASSWORD: password
           - MYSQL_USER: root
           - MYSQL_ROOT_HOST: '%'
       - image: selenium/standalone-chrome:latest
         name: chrome
+
+    working_directory: ~/myapp
+
     steps:
+
       - checkout
-      - ruby/install-deps
-      - run: mv config/database.yml.ci config/database.yml
+
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "Gemfile.lock" }}
+            - v1-dependencies-
+
       - run:
-          name: Wait for DB
-          command: dockerize -wait tcp://localhost:3306 -timeout 1m
+          name: install dependencies
+          command: |
+            gem install bundler -v 2.1.4
+            bundle install --jobs=4 --retry=3 --path vendor/bundle
+
+      - save_cache:
+          key: v1-dependencies-{{ checksum "Gemfile.lock" }}
+          paths:
+            - ./vendor/bundle
+
+      - run: mv config/database.yml.ci config/database.yml
       - run: bundle exec rake db:create
       - run: bundle exec rake db:schema:load
-      # Run rspec in parallel
-      - ruby/rubocop-check
-      - ruby/rspec-test
 
-workflows:
-  version: 2
-  build_and_test:
-    jobs:
-      - build
-      - test:
-          requires:
-            - build
+      - run:
+          name: run tests
+          command: |
+            mkdir /tmp/test-results
+            TEST_FILES="$(circleci tests glob "spec/**/*_spec.rb" | \
+              circleci tests split --split-by=timings)"
+            bundle exec rspec \
+              --format RspecJunitFormatter \
+              --out /tmp/test-results/rspec.xml \
+              --format progress \
+              $TEST_FILES
+          no_output_timeout: 15m
+
+      - store_test_results:
+          path: /tmp/test-results
+      - store_artifacts:
+          path: /tmp/test-results
+          destination: test-results

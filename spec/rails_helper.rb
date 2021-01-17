@@ -9,7 +9,7 @@ Dir[Rails.root.join('spec', 'support', '**', '*.rb')].sort.each { |f|
   require f
 }
 
-#---コンテナ上でRspec動かすのに必要---
+#---Docker上でRspec動かすのに必要---
 Capybara.register_driver :remote_chrome do |app|
   url = 'http://chrome:4444/wd/hub'
   caps = ::Selenium::WebDriver::Remote::Capabilities.chrome(
