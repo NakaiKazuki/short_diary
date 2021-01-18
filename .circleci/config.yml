@@ -43,6 +43,20 @@ jobs:
       - ruby/rubocop-check
       - ruby/rspec-test
 
+  deploy:
+    docker:
+      - image: circleci/ruby:2.7.2-node
+        environment:
+          BUNDLER_VERSION: 2.1.4
+    steps:
+      - checkout
+      - ruby/install-deps
+      - add_ssh_keys:
+          fingerprints: "30:2c:a9:34:3b:9f:ea:53:43:b6:20:f9:9a:fe:01:5f"
+      - deploy:
+          name: Capistrano deploy
+          command: bundle exec cap production deploy
+
 workflows:
   version: 2
   build_and_test:
@@ -51,3 +65,9 @@ workflows:
       - test:
           requires:
             - build
+      - deploy:
+          requires:
+            - test
+          filters:
+            branches:
+              only: master
