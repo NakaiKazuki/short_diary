@@ -15,3 +15,10 @@ development:
 test:
   <<: *default
   database: short_diary_docker_test
+
+production:
+  <<: *default
+  database: <%= Rails.application.credentials.production_db[:database_name] %>
+  username: <%= Rails.application.credentials.production_db[:user_name] %>
+  password: <%= Rails.application.credentials.production_db[:password] %>
+  host: <%= Rails.application.credentials.production_db[:host_name] %>
