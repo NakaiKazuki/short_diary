@@ -4,6 +4,8 @@ services:
     image: selenium/standalone-chrome
     logging:
       driver: none
+    ports:
+      - 4444:4444
 
   webapp:
     build:
@@ -31,6 +33,8 @@ services:
     volumes:
       - db-data:/var/lib/mysql
       - ./mysql-confd:/etc/mysql/conf.d
+    ports:
+      - 3306:3306
     depends_on:
       - webapp
 
