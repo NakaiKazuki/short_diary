@@ -53,7 +53,6 @@ jobs:
       - ruby/install-deps
       - add_ssh_keys:
           fingerprints:
-            - "30:2c:a9:34:3b:9f:ea:53:43:b6:20:f9:9a:fe:01:5f"
             - "6c:67:71:c3:ae:79:b9:de:ad:5b:89:c1:c1:55:77:5f"
       - deploy:
           name: Capistrano deploy
