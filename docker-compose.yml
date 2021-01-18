@@ -21,10 +21,6 @@ services:
       - chrome
     tty: true
     command: bundle exec puma -C config/puma.rb
-    # secretsはデプロイ時のみコメントアウト
-    secrets:
-      - ec2_rsa
-      - git_rsa
 
   db:
     image: mysql:8.0
@@ -48,13 +44,6 @@ services:
       - 80:80
     depends_on:
       - db
-
-# secretsはデプロイ時のみコメントアウト
-secrets:
-  ec2_rsa:
-    file: ${SHORT_DIARY_KEY}
-  git_rsa:
-    file: ${GIT_KEY}
 
 volumes:
   public-data:
