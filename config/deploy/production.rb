@@ -7,6 +7,6 @@ server Rails.application.credentials.amazon.dig(:amazon, :ec2_ip),
 set :deploy_to, '/var/www/rails/short_diary'
 
 set :ssh_options, {
-  keys: [ENV.fetch('EC2_SSH_KEY').to_s],
+  keys: [ENV.fetch('PRODUCTION_SSH_KEY').to_s],
   forward_agent: true
 }
