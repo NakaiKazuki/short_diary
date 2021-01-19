@@ -59,8 +59,7 @@ jobs:
           command: sudo pip install awscli
       - deploy:
           name: Capistrano deploy
-              commands:
-                - ./deploy.sh
+          command: ./deploy.sh
 
 workflows:
   version: 2
