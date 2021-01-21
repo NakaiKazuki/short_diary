@@ -1,24 +1,12 @@
 require 'rails_helper'
 
 RSpec.describe 'DeviseConfirmationNews', type: :system do
-  let(:user) { create(:user) }
+  let(:activate_user) { create(:user) }
   let!(:non_activate) { create(:user, :non_activate, :other_email) }
 
-  # メールアドレス未入力
-  def submit_with_invalid_information
-    fill_in '登録したメールアドレス', with: ''
-    find('.form-submit').click
-  end
-
-  # すでに有効化されたユーザーのメールアドレス
-  def submit_with_activate_user_information
-    fill_in '登録したメールアドレス', with: user.email
-    find('.form-submit').click
-  end
-
-  # 登録されていないメールアドレス
-  def submit_with_unregistered_email_information
-    fill_in '登録したメールアドレス', with: 'unregistered@email.address'
+  # メールアドレスフォーム
+  def submit_with_information(email)
+    fill_in '登録したメールアドレス', with: email
     find('.form-submit').click
   end
 
@@ -64,25 +52,25 @@ RSpec.describe 'DeviseConfirmationNews', type: :system do
         describe 'メールは送信されない' do
           it 'メールアドレスが空' do
             expect do
-              submit_with_invalid_information
+              submit_with_information(nil)
             end.to change { ActionMailer::Base.deliveries.size }.by(0)
           end
 
           it 'すでに認証済みのメールアドレス' do
             expect do
-              submit_with_activate_user_information
+              submit_with_information(activate_user.email)
             end.to change { ActionMailer::Base.deliveries.size }.by(0)
           end
 
           it '未登録のメールアドレス' do
             expect do
-              submit_with_unregistered_email_information
+              submit_with_information('unregistered@example.com')
             end.to change { ActionMailer::Base.deliveries.size }.by(0)
           end
         end
 
         it '警告メッセージが表示' do
-          submit_with_invalid_information
+          submit_with_information(nil)
           expect(page).to have_selector '.alert-danger'
         end
       end
@@ -103,7 +91,7 @@ RSpec.describe 'DeviseConfirmationNews', type: :system do
 
     context 'ログイン状態でアクセスした場合' do
       before do
-        sign_in user
+        sign_in activate_user
         visit new_user_confirmation_path
       end
 
