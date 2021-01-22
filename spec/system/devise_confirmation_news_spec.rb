@@ -7,7 +7,7 @@ RSpec.describe 'DeviseConfirmationNews', type: :system do
   before do
     ActionMailer::Base.deliveries.clear
   end
-  
+
   # 有効な情報を保持したフォーム
   def submit_with_information(email = non_activate.email)
     fill_in '登録したメールアドレス', with: email

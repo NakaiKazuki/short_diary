@@ -2,11 +2,12 @@ require 'rails_helper'
 
 RSpec.describe 'DevisePasswordNews', type: :system do
   let(:user) { create(:user) }
-  
+
   before do
     ActionMailer::Base.deliveries.clear
   end
   # 有効な情報を保持したフォーム
+
   def submit_with_information(email = user.email)
     fill_in 'メールアドレス', with: email
     find('.form-submit').click

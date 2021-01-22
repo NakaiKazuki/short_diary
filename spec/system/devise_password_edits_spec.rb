@@ -7,6 +7,7 @@ RSpec.describe 'DevisePasswordEdits', type: :system do
     ActionMailer::Base.deliveries.clear
   end
   # 有効な情報を保持したフォーム
+
   def submit_with_information(password: 'success', password_confirmation: 'success')
     fill_in 'パスワード（6文字以上）', with: password
     fill_in 'パスワード（再入力）', with: password_confirmation

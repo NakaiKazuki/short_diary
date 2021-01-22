@@ -4,7 +4,7 @@ RSpec.describe 'DeviseAccountActivationMails', type: :system do
   before do
     ActionMailer::Base.deliveries.clear
   end
-  
+
   def user_create
     visit new_user_registration_path
     fill_in 'メールアドレス（例：email@example.com）', with: 'user@example.com'
