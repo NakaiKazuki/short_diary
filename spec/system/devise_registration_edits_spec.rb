@@ -1,13 +1,13 @@
 require 'rails_helper'
 
 RSpec.describe 'DeviseRegistrationEdits', type: :system do
-  before do
-    ActionMailer::Base.deliveries.clear
-  end
-
   let(:user) { create(:user) }
   let(:guest) { create(:guest) }
 
+  before do
+    ActionMailer::Base.deliveries.clear
+  end
+  
   # 有効な情報を保持したフォーム
   def submit_with_information(email: 'valid@exapmle.com', password: 'password', password_confirmation: 'password', current_password: user.password)
     fill_in '新しいメールアドレス（例：email@example.com）', with: email

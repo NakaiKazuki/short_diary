@@ -4,14 +4,14 @@ RSpec.describe 'DeviseConfirmationNews', type: :system do
   let(:activate_user) { create(:user) }
   let!(:non_activate) { create(:user, :non_activate, :other_email) }
 
+  before do
+    ActionMailer::Base.deliveries.clear
+  end
+  
   # 有効な情報を保持したフォーム
   def submit_with_information(email = non_activate.email)
     fill_in '登録したメールアドレス', with: email
     find('.form-submit').click
-  end
-
-  before do
-    ActionMailer::Base.deliveries.clear
   end
 
   describe '/users/confirmation/new layout' do
