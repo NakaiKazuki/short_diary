@@ -3,40 +3,28 @@ require 'rails_helper'
 RSpec.describe 'SharedMicropostForms', type: :system do
   let(:user) { create(:user) }
 
-  # 無効なパラメータ
-  def submit_with_invalid_information
-    fill_in '50文字以内で今日の出来事を入力してください。', with: ' '
+  # 有効な情報を保持したフォーム
+  def submit_with_information(content = '50文字以下の投稿')
+    fill_in '50文字以内で今日の出来事を入力してください。', with: content
     find('.form-submit').click
   end
 
-  # 50文字超えるため無効なパラメータ
-  def submit_with_content_is_51_characters_invalid_information
-    fill_in '50文字以内で今日の出来事を入力してください。', with: 'a' * 51
-    find('.form-submit').click
-  end
-
-  # 6MBを超える画像ファイルが含まれるため無効なパラメータ
-  def submit_with_invalid_information_add_6mb_picture
+  # 6MBの画像が追加された無効な情報
+  def submit_with_information_add_6mb_picture
     fill_in '50文字以内で今日の出来事を入力してください。', with: '50文字以下の投稿'
     attach_file('spec/fixtures/images/test_6mb.jpg')
     find('.form-submit').click
   end
 
-  # pdfファイルが含まれるため無効なパラメータ
-  def submit_with_invalid_information_add_invalid_file
+  # pdfファイルが追加された無効な情報
+  def submit_with_information_add_pdf_file
     fill_in '50文字以内で今日の出来事を入力してください。', with: '50文字以下の投稿'
     attach_file('spec/fixtures/images/test.pdf')
     find('.form-submit').click
   end
 
-  # 有効なパラメータ
-  def submit_with_valid_information
-    fill_in '50文字以内で今日の出来事を入力してください。', with: '50文字以下の投稿'
-    find('.form-submit').click
-  end
-
-  # 5MB以下の画像が追加された有効なパラメータ
-  def submit_with_valid_information_when_add_picture
+  # 5MB以下の画像が追加された有効な情報
+  def submit_with_valid_information_add_5mb_picture
     fill_in '50文字以内で今日の出来事を入力してください。', with: '50文字以下の投稿'
     attach_file('spec/fixtures/images/test.jpg')
     find('.form-submit').click
@@ -50,37 +38,37 @@ RSpec.describe 'SharedMicropostForms', type: :system do
 
     context '無効なパラメータを送信した場合' do
       it '同じページが表示' do
-        submit_with_invalid_information
+        submit_with_information(nil)
         expect(page).to have_selector '.micropost-form'
       end
 
       it 'エラーメッセージが表示' do
-        submit_with_invalid_information
+        submit_with_information(nil)
         expect(page).to have_selector '.alert-danger'
       end
 
       describe '各項目が無効なパラメータだと投稿データは作成されない' do
         it 'contentが空白' do
           expect do
-            submit_with_invalid_information
+            submit_with_information(nil)
           end.to change(Micropost, :count).by(0)
         end
 
         it 'contentが51文字' do
           expect do
-            submit_with_content_is_51_characters_invalid_information
+            submit_with_information('a' * 51)
           end.to change(Micropost, :count).by(0)
         end
 
         it '6MBを超える画像ファイルが含まれるため無効' do
           expect do
-            submit_with_invalid_information_add_6mb_picture
+            submit_with_information_add_6mb_picture
           end.to change(Micropost, :count).by(0)
         end
 
         it '画像ファイル以外が含まれるため無効' do
           expect do
-            submit_with_invalid_information_add_invalid_file
+            submit_with_information_add_pdf_file
           end.to change(Micropost, :count).by(0)
         end
       end
@@ -89,19 +77,19 @@ RSpec.describe 'SharedMicropostForms', type: :system do
     context '有効なパラメータを送信した場合' do
       it '投稿が作成される' do
         expect do
-          submit_with_valid_information
+          submit_with_information
         end.to change(Micropost, :count).by(1)
       end
 
       it '5MB以下の画像の場合は投稿が作成される' do
         expect do
-          submit_with_valid_information_when_add_picture
+          submit_with_valid_information_add_5mb_picture
         end.to change(Micropost, :count).by(1)
       end
 
       describe '投稿作成完了に付随する処理' do
         before do
-          submit_with_valid_information
+          submit_with_information
         end
 
         it 'ホーム画面に移動' do

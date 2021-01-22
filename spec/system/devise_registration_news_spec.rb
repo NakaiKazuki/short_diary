@@ -4,54 +4,15 @@ RSpec.describe 'DeviseRegistrationNews', type: :system do
   let(:user) { create(:user, :non_activate) }
   let(:activate_user) { create(:user) }
 
-  # 全てが無効なパラメータ
-  def submit_with_invalid_information
-    fill_in 'メールアドレス（例：email@example.com）', with: 'user@invalid'
-    fill_in 'パスワード（6文字以上）', with: 'foo'
-    fill_in 'パスワード（再入力）', with: 'bar'
-    find('.form-submit').click
-  end
-
-  # パスワードと確認用パスワードが一致しないパラメータ
-  def submit_with_password_confirmation_is_not_matching_information
-    fill_in 'メールアドレス（例：email@example.com）', with: 'user@example.com'
-    fill_in 'パスワード（6文字以上）', with: 'password'
-    fill_in 'パスワード（再入力）', with: 'foobar'
+  # 有効な情報を保持したフォーム
+  def submit_with_information(email: 'valid@example.com', password: 'password', password_confirmation: 'password')
+    fill_in 'メールアドレス（例：email@example.com）', with: email
+    fill_in 'パスワード（6文字以上）', with: password
+    fill_in 'パスワード（再入力）', with: password_confirmation
     find('.form-submit').click
   end
 
   # 各項目が無効なパラメータ
-  # メールアドレスが無効なパラメータ
-  def submit_with_email_is_invalid_information
-    fill_in 'メールアドレス（例：email@example.com）', with: 'user@invalid'
-    fill_in 'パスワード（6文字以上）', with: 'password'
-    fill_in 'パスワード（再入力）', with: 'password'
-    find('.form-submit').click
-  end
-
-  # パスワードが無効なパラメータ
-  def submit_with_password_is_invalid_information
-    fill_in 'メールアドレス（例：email@example.com）', with: 'user@example.com'
-    fill_in 'パスワード（6文字以上）', with: 'foo'
-    fill_in 'パスワード（再入力）', with: 'password'
-    find('.form-submit').click
-  end
-
-  # 確認用パスワードが無効なパラメータ
-  def submit_with_password_confirmation_is_invalid_information
-    fill_in 'メールアドレス（例：email@example.com）', with: 'user@example.com'
-    fill_in 'パスワード（6文字以上）', with: 'password'
-    fill_in 'パスワード（再入力）', with: 'foo'
-    find('.form-submit').click
-  end
-
-  # 全て有効なパラメータ
-  def submit_with_valid_information
-    fill_in 'メールアドレス（例：email@example.com）', with: 'user@example.com'
-    fill_in 'パスワード（6文字以上）', with: 'password'
-    fill_in 'パスワード（再入力）', with: 'password'
-    find('.form-submit').click
-  end
 
   describe '/users/sign_up layout' do
     context 'ログアウト状態でアクセスした場合' do
@@ -84,43 +45,43 @@ RSpec.describe 'DeviseRegistrationNews', type: :system do
 
       context '無効なパラメータを送信した場合' do
         it '同じ画面が表示' do
-          submit_with_invalid_information
+          submit_with_information(email: 'invalid@example', password: 'foo', password_confirmation: 'bar')
           expect(page).to have_selector '.signup-container'
         end
 
         it 'エラーメッセージが表示' do
-          submit_with_invalid_information
+          submit_with_information(email: 'invalid@example', password: 'foo', password_confirmation: 'bar')
           expect(page).to have_selector '.alert-danger'
         end
 
         describe '各項目が無効な値の場合ユーザーは登録されない' do
           it '全項目が無効' do
             expect do
-              submit_with_invalid_information
+              submit_with_information(email: 'invalid@example', password: 'foo', password_confirmation: 'bar')
             end.to change(User, :count).by(0)
           end
 
           it 'メールアドレスが無効' do
             expect do
-              submit_with_email_is_invalid_information
+              submit_with_information(email: 'invalid@example')
             end.to change(User, :count).by(0)
           end
 
           it 'パスワードが無効' do
             expect do
-              submit_with_password_is_invalid_information
+              submit_with_information(password: 'foo')
             end.to change(User, :count).by(0)
           end
 
           it '確認用パスワードが無効' do
             expect do
-              submit_with_password_confirmation_is_invalid_information
+              submit_with_information(password_confirmation: 'foo')
             end.to change(User, :count).by(0)
           end
 
           it 'パスワードと確認用パスワードの不一致は無効' do
             expect do
-              submit_with_password_confirmation_is_not_matching_information
+              submit_with_information(password_confirmation: 'mismatch_password_confirmation')
             end.to change(User, :count).by(0)
           end
         end
@@ -129,24 +90,24 @@ RSpec.describe 'DeviseRegistrationNews', type: :system do
       context '有効なパラメータを送信した場合' do
         it 'アカウント登録される' do
           expect do
-            submit_with_valid_information
+            submit_with_information
           end.to change(User, :count).by(1)
         end
 
         describe 'アカウント登録に付随する処理' do
           it 'メールが送信される' do
             expect do
-              submit_with_valid_information
+              submit_with_information
             end.to change { ActionMailer::Base.deliveries.size }.by(1)
           end
 
           it 'ホーム画面に移動' do
-            submit_with_valid_information
+            submit_with_information
             expect(page).to have_current_path root_path, ignore_query: true
           end
 
           it 'アカウント有効化メール送信メッセージが表示' do
-            submit_with_valid_information
+            submit_with_information
             expect(page).to have_selector '.alert-notice'
           end
         end

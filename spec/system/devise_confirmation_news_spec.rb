@@ -4,15 +4,9 @@ RSpec.describe 'DeviseConfirmationNews', type: :system do
   let(:activate_user) { create(:user) }
   let!(:non_activate) { create(:user, :non_activate, :other_email) }
 
-  # メールアドレスフォーム
-  def submit_with_information(email)
+  # 有効な情報を保持したフォーム
+  def submit_with_information(email = non_activate.email)
     fill_in '登録したメールアドレス', with: email
-    find('.form-submit').click
-  end
-
-  # 有効な情報
-  def submit_with_valid_information
-    fill_in '登録したメールアドレス', with: non_activate.email
     find('.form-submit').click
   end
 
@@ -78,12 +72,12 @@ RSpec.describe 'DeviseConfirmationNews', type: :system do
       context '有効なパラメータ送信' do
         it 'メールが送信' do
           expect do
-            submit_with_valid_information
+            submit_with_information
           end.to change { ActionMailer::Base.deliveries.size }.by(1)
         end
 
         it 'メール送信メッセージが表示' do
-          submit_with_valid_information
+          submit_with_information
           expect(page).to have_selector '.alert-notice'
         end
       end

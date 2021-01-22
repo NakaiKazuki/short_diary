@@ -3,43 +3,13 @@ require 'rails_helper'
 RSpec.describe 'DevisePasswordEdits', type: :system do
   let(:user) { create(:user) }
 
-  # 　全てが無効なパラメータ
-  def submit_with_invalid_information
-    fill_in 'パスワード（6文字以上）', with: ''
-    fill_in 'パスワード（再入力）', with: ''
+  # 有効な情報を保持したフォーム
+  def submit_with_information(password: 'success', password_confirmation: 'success')
+    fill_in 'パスワード（6文字以上）', with: password
+    fill_in 'パスワード（再入力）', with: password_confirmation
     find('.form-submit').click
   end
 
-  # 各項目が無効なパラメータ
-  # パスワードが無効なパラメータ
-  def submit_with_password_is_invalid_information
-    fill_in 'パスワード（6文字以上）', with: 'foo'
-    fill_in 'パスワード（再入力）', with: 'foobar'
-    find('.form-submit').click
-  end
-
-  # 確認用パスワードが無効なパラメータ
-  def submit_with_password_confirmation_is_invalid_information
-    fill_in 'パスワード（6文字以上）', with: 'foobar'
-    fill_in 'パスワード（再入力）', with: 'foo'
-    find('.form-submit').click
-  end
-
-  # パスワードと確認用パスワードが一致しないパラメータ
-  def submit_with_password_and_password_confirmation_not_match_information
-    fill_in 'パスワード（6文字以上）', with: 'foobar'
-    fill_in 'パスワード（再入力）', with: 'hogehoge'
-    find('.form-submit').click
-  end
-
-  # 有効なパラメータ
-  def submit_with_valid_information
-    fill_in 'パスワード（6文字以上）', with: 'success'
-    fill_in 'パスワード（再入力）', with: 'success'
-    find('.form-submit').click
-  end
-
-  # パスワード変更メールを開く
   before do
     ActionMailer::Base.deliveries.clear
   end
@@ -92,28 +62,28 @@ RSpec.describe 'DevisePasswordEdits', type: :system do
 
       context '無効なパラメータを送信した場合' do
         it 'エラーメッセージが表示' do
-          submit_with_invalid_information
+          submit_with_information(password: nil, password_confirmation: nil)
           expect(page).to have_selector '.alert-danger'
         end
 
         it '同じ画面が表示される' do
-          submit_with_invalid_information
+          submit_with_information(password: nil, password_confirmation: nil)
           expect(page).to have_selector '.password-reset-edit-container'
         end
 
         describe '各項目が無効な場合パスワードは変更されない' do
           it 'パスワードが無効' do
-            submit_with_password_is_invalid_information
+            submit_with_information(password: 'foo', password_confirmation: 'foobar')
             expect(user.reload.password).to eq 'password'
           end
 
           it '確認用パスワードが無効' do
-            submit_with_password_confirmation_is_invalid_information
+            submit_with_information(password: 'foobar', password_confirmation: 'foo')
             expect(user.reload.password).to eq 'password'
           end
 
           it 'パスワードと確認用パスワードの不一致は無効' do
-            submit_with_password_and_password_confirmation_not_match_information
+            submit_with_information(password: 'foo', password_confirmation: 'hogehoge')
             expect(user.reload.password).to eq 'password'
           end
         end
@@ -121,7 +91,7 @@ RSpec.describe 'DevisePasswordEdits', type: :system do
 
       context '有効なパラメータを送信した場合' do
         before do
-          submit_with_valid_information
+          submit_with_information
         end
 
         it '変更成功メッセージが表示' do

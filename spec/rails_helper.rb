@@ -5,9 +5,10 @@ abort('The Rails environment is running in production mode!') if Rails.env.produ
 require 'rspec/rails'
 require 'capybara/email/rspec'
 
-Dir[Rails.root.join('spec', 'support', '**', '*.rb')].sort.each { |f|
-  require f
-}
+# spec/support配下を読み込む場合は有効化
+# Dir[Rails.root.join('spec', 'support', '**', '*.rb')].sort.each { |f|
+#   require f
+# }
 
 #---Docker上でRspec動かすのに必要---
 Capybara.register_driver :remote_chrome do |app|

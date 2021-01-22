@@ -4,53 +4,25 @@ RSpec.describe 'DeviseSessionNews', type: :system do
   let(:user) { create(:user) }
   let(:non_activate) { create(:user, :non_activate) }
 
-  # 全て無効なパラメータ
-  def submit_with_invalid_information
-    fill_in 'メールアドレス', with: ''
-    fill_in 'パスワード', with: ''
-    find('.form-submit').click
-  end
-
-  # メールアドレスが無効なパラメータ
-  def submit_with_email_is_invalid_information
-    fill_in 'メールアドレス', with: ' '
-    fill_in 'パスワード', with: user.password
-    find('.form-submit').click
-  end
-
-  # パスワードが無効なパラメータ
-  def submit_with_password_is_invalid_information
-    fill_in 'メールアドレス', with: user.email
-    fill_in 'パスワード', with: '　'
-    find('.form-submit').click
-  end
-
-  # メールアドレスに対してパスワードが一致しないパラメータ
-  def submit_with_password_is_not_matching_information
-    fill_in 'メールアドレス', with: user.email
-    fill_in 'パスワード', with: 'password_is_not_matching'
+  # 有効な情報を保持したフォーム
+  def submit_with_information(email: user.email, password: user.password)
+    fill_in 'メールアドレス', with: email
+    fill_in 'パスワード', with: password
     find('.form-submit').click
   end
 
   # repeatの回数連続でパスワードが空白のパラメータ送信
   def submit_with_consecutive_password_empty(repeat)
     repeat.times do
-      submit_with_password_is_invalid_information
+      submit_with_information(password: nil)
     end
   end
 
   # repeatの回数連続でパスワードが一致しないパラメータ送信
   def submit_with_consecutive_password_mismatches(repeat)
     repeat.times do
-      submit_with_password_is_not_matching_information
+      submit_with_information(password: 'mismatch_password')
     end
-  end
-
-  # 全て有効なパラメータ
-  def submit_with_valid_information(user)
-    fill_in 'メールアドレス', with: user.email
-    fill_in 'パスワード', with: user.password
-    find('.form-submit').click
   end
 
   describe '/users/sign_in layout' do
@@ -88,43 +60,43 @@ RSpec.describe 'DeviseSessionNews', type: :system do
 
       context '無効なパラメータを送信した場合' do
         it '同じ画面が表示' do
-          submit_with_invalid_information
+          submit_with_information(email: nil, password: nil)
           expect(page).to have_selector '.login-container'
         end
 
         describe '警告メッセージが表示' do
           it '全項目が無効' do
-            submit_with_invalid_information
+            submit_with_information(email: nil, password: nil)
             expect(page).to have_selector '.alert-alert'
           end
 
           it 'メールアドレスが無効' do
-            submit_with_email_is_invalid_information
+            submit_with_information(email: nil)
             expect(page).to have_selector '.alert-alert'
           end
 
           it 'パスワードが無効' do
-            submit_with_password_is_invalid_information
+            submit_with_information(password: nil)
             expect(page).to have_selector '.alert-alert'
           end
 
           it 'アドレスに対してパスワードの不一致は無効' do
-            submit_with_password_is_not_matching_information
+            submit_with_information(password: 'mismatch_password')
             expect(page).to have_selector '.alert-alert'
           end
 
           it '認証前のログインは無効' do
-            submit_with_valid_information(non_activate)
+            submit_with_information(email: non_activate.email, password: non_activate.password)
             expect(page).to have_selector '.alert-alert'
           end
         end
 
-        context '連続で入力されたパスワードが一致しない場合' do
+        context '入力されたパスワードが複数回一致しない場合' do
           before do
             ActionMailer::Base.deliveries.clear
           end
 
-          it 'パスワードが5連続空白は含まれない' do
+          it 'パスワードが5連続空白の場合はメールは送信されない' do
             expect do
               submit_with_consecutive_password_empty(5)
             end.to change { ActionMailer::Base.deliveries.size }.by(0)
@@ -154,7 +126,7 @@ RSpec.describe 'DeviseSessionNews', type: :system do
 
           it 'アカウント凍結後は正しいパラメータでもログイン不可' do
             submit_with_consecutive_password_mismatches(5)
-            submit_with_valid_information(user)
+            submit_with_information
             expect(page).to have_content 'アカウントは凍結されています。'
           end
         end
@@ -163,7 +135,7 @@ RSpec.describe 'DeviseSessionNews', type: :system do
       context '有効なパラメータを送信した場合' do
         # 有効なパラメータを送信
         before do
-          submit_with_valid_information(user)
+          submit_with_information
         end
 
         it 'ホーム画面に移動' do

@@ -3,20 +3,9 @@ require 'rails_helper'
 RSpec.describe 'DevisePasswordNews', type: :system do
   let(:user) { create(:user) }
 
-  # メールアドレスが空白のため無効
-  def submit_with_invalid_information
-    fill_in 'メールアドレス', with: ' '
-    find('.form-submit').click
-  end
-
-  # 登録されていないメールアドレス
-  def submit_with_unregistered_email_information
-    fill_in 'メールアドレス', with: 'invalid@email.com'
-    find('.form-submit').click
-  end
-
-  def submit_with_valid_information
-    fill_in 'メールアドレス', with: user.email
+  # 有効な情報を保持したフォーム
+  def submit_with_information(email = user.email)
+    fill_in 'メールアドレス', with: email
     find('.form-submit').click
   end
 
@@ -59,25 +48,25 @@ RSpec.describe 'DevisePasswordNews', type: :system do
 
       context '無効なパラメータを送信した場合' do
         it 'エラーメッセージが表示' do
-          submit_with_invalid_information
+          submit_with_information(nil)
           expect(page).to have_selector '.alert-danger'
         end
 
         it '同じ画面が表示される' do
-          submit_with_invalid_information
+          submit_with_information(nil)
           expect(page).to have_selector '.password-reset-new-container'
         end
 
         describe 'メールは送信されない' do
           it 'メールアドレスが空' do
             expect do
-              submit_with_invalid_information
+              submit_with_information(nil)
             end.to change { ActionMailer::Base.deliveries.size }.by(0)
           end
 
           it '登録されていないメールアドレス' do
             expect do
-              submit_with_unregistered_email_information
+              submit_with_information('invalid@example.com')
             end.to change { ActionMailer::Base.deliveries.size }.by(0)
           end
         end
@@ -86,12 +75,12 @@ RSpec.describe 'DevisePasswordNews', type: :system do
       context '有効なパラメータを送信した場合' do
         it 'メールが送信' do
           expect do
-            submit_with_valid_information
+            submit_with_information
           end.to change { ActionMailer::Base.deliveries.size }.by(1)
         end
 
         it 'メール送信メッセージが表示' do
-          submit_with_valid_information
+          submit_with_information
           expect(page).to have_selector '.alert-notice'
         end
       end

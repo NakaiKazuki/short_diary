@@ -3,24 +3,19 @@ require 'rails_helper'
 RSpec.describe 'DeviseUnlockInstructionMails', type: :system do
   let(:user) { create(:user) }
 
-  # repeatの回数連続でパスワードが一致しないパラメータ送信
-  def submit_with_consecutive_password_mismatches
+  # アカウント凍結解除メールを送信して開いている
+  before do
+    ActionMailer::Base.deliveries.clear
+    visit new_user_session_path
     5.times do
       fill_in 'メールアドレス', with: user.email
       fill_in 'パスワード', with: 'password_is_not_matching'
       find('.form-submit').click
     end
-  end
-
-  # アカウント凍結解除メールを送信して開いている
-  before do
-    ActionMailer::Base.deliveries.clear
-    visit new_user_session_path
-    submit_with_consecutive_password_mismatches
     open_email('user@example.com')
   end
 
-  # 全て有効なログインパラメータ
+  # 有効な情報を保持したフォーム
   def submit_with_valid_information
     fill_in 'メールアドレス', with: user.email
     fill_in 'パスワード', with: user.password
