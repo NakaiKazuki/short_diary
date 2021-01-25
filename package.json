@@ -1,5 +1,14 @@
 {
   "name": "short_diary_docker",
   "private": true,
-  "dependencies": {}
+  "dependencies": {
+    "@rails/ujs": "^6.1.1",
+    "@rails/webpacker": "5.2.1",
+    "bootstrap": "^4.6.0",
+    "jquery": "^3.5.1",
+    "popper.js": "^1.16.1"
+  },
+  "devDependencies": {
+    "webpack-dev-server": "^3.11.2"
+  }
 }

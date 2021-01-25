@@ -5,12 +5,10 @@ ruby '2.7.2'
 
 gem 'bcrypt'
 gem 'bootsnap', require: false
-gem 'bootstrap'
 gem 'devise'
 gem 'devise-i18n'
 gem 'image_processing'
 gem 'jbuilder'
-gem 'jquery-rails'
 gem 'kaminari'
 gem 'kaminari-bootstrap'
 gem 'mini_magick'
@@ -20,7 +18,7 @@ gem 'rails', '~> 6.0.3', '>= 6.0.3.4'
 gem 'rails-i18n'
 gem 'sassc-rails'
 gem 'turbolinks'
-gem 'uglifier'
+gem 'webpacker'
 
 group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]

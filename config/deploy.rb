@@ -10,12 +10,12 @@ set :repo_url, 'git@github.com:NakaiKazuki/short_diary.git'
 set :deploy_to, '/var/www/rails/short_diary'
 
 # Rubyのバージョンを指定
-set :rbenv_ruby, '2.7.2'
+set :rbenv_ruby, File.read('.ruby-version').strip
 
 # シンボリックリンクのファイルを指定、具体的にはsharedに入るファイル
 append :linked_files, 'config/master.key'
 # シンボリックリンクのディレクトリを生成
-append :linked_dirs, 'log', 'tmp/pids', 'tmp/cache', 'tmp/sockets'
+append :linked_dirs, 'log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'node_modules'
 # タスクでsudoなどを行う際に必要
 set :pty, true
 # 保持するバージョンの個数(※後述)
