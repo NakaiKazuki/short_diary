@@ -18,7 +18,7 @@ jobs:
       - node/install-packages:
           pkg-manager: yarn
           cache-path: 'yarn.lock'
-
+      - aws-cli/install
   test:
     parallelism: 3
     docker:
@@ -42,6 +42,7 @@ jobs:
       - node/install-packages:
           pkg-manager: yarn
           cache-path: 'yarn.lock'
+      - aws-cli/install
       - run: mv config/database.yml.ci config/database.yml
       - run:
           name: Wait for DB
