@@ -38,6 +38,7 @@ jobs:
       - node/install-packages:
           pkg-manager: yarn
           cache-path: 'yarn.lock'
+          with-cache: false
       - run: mv config/database.yml.ci config/database.yml
       - run:
           name: Wait for DB
@@ -56,6 +57,10 @@ jobs:
     steps:
       - checkout
       - ruby/install-deps
+      - node/install-packages:
+          pkg-manager: yarn
+          cache-path: 'yarn.lock'
+          with-cache: false
       - aws-cli/install
       - add_ssh_keys:
           fingerprints: "6c:67:71:c3:ae:79:b9:de:ad:5b:89:c1:c1:55:77:5f"
