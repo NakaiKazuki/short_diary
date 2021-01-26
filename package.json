@@ -2,11 +2,14 @@
   "name": "short_diary_docker",
   "private": true,
   "dependencies": {
+    "@rails/activestorage": "^6.1.1",
     "@rails/ujs": "^6.1.1",
     "@rails/webpacker": "5.2.1",
     "bootstrap": "^4.6.0",
+    "channels": "^0.0.4",
     "jquery": "^3.5.1",
-    "popper.js": "^1.16.1"
+    "popper.js": "^1.16.1",
+    "turbolinks": "^5.2.0"
   },
   "devDependencies": {
     "webpack-dev-server": "^3.11.2"
