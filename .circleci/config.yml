@@ -7,7 +7,6 @@ orbs:
 
 jobs:
   build:
-    working_directory: ~/app
     docker:
       - image: circleci/ruby:2.7.2-node
         environment:
@@ -15,7 +14,9 @@ jobs:
     steps:
       - checkout
       - ruby/install-deps
-
+      - node/install-packages:
+          pkg-manager: yarn
+          cache-path: 'yarn.lock'
   test:
     parallelism: 3
     docker:
