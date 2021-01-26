@@ -31,7 +31,6 @@ jobs:
           - MYSQL_ROOT_HOST: '%'
       - image: selenium/standalone-chrome:latest
         name: chrome
-
     steps:
       - checkout
       - ruby/install-deps
