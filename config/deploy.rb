@@ -23,6 +23,11 @@ set :keep_releases, 3
 # 出力するログのレベル。
 set :log_level, :debug
 
+# bundler
+set :bundle_flags,      '--quiet' # this unsets --deployment, see details in config_bundler task details
+set :bundle_path,       nil
+set :bundle_without,    nil
+
 # puma
 set :puma_init_active_record, true
 
