@@ -1,10 +1,5 @@
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
-
-  # 追加　本番環境ではJSファイル圧縮
-  config.assets.js_compressor = :uglifier
-  # ここまで
-
   # Code is not reloaded between requests.
   config.cache_classes = true
 
