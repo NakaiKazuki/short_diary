@@ -35,12 +35,17 @@ jobs:
     steps:
       - checkout
       - ruby/install-deps
+      - run:
+          name: yarn Install
+          command: yarn install
+      - run: bundle exec bin/webpack
       - run: mv config/database.yml.ci config/database.yml
       - run:
           name: Wait for DB
           command: dockerize -wait tcp://localhost:3306 -timeout 1m
       - run: bundle exec rake db:create
       - run: bundle exec rake db:schema:load
+
       # Run rspec in parallel
       - ruby/rubocop-check
       - ruby/rspec-test
