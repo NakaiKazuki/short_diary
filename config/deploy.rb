@@ -34,3 +34,18 @@ set :puma_init_active_record, true
 # Nginxの設定ファイル名と置き場所を修正
 set :nginx_sites_enabled_path, '/etc/nginx/conf.d'
 set :nginx_config_name, "#{fetch(:application)}.conf"
+
+namespace :deploy do
+  desc 'Config bundler'
+  task :config_bundler do
+    on roles(/.*/) do
+      within release_path do
+        execute :bundle, :config, '--local deployment true'
+        execute :bundle, :config, '--local without "development test"'
+        execute :bundle, :config, "--local path #{shared_path.join('bundle')}"
+      end
+    end
+  end
+end
+
+before 'bundler:install', 'deploy:config_bundler'
