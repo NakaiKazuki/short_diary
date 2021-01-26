@@ -59,7 +59,6 @@ jobs:
         environment:
           BUNDLER_VERSION: 2.1.4
     steps:
-    steps:
       - checkout
       - node/install-packages:
           pkg-manager: yarn
