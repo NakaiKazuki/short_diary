@@ -1,0 +1,8 @@
+<div class='search'>
+  <%= search_form_for @q do |f| %>
+    <%= f.label :content, '日記検索' %>
+    <%= f.search_field :content_cont, class:'text-field' ,placeholder: '日記の内容を入力してください' %>
+
+    <%= f.submit '検索' ,class: 'search-submit' %>
+  <% end %>
+</div>

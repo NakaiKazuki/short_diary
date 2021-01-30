@@ -1,31 +1,24 @@
-<h1 class="micropost-index-title">Diary</h1>
-<div class="search">
-  <%= search_form_for @q do |f| %>
-    <%= f.label :content, "日記検索" %>
-    <%= f.search_field :content_cont, class:"text-field" ,placeholder: "日記の内容を入力してください" %>
-
-    <%= f.submit "検索" ,class: "search-submit" %>
-  <% end %>
-</div>
+<h1 class='micropost-index-title'>Diary</h1>
+<%= render 'shared/search_field' %>
 <% if current_user.microposts.any? %>
-  <ul class="microposts">
+  <ul class='microposts'>
     <% @microposts.each do |micropost| %>
-      <li class="row micropost",id ="micropost-<%= micropost.id %>" >
-        <div class="col-10 micropost-date"><%= micropost.created_at.strftime("%Y年%-m月%-d日") %></div>
-        <span class= "col-2 micropost-delete">
+      <li class='row micropost',id ="micropost-<%= micropost.id %>" >
+        <div class='col-10 micropost-date'><%= micropost.created_at.strftime('%Y年%-m月%-d日') %></div>
+        <span class= 'col-2 micropost-delete'>
           <% if micropost.user_id == current_user.id %>
-            <%= link_to "削除", micropost_path(micropost), method: :delete,
-                                  data: { confirm: "選択した投稿を削除しますか？" } ,class: "btn btn-sm btn-outline-info" %>
+            <%= link_to '削除', micropost_path(micropost), method: :delete,
+                                  data: { confirm: '選択した投稿を削除しますか？' } ,class: 'btn btn-sm btn-outline-info' %>
           <% end %>
         </span>
-        <div class="col-12">
-          <div class="micropost-content">
+        <div class='col-12'>
+          <div class='micropost-content'>
             <%= micropost.content  %>
           </div>
         </div>
         <% if micropost.picture.attached?%>
-          <div class="col-12 micropost-picture">
-            <%= image_tag micropost.resize_picture,class:"d-none d-md-inline-block" %>
+          <div class='col-12 micropost-picture'>
+            <%= image_tag micropost.resize_picture,class:'d-none d-md-inline-block' %>
           </div>
         <% end %>
       </li>
