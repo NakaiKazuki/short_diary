@@ -1,13 +1,6 @@
 version: '3.1'
 services:
-  chrome:
-    image: selenium/standalone-chrome
-    logging:
-      driver: none
-    ports:
-      - 4444:4444
-
-  webapp:
+  webapp: &app_base
     build:
       context: .
     env_file:
@@ -17,10 +10,20 @@ services:
       - public-data:/short_diary_docker/public
       - tmp-data:/short_diary_docker/tmp
       - log-data:/short_diary_docker/log
-    depends_on:
-      - chrome
+      - node-modules:/short_diary_docker/node_modules
+      - packs:/short_diary_docker/packs
     tty: true
-    command: bundle exec puma -C config/puma.rb
+    command: /bin/sh -c "yarn install --check-files && bundle exec puma -C config/puma.rb"
+
+  webpack:
+    <<: *app_base
+    command: ./bin/webpack-dev-server
+    ports:
+      - 3035:3035
+    depends_on:
+      - webapp
+    tty: true
+    stdin_open: true
 
   db:
     image: mysql:8.0
@@ -32,7 +35,7 @@ services:
     ports:
       - 3306:3306
     depends_on:
-      - webapp
+      - webpack
 
   nginx:
     build:
@@ -45,8 +48,19 @@ services:
     depends_on:
       - db
 
+  chrome:
+    image: selenium/standalone-chrome
+    logging:
+      driver: none
+    ports:
+      - 4444:4444
+    depends_on:
+      - nginx
+
 volumes:
   public-data:
   tmp-data:
   log-data:
   db-data:
+  node-modules:
+  packs:
