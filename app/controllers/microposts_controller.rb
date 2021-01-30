@@ -7,7 +7,9 @@ class MicropostsController < ApplicationController
     if @micropost.save
       redirect_to root_url, flash: { success: '今日の日記が作成されました！' }
     else
-      @microposts = current_user.microposts.page(params[:page]).per(30)
+      @q = current_user.microposts.ransack(params[:q])
+      microposts = @q.result(distinct: true)
+      @pagy, @microposts = pagy(microposts, items: 30)
       render 'static_pages/home'
     end
   end

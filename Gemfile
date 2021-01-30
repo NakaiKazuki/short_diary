@@ -3,19 +3,21 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.7.2'
 
+gem 'autoprefixer-rails'
 gem 'bcrypt'
 gem 'bootsnap', require: false
 gem 'devise'
 gem 'devise-i18n'
+gem 'fast_blank'
 gem 'image_processing'
 gem 'jbuilder'
-gem 'kaminari'
-gem 'kaminari-bootstrap'
 gem 'mini_magick'
 gem 'mysql2'
+gem 'pagy'
 gem 'puma', '< 5'
 gem 'rails', '~> 6.0.3', '>= 6.0.3.4'
 gem 'rails-i18n'
+gem 'ransack'
 gem 'sassc-rails'
 gem 'turbolinks'
 gem 'webpacker'
@@ -27,6 +29,7 @@ group :development, :test do
 end
 
 group :development do
+  gem 'annotate'
   gem 'bcrypt_pbkdf'
   gem 'capistrano'
   gem 'capistrano3-puma', '< 5'

@@ -16,8 +16,8 @@ require:
 
 ## 全体に適応する項目を定義します。ここで Exclude に設定したファイルは、チェック対象外になります。
 AllCops:
-  TargetRubyVersion: 2.6
-  TargetRailsVersion: 5.2
+  TargetRubyVersion: 2.7
+  TargetRailsVersion: 6.0
   Exclude:
     - 'vendor/**/*'
     - 'bin/**/*'
@@ -71,9 +71,11 @@ Lint/StructNewOverride:
 Layout/LineLength:
   Max: 155
 
+#microposts_controller.rb 追加してる
 Metrics/AbcSize:
   Exclude:
     - 'lib/tasks/dev.rake'
+    - 'app/controllers/microposts_controller.rb'
 
 #少し追加してる
 Metrics/BlockLength:
@@ -86,6 +88,7 @@ Metrics/BlockLength:
     - 'lib/tasks/dev.rake'
     - 'config/environments/*'
     - 'config/deploy.rb'
+
 Metrics/ClassLength:
   CountComments: false
 

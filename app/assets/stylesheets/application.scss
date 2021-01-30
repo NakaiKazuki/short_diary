@@ -246,10 +246,29 @@ footer {
      border: none;
      margin: 0 0.04rem;
      border-radius: 10%;
+     margin-left:0.4rem;
      &:hover{
-       color: black;
+       color: white;
        background: darkturquoise;
      }
    }
  }
+}
+
+ // Search-Box
+ .search{
+  text-align: center;
+  padding: 1.5rem 0;
+  .text-field{
+    width:55%;
+
+  }
+  .search-submit{
+    background-color: darkturquoise;
+    color:white;
+    border: 0.14rem solid skyblue;
+    &:hover{
+      background:skyblue;
+    }
+  }
 }

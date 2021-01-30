@@ -1,6 +1,13 @@
 <h1 class="micropost-index-title">Diary</h1>
+<div class="search">
+  <%= search_form_for @q do |f| %>
+    <%= f.label :content, "日記検索" %>
+    <%= f.search_field :content_cont, class:"text-field" ,placeholder: "日記の内容を入力してください" %>
+
+    <%= f.submit "検索" ,class: "search-submit" %>
+  <% end %>
+</div>
 <% if current_user.microposts.any? %>
-  <%= paginate @microposts %>
   <ul class="microposts">
     <% @microposts.each do |micropost| %>
       <li class="row micropost",id ="micropost-<%= micropost.id %>" >
@@ -24,5 +31,5 @@
       </li>
     <% end %>
   </ul>
-  <%= paginate @microposts %>
+  <%== pagy_bootstrap_nav(@pagy) %>
 <% end %>
