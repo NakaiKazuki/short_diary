@@ -1,16 +1,16 @@
-<h1 class="micropost-form-title"> Form</h1>
+<h1 class='micropost-form-title'> Form</h1>
 <%= form_with(model: @micropost, url: microposts_path, local: true) do |f| %>
   <%= render 'shared/error_messages', object: f.object %>
 
-  <div class="form-group">
-    <%= f.text_area :content, autofocus: true, autocomplete: "content", placeholder: "50文字以内で今日の出来事を入力してください。", class: "form-control content-form" %>
+  <div class='form-group'>
+    <%= f.text_area :content, autofocus: true, autocomplete: 'content', placeholder: '50文字以内で今日の出来事を入力してください。', class: 'form-control content-form' %>
   </div>
 
-  <span class="form-group">
-    <%= f.file_field :picture, accept: 'image/jpeg,image/gif,image/png',class: "form-control image-form" %>
+  <span class='form-group'>
+    <%= f.file_field :picture, accept: 'image/jpeg,image/gif,image/png',class: 'form-control image-form' %>
   </span>
 
-  <div class="form-group">
-    <%= f.submit "今日の日記を投稿する", class: "btn btn-outline-info form-control form-submit" %>
+  <div class='form-group'>
+    <%= f.submit '今日の日記を投稿する', class: 'btn btn-outline-info form-control form-submit' %>
   </div>
 <% end %>
