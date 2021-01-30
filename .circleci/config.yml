@@ -14,9 +14,6 @@ jobs:
     steps:
       - checkout
       - ruby/install-deps
-      - node/install-packages:
-          pkg-manager: yarn
-          cache-path: 'yarn.lock'
 
   test:
     docker:
