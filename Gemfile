@@ -38,6 +38,8 @@ group :development do
   gem 'capistrano-rbenv'
   gem 'capistrano-rbenv-vars'
   gem 'ed25519'
+  gem 'letter_opener'
+  gem 'letter_opener_web'
   gem 'listen'
   gem 'rubocop', require: false
   gem 'rubocop-performance', require: false

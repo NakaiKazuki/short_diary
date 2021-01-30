@@ -1,19 +1,20 @@
 // 共通
-body{
- background-image: image-url("background.jpg");
- padding-top: 4.22875rem;
+body {
+  background-image: image-url("background.jpg");
+  padding-top: 4.22875rem;
 }
 
 // header
 .navbar-extend {
   margin-bottom: 0;
   background-color: darkturquoise;
+
   ul li a button {
     padding: 0.375rem 1.5rem;
   }
 }
 
-.navbar-brand{
+.navbar-brand {
   font-size: 1.43rem;
   background-color: white;
   padding: 0.28rem 0.92rem 0.42rem 0.92rem;
@@ -23,8 +24,8 @@ body{
   letter-spacing: 0.07rem;
 }
 
-.nav-item-extend{
-  .btn-extend{
+.nav-item-extend {
+  .btn-extend {
     float: right;
     margin-top: 0.6rem;
     font-size: 1.43rem;
@@ -34,6 +35,7 @@ body{
     letter-spacing: 0.07rem;
   }
 }
+
 /* footer */
 
 footer {
@@ -41,10 +43,12 @@ footer {
   padding-top: 1rem;
   height: 4.5rem;
   background-color: darkturquoise;
+
   ul {
     float: right;
     list-style: none;
     padding-right: 1rem;
+
     a {
       float: left;
       font-size: 1rem;
@@ -53,7 +57,8 @@ footer {
       border: 0.01rem darkturquoise solid;
       border-radius: 0.63rem;
       letter-spacing: 0.07rem;
-      &:hover{
+
+      &:hover {
         text-decoration: none;
       }
     }
@@ -61,44 +66,50 @@ footer {
 }
 
 // headerとfooter以外共通
-.remove-all-margin-padding{
-  margin: 0! important;
-  padding: 0! important;
+.remove-all-margin-padding {
+  margin: 0 ! important;
+  padding: 0 ! important;
 }
 
 // Alert
- .alert{
-   margin: 1.5rem 0;
-   text-align: center;
-   padding: 1.3rem 0;
- }
+.alert {
+  margin: 1.5rem 0;
+  text-align: center;
+  padding: 1.3rem 0;
+}
 
- .alert-notice{
-   color: #155724;
-   background-color: #d4edda;
- }
+.alert-notice {
+  color: #155724;
+  background-color: #d4edda;
+}
 
- .alert-alert{
-   color: #721c24;
-   background-color: #f8d7da;
- }
+.alert-alert {
+  color: #721c24;
+  background-color: #f8d7da;
+}
 
 // jumbotron
 .jumbotron-extend {
   background-image: image-url("note.jpg");
   background-size: cover;
   background-repeat: no-repeat;
+
   .container {
-    h1,p {
+
+    h1,
+    p {
       color: black;
       margin-bottom: 0.75rem;
       opacity: 0.8;
     }
+
     h1 {
       margin-bottom: 1.5rem;
     }
+
     .btn-container {
       margin-top: 2rem;
+
       p {
         margin-top: 1rem;
       }
@@ -113,7 +124,7 @@ footer {
 .password-reset-new-container,
 .password-reset-edit-container,
 .unlock-container,
-.user-edit-container{
+.user-edit-container {
   margin-top: 3rem;
   margin-bottom: 4rem;
   padding: 3.5rem;
@@ -121,20 +132,23 @@ footer {
   border: 0.63rem double skyblue;
   border-radius: 4.4rem;
   text-align: center;
-  .title-container{
+
+  .title-container {
     color: lightskyblue;
     letter-spacing: 0.15rem;
   }
 }
 
 // Form
-.form-group:first-of-type{
+.form-group:first-of-type {
   margin-top: 1.8rem;
 }
-.form-group{
+
+.form-group {
   padding: 0.4rem 0;
 }
-.form-submit{
+
+.form-submit {
   font-size: 1.2rem;
 }
 
@@ -142,6 +156,7 @@ footer {
 #error_explanation {
   text-align: center;
   color: red;
+
   ul {
     display: inline-block;
     text-align: left;
@@ -149,28 +164,30 @@ footer {
     padding: 1rem 0;
   }
 }
+
 .field_with_errors .form-control {
   border-color: red;
 }
 
 // devise/registrations/_user_delete
-  .user-delete-container{
-    width: 40%;
-    margin-top: 5rem;
-    margin-bottom: 4rem;
-    padding: 2rem;
-    background-color: white;
-    border: 0.3rem solid red;
-    border-radius: 1rem;
-    text-align: center;
-    h3{
-      margin-bottom: 2rem;
-      letter-spacing: 0.15rem;
-    }
+.user-delete-container {
+  width: 40%;
+  margin-top: 5rem;
+  margin-bottom: 4rem;
+  padding: 2rem;
+  background-color: white;
+  border: 0.3rem solid red;
+  border-radius: 1rem;
+  text-align: center;
+
+  h3 {
+    margin-bottom: 2rem;
+    letter-spacing: 0.15rem;
   }
+}
 
 // staticpages/home　ログイン時
-.home-container{
+.home-container {
   background-color: white;
   padding-left: 1rem;
   padding-bottom: 4rem;
@@ -178,44 +195,54 @@ footer {
 }
 
 // shared/_micropost-form
-.micropost-form{
+.micropost-form {
   padding-top: 1.5rem;
-  .micropost-form-title{
-    font-family: cursive,Century;
+
+  .micropost-form-title {
+    font-family: cursive, Century;
   }
-  .content-form{
+
+  .content-form {
     height: 7rem;
   }
-  .image-form{
+
+  .image-form {
     height: auto;
     margin: 0.4rem 0;
   }
 }
 
 // shared/_micropost-index
-.micropost-index{
+.micropost-index {
   padding-top: 1.5rem;
-  .micropost-index-title{
+
+  .micropost-index-title {
     margin-bottom: 2rem;
-    font-family: cursive,Century;
+    font-family: cursive, Century;
   }
-  .microposts{
+
+  .microposts {
     list-style: none;
     text-align: left;
-    .micropost{
+
+    .micropost {
       overflow: auto;
       padding: 0.65rem 0;
       border: 0.065rem solid darkturquoise;
-      .micropost-date{
-        font-family: cursive,Century;
+
+      .micropost-date {
+        font-family: cursive, Century;
       }
-      .micropost-delete{
+
+      .micropost-delete {
         text-align: right;
       }
-      .micropost-content{
+
+      .micropost-content {
         white-space: pre-line;
       }
-      .micropost-picture{
+
+      .micropost-picture {
         padding-top: 0.7rem;
         text-align: center;
       }
@@ -224,51 +251,59 @@ footer {
 }
 
 // shared/_link_list
-.link-list{
+.link-list {
   padding-top: 1.5rem;
-  .link-list-title{
+
+  .link-list-title {
     margin-bottom: 2rem;
-    font-family: cursive,Century;
+    font-family: cursive, Century;
   }
-  .link{
+
+  .link {
     width: 9rem;
   }
 }
 
-// Pagination
-.pagination{
-  justify-content: center;
-  .page-item {
-    &.active .page-link{
-      background: darkturquoise;
-   }
-   .page-link{
-     border: none;
-     margin: 0 0.04rem;
-     border-radius: 10%;
-     margin-left:0.4rem;
-     &:hover{
-       color: white;
-       background: darkturquoise;
-     }
-   }
- }
-}
-
- // Search-Box
- .search{
+// shared/search_field
+.search {
   text-align: center;
   padding: 1.5rem 0;
-  .text-field{
-    width:55%;
+
+  .text-field {
+    width: 55%;
 
   }
-  .search-submit{
+
+  .search-submit {
     background-color: darkturquoise;
-    color:white;
+    color: white;
     border: 0.14rem solid skyblue;
-    &:hover{
-      background:skyblue;
+
+    &:hover {
+      background: skyblue;
+    }
+  }
+}
+
+// Pagination機能
+.pagination {
+  justify-content: center;
+
+  .page-item {
+    &.active .page-link {
+      background: darkturquoise;
+    }
+
+    .page-link {
+      border: none;
+      margin: 0 0.04rem;
+      border-radius: 10%;
+      margin-left: 0.4rem;
+
+      &:hover {
+        color: white;
+        background: darkturquoise;
+      }
     }
   }
 }

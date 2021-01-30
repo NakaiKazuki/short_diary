@@ -71,11 +71,9 @@ Lint/StructNewOverride:
 Layout/LineLength:
   Max: 155
 
-#microposts_controller.rb 追加してる
 Metrics/AbcSize:
   Exclude:
     - 'lib/tasks/dev.rake'
-    - 'app/controllers/microposts_controller.rb'
 
 #少し追加してる
 Metrics/BlockLength:
