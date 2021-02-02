@@ -41,6 +41,7 @@ group :development do
   gem 'letter_opener'
   gem 'letter_opener_web'
   gem 'listen'
+  gem 'rack-mini-profiler', require: false
   gem 'rubocop', require: false
   gem 'rubocop-performance', require: false
   gem 'rubocop-rails', require: false

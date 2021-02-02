@@ -61,7 +61,7 @@ RSpec.describe 'DeviseSessionNews', type: :system do
       context '無効なパラメータを送信した場合' do
         it '同じ画面が表示' do
           submit_with_information(email: nil, password: nil)
-          expect(page).to have_selector '.login-container'
+          expect(title).to eq full_title('Login')
         end
 
         describe '警告メッセージが表示' do
@@ -97,15 +97,15 @@ RSpec.describe 'DeviseSessionNews', type: :system do
           end
 
           it 'パスワードが5連続空白の場合はメールは送信されない' do
-            expect do
+            expect {
               submit_with_consecutive_password_empty(5)
-            end.to change { ActionMailer::Base.deliveries.size }.by(0)
+            }.to change { ActionMailer::Base.deliveries.size }.by(0)
           end
 
           it '4連続入力失敗はメールが送信されない' do
-            expect do
+            expect {
               submit_with_consecutive_password_mismatches(4)
-            end.to change { ActionMailer::Base.deliveries.size }.by(0)
+            }.to change { ActionMailer::Base.deliveries.size }.by(0)
           end
 
           it '4連続入力失敗でアカウント凍結予告メッセージが表示' do
@@ -114,9 +114,9 @@ RSpec.describe 'DeviseSessionNews', type: :system do
           end
 
           it '5連続入力失敗でメールが送信される' do
-            expect do
+            expect {
               submit_with_consecutive_password_mismatches(5)
-            end.to change { ActionMailer::Base.deliveries.size }.by(1)
+            }.to change { ActionMailer::Base.deliveries.size }.by(1)
           end
 
           it '5連続入力失敗でアカウント凍結メッセージ表示' do

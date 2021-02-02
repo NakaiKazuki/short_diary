@@ -11,9 +11,9 @@ RSpec.describe 'DeviseUserRegistrationsControllers', type: :request do
       end
 
       it 'アカウントは削除される' do
-        expect do
+        expect {
           delete user_registration_path
-        end.to change(User, :count).by(-1)
+        }.to change(User, :count).by(-1)
       end
     end
 
@@ -23,9 +23,9 @@ RSpec.describe 'DeviseUserRegistrationsControllers', type: :request do
       end
 
       it 'アカウントは削除されない' do
-        expect do
+        expect {
           delete user_registration_path
-        end.to change(User, :count).by(0)
+        }.to change(User, :count).by(0)
       end
 
       it '警告メッセージが表示' do

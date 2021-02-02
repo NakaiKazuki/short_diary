@@ -27,6 +27,8 @@
 #
 class User < ApplicationRecord
   has_many :microposts, dependent: :destroy
+  has_many :favorites, dependent: :destroy
+  has_many :favorite_microposts, through: :favorites, source: :micropost
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable,
@@ -45,6 +47,22 @@ class User < ApplicationRecord
         user.confirmed_at = Time.current
       end
     end
+  end
+# お気に入り登録
+
+  # お気に入り登録する
+  def favorite(micropost)
+    favorite_microposts << micropost
+  end
+
+  # お気に入り登録解除
+  def unfavorite(micropost)
+    favorites.find_by(micropost_id: micropost.id).destroy
+  end
+
+  # 現在のユーザーがお気に入り登録してたらtrueを返す
+  def favorite?(micropost)
+    favorite_microposts.include?(micropost)
   end
 
   private

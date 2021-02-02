@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'SharedMicropostForms', type: :system do
+RSpec.describe 'MicropostForms', type: :system do
   let(:user) { create(:user) }
 
   # 有効な情報を保持したフォーム
@@ -30,7 +30,7 @@ RSpec.describe 'SharedMicropostForms', type: :system do
     find('.form-submit').click
   end
 
-  describe 'shared/_micropost_form layout' do
+  describe 'microposts/_form layout' do
     before do
       sign_in user
       visit root_path
@@ -49,42 +49,42 @@ RSpec.describe 'SharedMicropostForms', type: :system do
 
       describe '各項目が無効なパラメータだと投稿データは作成されない' do
         it 'contentが空白' do
-          expect do
+          expect {
             submit_with_information(nil)
-          end.to change(Micropost, :count).by(0)
+          }.to change(Micropost, :count).by(0)
         end
 
         it 'contentが51文字' do
-          expect do
+          expect {
             submit_with_information('a' * 51)
-          end.to change(Micropost, :count).by(0)
+          }.to change(Micropost, :count).by(0)
         end
 
         it '6MBを超える画像ファイルが含まれるため無効' do
-          expect do
+          expect {
             submit_with_information_add_6mb_picture
-          end.to change(Micropost, :count).by(0)
+          }.to change(Micropost, :count).by(0)
         end
 
         it '画像ファイル以外が含まれるため無効' do
-          expect do
+          expect {
             submit_with_information_add_pdf_file
-          end.to change(Micropost, :count).by(0)
+          }.to change(Micropost, :count).by(0)
         end
       end
     end
 
     context '有効なパラメータを送信した場合' do
       it '投稿が作成される' do
-        expect do
+        expect {
           submit_with_information
-        end.to change(Micropost, :count).by(1)
+        }.to change(Micropost, :count).by(1)
       end
 
       it '5MB以下の画像の場合は投稿が作成される' do
-        expect do
+        expect {
           submit_with_valid_information_add_5mb_picture
-        end.to change(Micropost, :count).by(1)
+        }.to change(Micropost, :count).by(1)
       end
 
       describe '投稿作成完了に付随する処理' do
