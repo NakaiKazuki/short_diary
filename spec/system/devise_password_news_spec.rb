@@ -54,29 +54,29 @@ RSpec.describe 'DevisePasswordNews', type: :system do
 
         it '同じ画面が表示される' do
           submit_with_information(nil)
-          expect(page).to have_selector '.password-reset-new-container'
+          expect(title).to eq full_title('パスワード再設定')
         end
 
         describe 'メールは送信されない' do
           it 'メールアドレスが空' do
-            expect do
+            expect {
               submit_with_information(nil)
-            end.to change { ActionMailer::Base.deliveries.size }.by(0)
+            }.to change { ActionMailer::Base.deliveries.size }.by(0)
           end
 
           it '登録されていないメールアドレス' do
-            expect do
+            expect {
               submit_with_information('invalid@example.com')
-            end.to change { ActionMailer::Base.deliveries.size }.by(0)
+            }.to change { ActionMailer::Base.deliveries.size }.by(0)
           end
         end
       end
 
       context '有効なパラメータを送信した場合' do
         it 'メールが送信' do
-          expect do
+          expect {
             submit_with_information
-          end.to change { ActionMailer::Base.deliveries.size }.by(1)
+          }.to change { ActionMailer::Base.deliveries.size }.by(1)
         end
 
         it 'メール送信メッセージが表示' do

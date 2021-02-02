@@ -47,7 +47,7 @@ RSpec.describe 'DeviseRegistrationEdits', type: :system do
       context '無効なパラメータを送信した場合' do
         it '同じ画面が表示' do
           submit_with_information(email: 'invalid@example', password: nil, password_confirmation: nil, current_password: 'hogehoge')
-          expect(page).to have_selector '.user-edit-container'
+          expect(title).to eq full_title('登録情報編集')
         end
 
         it 'エラーメッセージが表示' do
@@ -56,9 +56,9 @@ RSpec.describe 'DeviseRegistrationEdits', type: :system do
         end
 
         it 'メールアドレスが無効の場合は確認用メールが送信されない' do
-          expect do
+          expect {
             submit_with_information(email: 'invalid@example')
-          end.to change { ActionMailer::Base.deliveries.size }.by(0)
+          }.to change { ActionMailer::Base.deliveries.size }.by(0)
         end
 
         describe '各項目が無効な場合登録情報は変更されない' do
@@ -86,9 +86,9 @@ RSpec.describe 'DeviseRegistrationEdits', type: :system do
 
       context '有効なパラメータを送信した場合' do
         it 'メールアドレスを変更すると確認メールが送信される' do
-          expect do
+          expect {
             submit_with_information
-          end.to change { ActionMailer::Base.deliveries.size }.by(1)
+          }.to change { ActionMailer::Base.deliveries.size }.by(1)
         end
 
         it 'ホーム画面へ移動' do
@@ -115,11 +115,11 @@ RSpec.describe 'DeviseRegistrationEdits', type: :system do
         end
 
         it 'アカウント削除ボタンでアカウント削除', js: true do
-          expect do
+          expect {
             find_button('Delete Account').click
             page.accept_confirm 'アカウントを削除してもよろしいですか？（投稿内容も全て削除されます）'
             expect(page).to have_selector '.alert-notice'
-          end.to change(User, :count).by(-1)
+          }.to change(User, :count).by(-1)
         end
 
         it 'アカウント削除でログアウトされる', js: true do
@@ -143,10 +143,10 @@ RSpec.describe 'DeviseRegistrationEdits', type: :system do
       end
 
       it 'ゲストユーザーは削除できない' do
-        expect do
+        expect {
           find_button('Delete Account').click
           page.accept_confirm 'アカウントを削除してもよろしいですか？（投稿内容も全て削除されます）'
-        end.to change(User, :count).by(0)
+        }.to change(User, :count).by(0)
       end
 
       it '削除実行後ホーム画面へ移動' do

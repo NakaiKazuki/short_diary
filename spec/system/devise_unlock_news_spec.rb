@@ -46,7 +46,7 @@ RSpec.describe 'DeviseUnlockNews', type: :system do
       context '無効なパラメータを送信した場合' do
         it '同じ画面が表示' do
           submit_with_information(nil)
-          expect(page).to have_selector '.unlock-container'
+          expect(title).to eq full_title('アカウント凍結解除メール再送信')
         end
 
         it 'エラーメッセージが表示' do
@@ -56,30 +56,30 @@ RSpec.describe 'DeviseUnlockNews', type: :system do
 
         describe 'メールは送信されない' do
           it 'メールアドレスが空' do
-            expect do
+            expect {
               submit_with_information(nil)
-            end.to change { ActionMailer::Base.deliveries.size }.by(0)
+            }.to change { ActionMailer::Base.deliveries.size }.by(0)
           end
 
           it '登録されていないメールアドレス' do
-            expect do
+            expect {
               submit_with_information('unregistered@example.com')
-            end.to change { ActionMailer::Base.deliveries.size }.by(0)
+            }.to change { ActionMailer::Base.deliveries.size }.by(0)
           end
 
           it '凍結されていないメールアドレス' do
-            expect do
+            expect {
               submit_with_information(not_rozen_user.email)
-            end.to change { ActionMailer::Base.deliveries.size }.by(0)
+            }.to change { ActionMailer::Base.deliveries.size }.by(0)
           end
         end
       end
 
       context '有効なパラメータを送信した場合' do
         it 'メールが送信される' do
-          expect do
+          expect {
             submit_with_information
-          end.to change { ActionMailer::Base.deliveries.size }.by(1)
+          }.to change { ActionMailer::Base.deliveries.size }.by(1)
         end
 
         it 'メール送信メッセージが表示' do

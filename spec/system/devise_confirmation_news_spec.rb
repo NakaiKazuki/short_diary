@@ -45,21 +45,21 @@ RSpec.describe 'DeviseConfirmationNews', type: :system do
       context '無効なパラメータを送信した場合' do
         describe 'メールは送信されない' do
           it 'メールアドレスが空' do
-            expect do
+            expect {
               submit_with_information(nil)
-            end.to change { ActionMailer::Base.deliveries.size }.by(0)
+            }.to change { ActionMailer::Base.deliveries.size }.by(0)
           end
 
           it 'すでに認証済みのメールアドレス' do
-            expect do
+            expect {
               submit_with_information(activate_user.email)
-            end.to change { ActionMailer::Base.deliveries.size }.by(0)
+            }.to change { ActionMailer::Base.deliveries.size }.by(0)
           end
 
           it '未登録のメールアドレス' do
-            expect do
+            expect {
               submit_with_information('unregistered@example.com')
-            end.to change { ActionMailer::Base.deliveries.size }.by(0)
+            }.to change { ActionMailer::Base.deliveries.size }.by(0)
           end
         end
 
@@ -71,9 +71,9 @@ RSpec.describe 'DeviseConfirmationNews', type: :system do
 
       context '有効なパラメータ送信' do
         it 'メールが送信' do
-          expect do
+          expect {
             submit_with_information
-          end.to change { ActionMailer::Base.deliveries.size }.by(1)
+          }.to change { ActionMailer::Base.deliveries.size }.by(1)
         end
 
         it 'メール送信メッセージが表示' do

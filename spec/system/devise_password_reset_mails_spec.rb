@@ -20,7 +20,7 @@ RSpec.describe 'DevisePasswordResetMails', type: :system do
 
     it 'リンククリックでパスワードリセット用ページへ移動' do
       current_email.click_link 'パスワードを変更する。'
-      expect(page).to have_selector '.password-reset-edit-container'
+      expect(title).to eq full_title('パスワード変更')
     end
   end
 end

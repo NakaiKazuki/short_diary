@@ -8,9 +8,9 @@ RSpec.describe 'MicropostDestroys', type: :request do
   describe 'DLETE /microposts/:id' do
     context 'ログイアウト状態の場合' do
       it 'ログアウト時は無効' do
-        expect do
+        expect {
           delete micropost_path(micropost)
-        end.to change(Micropost, :count).by(0)
+        }.to change(Micropost, :count).by(0)
       end
 
       it '警告メッセージが表示' do
@@ -43,9 +43,9 @@ RSpec.describe 'MicropostDestroys', type: :request do
       end
 
       it '投稿は削除される' do
-        expect do
+        expect {
           delete micropost_path(micropost)
-        end.to change(Micropost, :count).by(-1)
+        }.to change(Micropost, :count).by(-1)
       end
 
       it '削除完了メッセージが表示' do

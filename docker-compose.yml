@@ -1,6 +1,6 @@
 version: '3.1'
 services:
-  webapp: &app_base
+  webapp:
     build:
       context: .
     env_file:
@@ -10,20 +10,8 @@ services:
       - public-data:/short_diary_docker/public
       - tmp-data:/short_diary_docker/tmp
       - log-data:/short_diary_docker/log
-      - node-modules:/short_diary_docker/node_modules
-      - packs:/short_diary_docker/packs
     tty: true
-    command: /bin/sh -c "yarn install --check-files && bundle exec puma -C config/puma.rb"
-
-  webpack:
-    <<: *app_base
-    command: ./bin/webpack-dev-server
-    ports:
-      - 3035:3035
-    depends_on:
-      - webapp
-    tty: true
-    stdin_open: true
+    command: bundle exec puma -C config/puma.rb
 
   db:
     image: mysql:8.0
@@ -35,7 +23,7 @@ services:
     ports:
       - 3306:3306
     depends_on:
-      - webpack
+      - webapp
 
   nginx:
     build:
@@ -62,5 +50,3 @@ volumes:
   tmp-data:
   log-data:
   db-data:
-  node-modules:
-  packs:

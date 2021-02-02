@@ -46,7 +46,7 @@ RSpec.describe 'DeviseRegistrationNews', type: :system do
       context '無効なパラメータを送信した場合' do
         it '同じ画面が表示' do
           submit_with_information(email: 'invalid@example', password: 'foo', password_confirmation: 'bar')
-          expect(page).to have_selector '.signup-container'
+          expect(title).to eq full_title('アカウント作成')
         end
 
         it 'エラーメッセージが表示' do
@@ -56,49 +56,49 @@ RSpec.describe 'DeviseRegistrationNews', type: :system do
 
         describe '各項目が無効な値の場合ユーザーは登録されない' do
           it '全項目が無効' do
-            expect do
+            expect {
               submit_with_information(email: 'invalid@example', password: 'foo', password_confirmation: 'bar')
-            end.to change(User, :count).by(0)
+            }.to change(User, :count).by(0)
           end
 
           it 'メールアドレスが無効' do
-            expect do
+            expect {
               submit_with_information(email: 'invalid@example')
-            end.to change(User, :count).by(0)
+            }.to change(User, :count).by(0)
           end
 
           it 'パスワードが無効' do
-            expect do
+            expect {
               submit_with_information(password: 'foo')
-            end.to change(User, :count).by(0)
+            }.to change(User, :count).by(0)
           end
 
           it '確認用パスワードが無効' do
-            expect do
+            expect {
               submit_with_information(password_confirmation: 'foo')
-            end.to change(User, :count).by(0)
+            }.to change(User, :count).by(0)
           end
 
           it 'パスワードと確認用パスワードの不一致は無効' do
-            expect do
+            expect {
               submit_with_information(password_confirmation: 'mismatch_password_confirmation')
-            end.to change(User, :count).by(0)
+            }.to change(User, :count).by(0)
           end
         end
       end
 
       context '有効なパラメータを送信した場合' do
         it 'アカウント登録される' do
-          expect do
+          expect {
             submit_with_information
-          end.to change(User, :count).by(1)
+          }.to change(User, :count).by(1)
         end
 
         describe 'アカウント登録に付随する処理' do
           it 'メールが送信される' do
-            expect do
+            expect {
               submit_with_information
-            end.to change { ActionMailer::Base.deliveries.size }.by(1)
+            }.to change { ActionMailer::Base.deliveries.size }.by(1)
           end
 
           it 'ホーム画面に移動' do

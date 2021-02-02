@@ -1,0 +1,8 @@
+<h1 class='micropost-index-title'>Diary</h1>
+<%= render 'microposts/search_field' %>
+<% if current_user.microposts.any? %>
+  <ul class='microposts'>
+    <%= render @microposts %>
+  </ul>
+  <%== pagy_bootstrap_nav(@pagy) if  @pagy.vars[:count] > 30 %>
+<% end %>

@@ -14,6 +14,10 @@ RSpec.describe 'DevisePasswordEdits', type: :system do
     find('.form-submit').click
   end
 
+  # def full_title(page_title)
+  #   return "#{page_title} | Short Diary"
+  # end
+
   describe 'users/password/edit layout' do
     context 'メールのリンクを経由せずにアクセスした場合' do
       before do
@@ -36,7 +40,7 @@ RSpec.describe 'DevisePasswordEdits', type: :system do
       end
 
       it 'アクセス可能' do
-        expect(page).to have_selector '.password-reset-edit-container'
+        expect(title).to eq full_title('パスワード変更')
       end
 
       describe 'ページ内のリンクの表示確認' do
@@ -68,7 +72,7 @@ RSpec.describe 'DevisePasswordEdits', type: :system do
 
         it '同じ画面が表示される' do
           submit_with_information(password: nil, password_confirmation: nil)
-          expect(page).to have_selector '.password-reset-edit-container'
+          expect(title).to eq full_title('パスワード変更')
         end
 
         describe '各項目が無効な場合パスワードは変更されない' do

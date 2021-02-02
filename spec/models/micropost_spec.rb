@@ -87,4 +87,16 @@ RSpec.describe Micropost, type: :model do
       expect(micropost).to be_valid
     end
   end
+
+  describe 'アソシエーション' do
+    before do
+      micropost.save
+    end
+
+    it '関連するユーザー削除と同時に削除' do
+      expect {
+        user.destroy
+      }.to change(Micropost, :count).by(-1)
+    end
+  end
 end

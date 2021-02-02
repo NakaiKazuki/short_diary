@@ -1,0 +1,31 @@
+<li class='row micropost',id ="micropost-<%= micropost.id %>" >
+  <span class='col-5 micropost-date'><%= micropost.created_at.strftime('%Y年%-m月%-d日') %></span>
+  <span class= 'col-7 micropost-delete'>
+  <% if micropost.user_id == current_user.id %>
+    <span id="favorite_link" class = "favorite-link">
+      <% if current_user.favorite?(micropost) %>
+        <%= form_with(model: current_user.favorites.find_by(micropost_id: micropost.id),method: :delete, local: true) do |f| %>
+          <%= f.submit "Unfavorite",class:"btn btn-success" %>
+        <% end %>
+      <% else %>
+        <%= form_with(model:current_user.favorites.build, local: true) do |f| %>
+          <div><%= hidden_field_tag :micropost_id, micropost.id %></div>
+          <%= f.submit "Favorite" ,class:"btn btn-outline-success"%>
+        <% end %>
+      <% end %>
+    </span>
+    <%= link_to 'Delete', micropost_path(micropost), method: :delete,
+                          data: { confirm: '選択した投稿を削除しますか？' } ,class: 'btn btn-sm btn-outline-info' %>
+  <% end %>
+  </span>
+  <div class='col-12'>
+    <div class='micropost-content'>
+      <%= micropost.content  %>
+    </div>
+  </div>
+  <% if micropost.picture.attached?%>
+    <div class='col-12 micropost-picture'>
+      <%= image_tag micropost.resize_picture,class:'d-none d-md-inline-block' %>
+    </div>
+  <% end %>
+</li>
