@@ -59,7 +59,7 @@ RSpec.describe 'MicropostIndices', type: :system do
         }.to change(Favorite, :count).by(1)
       end
 
-      it 'お気に入り登録後ホーム画面が表示される',js: true do
+      it 'お気に入り登録後ホーム画面が表示される', js: true do
         click_button('Favorite')
         expect(page).to have_current_path root_path, ignore_query: true
       end
@@ -76,7 +76,7 @@ RSpec.describe 'MicropostIndices', type: :system do
         }.to change(Favorite, :count).by(-1)
       end
 
-      it 'お気に入り削除後ホーム画面が表示される' ,js: true do
+      it 'お気に入り削除後ホーム画面が表示される', js: true do
         click_button('Unfavorite')
         expect(page).to have_current_path root_path, ignore_query: true
       end
