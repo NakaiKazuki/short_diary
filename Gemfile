@@ -62,4 +62,5 @@ end
 
 group :production do
   gem 'aws-sdk-s3', require: false
+  gem 'google-analytics-rails'
 end

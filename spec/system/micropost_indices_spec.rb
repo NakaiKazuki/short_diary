@@ -3,6 +3,7 @@ require 'rails_helper'
 RSpec.describe 'MicropostIndices', type: :system do
   let(:user) { create(:user) }
   let!(:micropost) { create(:micropost, :add_picture, user: user) }
+  let(:favorite) { create(:favorite, user: user, micropost: micropost) }
 
   def submit_with_search_word(search_word)
     fill_in '日記の内容を入力してください', with: search_word
@@ -48,6 +49,36 @@ RSpec.describe 'MicropostIndices', type: :system do
       it '検索ワードに当てはまらないものは表示されない' do
         submit_with_search_word('検索ワード')
         expect(page).not_to have_text micropost.content
+      end
+    end
+
+    describe 'お気に入り登録機能' do
+      it 'Favoriteデータが作成される' do
+        expect {
+          click_button('Favorite')
+        }.to change(Favorite, :count).by(1)
+      end
+
+      it 'お気に入り登録後ホーム画面が表示される', js: true do
+        click_button('Favorite')
+        expect(page).to have_current_path root_path, ignore_query: true
+      end
+    end
+
+    describe 'お気に入り登録削除機能' do
+      before do
+        click_button('Favorite')
+      end
+
+      it 'お気に入りデータが削除される' do
+        expect {
+          click_button('Unfavorite')
+        }.to change(Favorite, :count).by(-1)
+      end
+
+      it 'お気に入り削除後ホーム画面が表示される', js: true do
+        click_button('Unfavorite')
+        expect(page).to have_current_path root_path, ignore_query: true
       end
     end
   end

@@ -169,7 +169,7 @@ footer {
   }
 }
 
-// staticpages/home　ログイン時
+// staticpages/home　ログイン時 (views/microposts)
 .home-container {
   background-color: white;
   padding-left: 1rem;
@@ -177,7 +177,7 @@ footer {
   margin: 0 ! important;
 }
 
-// shared/_micropost-form
+// microposts/_micropost-form
 .micropost-form {
   padding-top: 1.5rem;
   .micropost-form-title {
@@ -192,7 +192,7 @@ footer {
   }
 }
 
-// shared/_micropost-index
+// microposts/_micropost-index
 .micropost-index {
   padding-top: 1.5rem;
   .micropost-index-title {
@@ -210,8 +210,12 @@ footer {
       .micropost-date {
         font-family: cursive, Century;
       }
-      .micropost-delete {
-        text-align: right;
+      .micropost-favorite-delete {
+        display: inline-flex;
+        justify-content: flex-end;
+        .micropost-delete{
+          margin-left: 0.5rem;
+        }
       }
       .micropost-content {
         white-space: pre-line;
@@ -232,11 +236,12 @@ footer {
     font-family: cursive, Century;
   }
   .link {
-    width: 9rem;
+    width: 10rem;
+    margin-bottom: 0.4rem;
   }
 }
 
-// shared/search_field
+// microposts/search_field
 .search {
   text-align: center;
   padding: 1.5rem 0;

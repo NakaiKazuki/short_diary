@@ -1,4 +1,8 @@
 Rails.application.configure do
+  # グーグルアナリティクス---
+  GA.tracker = Rails.application.credentials.dig(:google, :analytics)
+  # ---ここまで
+
   # Settings specified here will take precedence over those in config/application.rb.
   # Code is not reloaded between requests.
   config.cache_classes = true
