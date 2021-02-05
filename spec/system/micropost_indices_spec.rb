@@ -52,8 +52,8 @@ RSpec.describe 'MicropostIndices', type: :system do
       end
     end
 
-    describe 'お気に入り登録機能' do
-      it 'Favoriteデータが作成される', js: true do
+    describe 'お気に入り登録機能', js: true do
+      it 'Favoriteデータが作成される' do
         expect {
           click_button('Favorite')
         }.to change(Favorite, :count).by(1)

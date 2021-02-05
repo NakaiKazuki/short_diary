@@ -1,0 +1,4 @@
+<%= form_with(model:current_user.favorites.build) do |f| %>
+  <%= hidden_field_tag :micropost_id, micropost.id %>
+  <%= f.submit "Favorite",class:"btn btn-sm btn-outline-success" %>
+<% end %>
