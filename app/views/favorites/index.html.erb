@@ -1,0 +1,15 @@
+<% provide(:title, 'お気にり入り一覧') %>
+<div class='row favorite-index-container'>
+  <div class='col-lg-10'>
+    <h1 class='title-container'>お気にり入り一覧</h1>
+    <% if @fav_microposts.any? %>
+      <ul class='fav_microposts'>
+         <%= render partial: 'favorites/favorite_microposts', locals:{ fav_microposts: @fav_microposts } %>
+      </ul>
+      <%== pagy_bootstrap_nav(@pagy) if  @pagy.vars[:count] > 20 %>
+    <% end %>
+  </div>
+  <div class='col-lg-2 link-list'>
+    <%= render 'shared/link_list' %>
+  </div>
+</div>

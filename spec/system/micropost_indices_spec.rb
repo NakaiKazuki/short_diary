@@ -20,6 +20,10 @@ RSpec.describe 'MicropostIndices', type: :system do
       expect(page).to have_selector '.micropost-date'
     end
 
+    it 'お気に入り登録フォームが表示' do
+      expect(page).to have_selector '.favorite-form'
+    end
+
     it '投稿内容が表示' do
       expect(page).to have_selector '.micropost-content'
     end
@@ -65,7 +69,7 @@ RSpec.describe 'MicropostIndices', type: :system do
       end
     end
 
-    describe 'お気に入り登録削除機能' do
+    describe 'お気に入り登録解除機能' do
       before do
         click_button('Favorite')
       end

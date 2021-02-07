@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'DeviseUsersSessionsControllers', type: :request do
+RSpec.describe 'DeviseUserSessionsControllers', type: :request do
   describe 'POST /users/guest_sign_in' do
     before do
       post users_guest_sign_in_path

@@ -109,20 +109,26 @@ footer {
   }
 }
 
-// Formがある画面
-.container-extend {
-  margin-top: 3rem;
-  margin-bottom: 4rem;
-  padding: 3.5rem;
-  background-color: white;
-  border: 0.63rem double skyblue;
-  border-radius: 4.4rem;
-  text-align: center;
-  .title-container {
-    color: lightskyblue;
-    letter-spacing: 0.15rem;
+// Pagination機能
+.pagination {
+  justify-content: center;
+  .page-item {
+    &.active .page-link {
+      background: darkturquoise;
+    }
+    .page-link {
+      border: none;
+      margin: 0 0.04rem;
+      border-radius: 10%;
+      margin-left: 0.4rem;
+      &:hover {
+        color: white;
+        background: darkturquoise;
+      }
+    }
   }
 }
+
 
 // Form
 .form-group:first-of-type {
@@ -153,6 +159,34 @@ footer {
   border-color: red;
 }
 
+//Formが大部分を占めるのページレイアウト(Devise関連のページ)
+.container-extend {
+  margin-top: 3rem;
+  margin-bottom: 4rem;
+  padding: 3.5rem;
+  background-color: white;
+  border: 0.63rem double skyblue;
+  border-radius: 4.4rem;
+  text-align: center;
+  .title-container {
+    color: lightskyblue;
+    letter-spacing: 0.15rem;
+  }
+}
+
+// shared/_link_list
+.link-list {
+  padding-top: 1.5rem;
+  .link-list-title {
+    margin-bottom: 2rem;
+    font-family: cursive, Century;
+  }
+  .link {
+    width: 10rem;
+    margin-bottom: 0.6rem;
+  }
+}
+
 // devise/registrations/_user_delete
 .user-delete-container {
   width: 40%;
@@ -169,7 +203,7 @@ footer {
   }
 }
 
-// staticpages/home　ログイン時 (views/microposts)
+// staticpages/home ログイン時 (views/microposts)のhtmlファイル
 .home-container {
   background-color: white;
   padding-left: 1rem;
@@ -199,10 +233,10 @@ footer {
     margin-bottom: 2rem;
     font-family: cursive, Century;
   }
-
   .microposts {
     list-style: none;
-    text-align: left;
+    margin-left: 0;
+    padding-left: 0;
     .micropost {
       overflow: auto;
       padding: 0.65rem 0;
@@ -228,19 +262,6 @@ footer {
   }
 }
 
-// shared/_link_list
-.link-list {
-  padding-top: 1.5rem;
-  .link-list-title {
-    margin-bottom: 2rem;
-    font-family: cursive, Century;
-  }
-  .link {
-    width: 10rem;
-    margin-bottom: 0.4rem;
-  }
-}
-
 // microposts/search_field
 .search {
   text-align: center;
@@ -258,21 +279,40 @@ footer {
   }
 }
 
-// Pagination機能
-.pagination {
-  justify-content: center;
-  .page-item {
-    &.active .page-link {
-      background: darkturquoise;
-    }
-    .page-link {
-      border: none;
-      margin: 0 0.04rem;
-      border-radius: 10%;
-      margin-left: 0.4rem;
-      &:hover {
-        color: white;
-        background: darkturquoise;
+
+// favorites/index
+.favorite-index-container{
+  background-color: white;
+  padding-left: 1rem;
+  padding-bottom: 4rem;
+  margin: 0 ! important;
+  .title-container {
+    margin-top: 3rem;
+    color: lightskyblue;
+    text-align: center;
+    letter-spacing: 0.15rem;
+  }
+  .fav_microposts {
+    margin: 2rem 3rem;
+    padding-left:0;
+    list-style: none;
+    .fav_micropost {
+      overflow: auto;
+      padding: 0.65rem 0;
+      border: 0.065rem solid darkturquoise;
+      .fav_micropost-date {
+        font-family: cursive, Century;
+      }
+      .fav_micropost-favorite_form {
+        display: inline-flex;
+        justify-content: flex-end;
+      }
+      .fav_micropost-content {
+        white-space: pre-line;
+      }
+      .fav_micropost-picture {
+        padding-top: 0.7rem;
+        text-align: center;
       }
     }
   }

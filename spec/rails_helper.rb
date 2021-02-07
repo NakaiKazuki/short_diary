@@ -43,7 +43,6 @@ RSpec.configure do |config|
 
   # テストで使うヘルパーの読み込み
   config.include ApplicationHelpers
-  config.include WaitForAjax
   # ------
 
   #---RSspecを動かすのに必要---
