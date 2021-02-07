@@ -1,0 +1,22 @@
+<% fav_microposts.each do |fav_micropost| %>
+<li class='row fav_micropost'>
+  <div class='col-5 fav_micropost-date'>
+    <%= fav_micropost.created_at.strftime('%Y年%-m月%-d日') %>
+  </div>
+  <span class= 'col-7 fav_micropost-favorite_form'>
+  <% if fav_micropost.user_id == current_user.id %>
+    <%= render partial: 'favorites/favorite_form', locals: {micropost: fav_micropost} %>
+  <% end %>
+  </span>
+  <div class='col-12'>
+    <div class='fav_micropost-content'>
+      <%= fav_micropost.content  %>
+    </div>
+  </div>
+  <% if fav_micropost.picture.attached?%>
+    <div class='col-12 fav_micropost-picture'>
+      <%= image_tag fav_micropost.resize_picture,class:'d-none d-md-inline-block' %>
+    </div>
+  <% end %>
+</li>
+<% end %>

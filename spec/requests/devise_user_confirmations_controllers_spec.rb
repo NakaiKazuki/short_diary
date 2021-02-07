@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'UserConfirmationControllers', type: :request do
+RSpec.describe 'DeviseUsersConfirmationControllers', type: :request do
   let(:user) { create(:user) }
 
   # new

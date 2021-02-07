@@ -11,6 +11,6 @@ Rails.application.routes.draw do
     post 'users/guest_sign_in', to: 'users/sessions#new_guest'
   end
   resources :microposts, only: %i[create destroy]
-  resources :favorites, only: %i[create destroy], param: nil
+  resources :favorites, only: %i[create destroy index], param: nil
   mount LetterOpenerWeb::Engine, at: '/letter_opener' if Rails.env.development?
 end
