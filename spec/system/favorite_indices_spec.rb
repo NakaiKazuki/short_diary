@@ -48,6 +48,10 @@ RSpec.describe 'FavoriteIndices', type: :system do
         expect(page).to have_selector '.favorite-form'
       end
 
+      it 'リンク一覧がある' do
+        expect(page).to have_selector '.link-list'
+      end
+
       describe 'お気に入り登録機能' do
         before do
           click_button('Unfavorite')

@@ -6,7 +6,7 @@ class FavoritesController < ApplicationController
     @micropost = Micropost.find(params[:micropost_id])
     current_user.favorite(@micropost)
     respond_to do |format|
-      format.html { redirect_to root_path }
+      format.html { redirect_to root_url }
       format.js
     end
   end
@@ -16,7 +16,7 @@ class FavoritesController < ApplicationController
     @micropost = Micropost.find(favorite.micropost_id)
     current_user.unfavorite(@micropost)
     respond_to do |format|
-      format.html { redirect_to root_path }
+      format.html { redirect_to root_url }
       format.js
     end
   end
