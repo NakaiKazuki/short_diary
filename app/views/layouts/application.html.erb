@@ -18,7 +18,9 @@
   <body>
     <%= render 'layouts/header' %>
     <div class='container-fluid remove-all-margin-padding'>
-      <%= render 'shared/flash' %>
+      <div id='flash-message'>
+        <%= render 'shared/flash' %>
+      </div>
       <%= yield %>
     </div>
     <%= render 'layouts/footer' %>

@@ -1,11 +1,11 @@
-<li class='row micropost'>
+<li class='row micropost', id="micropost_<%= micropost.id %>">
   <span class='col-5 micropost-date'>
     <%= micropost.created_at.strftime('%Y年%-m月%-d日') %>
   </span>
   <span class= 'col-7 micropost-favorite-delete'>
   <% if micropost.user_id == current_user.id %>
     <%= render partial: 'favorites/favorite_form', locals: {micropost: micropost} %>
-    <%= link_to 'Delete', micropost_path(micropost), method: :delete,
+    <%= link_to 'Delete', micropost_path(micropost), method: :delete, remote: true,
                           data: { confirm: '選択した投稿を削除しますか？' } ,class: 'btn btn-sm btn-outline-info micropost-delete' %>
   <% end %>
   </span>

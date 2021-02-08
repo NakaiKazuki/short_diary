@@ -36,7 +36,7 @@ RSpec.describe 'MicropostIndices', type: :system do
       expect(page).to have_link 'Delete', href: micropost_path(micropost)
     end
 
-    it '投稿削除成功メッセージが表示', js: true do
+    it 'Micropostデータを削除するとメッセージが表示される', js: true do
       expect {
         find_link('Delete', href: micropost_path(micropost)).click
         page.accept_confirm '選択した投稿を削除しますか？'

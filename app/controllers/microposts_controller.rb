@@ -5,6 +5,7 @@ class MicropostsController < ApplicationController
   def create
     @micropost = current_user.microposts.build(micropost_params) if user_signed_in?
     if @micropost.save
+      # flash[:success] = '今日の日記が作成されました！'
       redirect_to root_url, flash: { success: '今日の日記が作成されました！' }
     else
       @q = current_user.microposts.ransack(params[:q])
@@ -15,7 +16,11 @@ class MicropostsController < ApplicationController
 
   def destroy
     @micropost.destroy
-    redirect_to root_url, flash: { success: '投稿が削除されました' }
+    flash.now[:success] = '投稿が削除されました'
+    respond_to do |format|
+      format.html { redirect_to root_url }
+      format.js
+    end
   end
 
   private
