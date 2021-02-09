@@ -4,5 +4,5 @@
   <ul class='microposts'>
     <%= render @microposts %>
   </ul>
-  <%== pagy_bootstrap_nav(@pagy) if @pagy.vars[:count] > 20 %>
+  <%== pagy_bootstrap_nav(@pagy) if @pagy.vars[:count] > 15 %>
 <% end %>
