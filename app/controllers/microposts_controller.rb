@@ -5,11 +5,10 @@ class MicropostsController < ApplicationController
   def create
     @micropost = current_user.microposts.build(micropost_params) if user_signed_in?
     if @micropost.save
-      flash[:success] = '今日の日記が作成されました！'
       redirect_to root_url, flash: { success: '今日の日記が作成されました！' }
     else
       @q = current_user.microposts.ransack(params[:q])
-      @pagy, @microposts = pagy(@q.result(distinct: true))
+      @pagy, @microposts = pagy(@q.result(distinct: true), items: 15)
       render 'static_pages/home'
     end
   end
