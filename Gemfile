@@ -15,6 +15,7 @@ gem 'mini_magick'
 gem 'mysql2'
 gem 'pagy'
 gem 'puma', '< 5'
+gem 'rack-attack'
 gem 'rails', '~> 6.0.3', '>= 6.0.3.4'
 gem 'rails-i18n'
 gem 'ransack'
@@ -23,6 +24,7 @@ gem 'turbolinks'
 gem 'webpacker'
 
 group :development, :test do
+  # gem 'brakeman'
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
   gem 'factory_bot_rails'
   gem 'rspec-rails'
