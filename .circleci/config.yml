@@ -16,6 +16,18 @@ jobs:
       - ruby/install-deps
       - ruby/rubocop-check
 
+  brakeman:
+    docker:
+      - image: circleci/ruby:2.7.2-node
+        environment:
+          - BUNDLER_VERSION: 2.1.4
+    steps:
+      - checkout
+      - ruby/install-deps
+    - run:
+        name: Run Brakeman
+        command: bundle exec brakeman -6 -A -w1
+
   rspec:
     docker:
       - image: circleci/ruby:2.7.2-node
@@ -69,9 +81,12 @@ workflows:
   build_accept_deploy:
     jobs:
       - rubocop
-      - rspec:
+      - brakeman:
           requires:
             - rubocop
+      - rspec:
+          requires:
+            - brakeman
       - deploy:
           requires:
             - rspec
