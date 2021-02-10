@@ -17,6 +17,7 @@
           <div class='form-group'>
             <%= f.password_field :password_confirmation, autocomplete: 'new-password', placeholder: 'パスワード（再入力）', class: 'form-control' %>
           </div>
+          <%= recaptcha_tags %>
 
           <div class='form-group'>
             <%= f.submit 'Signup!', class: 'btn btn-outline-info form-control form-submit' %>

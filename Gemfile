@@ -19,10 +19,10 @@ gem 'rack-attack'
 gem 'rails', '~> 6.0.3', '>= 6.0.3.4'
 gem 'rails-i18n'
 gem 'ransack'
+gem 'recaptcha', require: 'recaptcha/rails'
 gem 'sassc-rails'
 gem 'turbolinks'
 gem 'webpacker'
-
 group :development, :test do
   gem 'brakeman', require: false
   gem 'byebug', platforms: %i[mri mingw x64_mingw]

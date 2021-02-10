@@ -1,7 +1,7 @@
 <% if resource.errors.any? %>
   <div id='error_explanation'>
     <div class='alert alert-danger'>
-      <%= resource.errors.count %>個のエラーがあります。
+      入力欄に<%= resource.errors.count %>個のエラーがあります。
     </div>
     <ul>
       <% resource.errors.full_messages.each do |message| %>
