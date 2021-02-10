@@ -73,7 +73,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
       self.resource = resource_class.new sign_up_params
       resource.validate # Look for any other validation errors besides reCAPTCHA
       set_minimum_password_length
-      flash.now[:recaptcha_error] = I18n.t('recaptcha.errors.verification_failed')
+      flash.now[:recaptcha_error] = flash[:recaptcha_error]
       respond_with_navigational(resource) { render :new }
     end
 end
