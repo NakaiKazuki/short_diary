@@ -24,9 +24,9 @@ jobs:
     steps:
       - checkout
       - ruby/install-deps
-    - run:
-        name: Run Brakeman
-        command: bundle exec brakeman -6 -A -w1
+      - run:
+          name: Run Brakeman
+          command: bundle exec brakeman -6 -A -w1
 
   rspec:
     docker:
