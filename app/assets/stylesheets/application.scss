@@ -159,6 +159,20 @@ footer {
   border-color: red;
 }
 
+.g-recaptcha {
+  margin-right:auto;
+  margin-left:auto;
+  text-align: center;
+  width: 20rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.alert-recaptcha_error {
+  color: #721c24;
+  background-color: #f8d7da;
+}
+
 //Formが大部分を占めるのページレイアウト(Devise関連のページ)
 .container-extend {
   margin-top: 3rem;
@@ -293,7 +307,7 @@ footer {
     letter-spacing: 0.15rem;
   }
   .fav_microposts {
-    margin: 2rem 3rem;
+    margin: auto;
     padding-left:0;
     list-style: none;
     .fav_micropost {
