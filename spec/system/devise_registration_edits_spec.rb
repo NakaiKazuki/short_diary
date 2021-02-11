@@ -111,25 +111,25 @@ RSpec.describe 'DeviseRegistrationEdits', type: :system do
 
       describe 'アカウント削除ボタン' do
         it 'アカウント削除ボタンがある' do
-          expect(page).to have_button 'Delete Account'
+          expect(page).to have_button 'Account Deletion'
         end
 
         it 'アカウント削除ボタンでアカウント削除', js: true do
           expect {
-            find_button('Delete Account').click
+            find_button('Account Deletion').click
             page.accept_confirm 'アカウントを削除してもよろしいですか？（投稿内容も全て削除されます）'
             expect(page).to have_selector '.alert-notice'
           }.to change(User, :count).by(-1)
         end
 
         it 'アカウント削除でログアウトされる', js: true do
-          find_button('Delete Account').click
+          find_button('Account Deletion').click
           page.accept_confirm 'アカウントを削除してもよろしいですか？（投稿内容も全て削除されます）'
           expect(page).to have_link 'Login', href: new_user_session_path
         end
 
         it 'アカウント削除メッセージが表示される', js: true do
-          find_button('Delete Account').click
+          find_button('Account Deletion').click
           page.accept_confirm 'アカウントを削除してもよろしいですか？（投稿内容も全て削除されます）'
           expect(page).to have_selector '.alert-notice'
         end
@@ -144,19 +144,19 @@ RSpec.describe 'DeviseRegistrationEdits', type: :system do
 
       it 'ゲストユーザーは削除できない' do
         expect {
-          find_button('Delete Account').click
+          find_button('Account Deletion').click
           page.accept_confirm 'アカウントを削除してもよろしいですか？（投稿内容も全て削除されます）'
         }.to change(User, :count).by(0)
       end
 
       it '削除実行後ホーム画面へ移動' do
-        find_button('Delete Account').click
+        find_button('Account Deletion').click
         page.accept_confirm 'アカウントを削除してもよろしいですか？（投稿内容も全て削除されます）'
         expect(page).to have_current_path root_path, ignore_query: true
       end
 
       it 'アカウント削除しようとすると削除不可メッセージが表示' do
-        find_button('Delete Account').click
+        find_button('Account Deletion').click
         page.accept_confirm 'アカウントを削除してもよろしいですか？（投稿内容も全て削除されます）'
         expect(page).to have_selector '.alert-alert'
       end
