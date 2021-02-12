@@ -15,7 +15,7 @@ class MicropostsController < ApplicationController
 
   def destroy
     @micropost.destroy
-    flash.now[:success] = '投稿が削除されました'
+    flash.now[:success] = '選択した日記を削除しました'
     respond_to do |format|
       format.html { redirect_to root_url }
       format.js

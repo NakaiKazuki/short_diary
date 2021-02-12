@@ -2,7 +2,7 @@
 
 class Users::RegistrationsController < Devise::RegistrationsController
   before_action :check_guest, only: :destroy
-  prepend_before_action :check_captcha, only: [:create]
+  before_action :check_captcha, only: :create
   # before_action :configure_sign_up_params, only: [:create]
   # before_action :configure_account_update_params, only: [:update]
 
@@ -68,12 +68,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
     end
 
     def check_captcha
-      return if verify_recaptcha
-
       self.resource = resource_class.new sign_up_params
-      resource.validate # Look for any other validation errors besides reCAPTCHA
-      set_minimum_password_length
-      flash.now[:recaptcha_error] = flash[:recaptcha_error]
+      resource.validate
+      return if verify_recaptcha(model: resource)
+
       respond_with_navigational(resource) { render :new }
     end
 end
