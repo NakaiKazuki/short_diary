@@ -1,6 +1,6 @@
 Rails.application.configure do
   # グーグルアナリティクス---
-  GA.tracker = Rails.application.credentials.dig(:google, :analytics)
+  GA.tracker = Rails.application.credentials.dig(:google, :analytics_ua)
   # ---ここまで
 
   # Settings specified here will take precedence over those in config/application.rb.

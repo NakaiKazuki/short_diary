@@ -35,8 +35,7 @@ body {
   }
 }
 
-/* footer */
-
+// footer
 footer {
   border-top: 0.065rem solid mediumturquoise;
   padding-top: 1rem;
@@ -69,7 +68,6 @@ footer {
 
 // Alert
 .alert {
-  margin: 1.5rem 0;
   text-align: center;
   padding: 1.3rem 0;
 }
@@ -84,12 +82,18 @@ footer {
   background-color: #f8d7da;
 }
 
+// headerのすぐしたに出るやつ
+#flash-message{
+  position: fixed;
+  top: auto;
+  width: 100%;
+}
+
 // jumbotron
 .jumbotron-extend {
   background-image: image-url("note.jpg");
   background-size: cover;
   background-repeat: no-repeat;
-
   .container {
     h1,
     p {
@@ -145,6 +149,7 @@ footer {
 
 // Formエラー表示
 #error_explanation {
+  margin: 1.5rem 0;
   text-align: center;
   color: red;
   ul {
@@ -166,11 +171,6 @@ footer {
   width: 20rem;
   margin-top: 1rem;
   margin-bottom: 1rem;
-}
-
-.alert-recaptcha_error {
-  color: #721c24;
-  background-color: #f8d7da;
 }
 
 //Formが大部分を占めるのページレイアウト(Devise関連のページ)
