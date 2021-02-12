@@ -34,6 +34,8 @@ end
 group :development do
   gem 'annotate'
   gem 'bcrypt_pbkdf'
+  gem 'better_errors'
+  gem 'binding_of_caller'
   gem 'capistrano'
   gem 'capistrano3-puma', '< 5'
   gem 'capistrano-bundler'
