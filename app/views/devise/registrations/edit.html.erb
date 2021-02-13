@@ -26,10 +26,8 @@
 
         <div class='form-group'>
           <%= f.label :current_password %> <i>登録情報を変更する場合は現在使用中のパスワードを入力してください</i><br />
-          <%= f.password_field :current_password, autocomplete: 'current-password', placeholder: '現在使用中のパスワード', class: 'form-control' %>
+          <%= f.password_field :current_password, autocomplete: 'current-password', placeholder: '使用中のパスワード', class: 'form-control' %>
         </div>
-
-        <%= recaptcha_tags %>
 
         <div class='form-group'>
           <%= f.submit '登録情報を変更する', class: 'btn btn-outline-info btn-lg  form-control form-submit' %>

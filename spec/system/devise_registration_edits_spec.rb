@@ -13,7 +13,7 @@ RSpec.describe 'DeviseRegistrationEdits', type: :system do
     fill_in '新しいメールアドレス（例：email@example.com）', with: email
     fill_in '新しいパスワード（6文字以上）', with: password
     fill_in '新しいパスワード（再入力）', with: password_confirmation
-    fill_in '現在使用中のパスワード', with: current_password
+    fill_in '使用中のパスワード', with: current_password
     find('.form-submit').click
   end
 
