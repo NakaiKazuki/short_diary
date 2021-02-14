@@ -29,7 +29,7 @@ https://short-diary.com/ <br >
 - Google Analytics
 
 # CircleCi CI/CD
-- Githubへのpush時に、ワークフローとして Rubocop Brakeman RSpecの順で各フローが成功した場合に実行されます。
+- Githubへのpush時に、Rubocop Brakeman RSpecの順で各フローが成功した場合に実行されます。
 - masterブランチへのpushでは、Rubocop Brakeman RSpecが全て成功した場合に限り、Capistranoを使用してEC2への自動デプロイが実行されます。
   自動デプロイ時にはCircleCiが使用しているIPアドレスからEC2へのSSH接続を許可し、デプロイが成功or失敗した場合後に使用したIPアドレスの接続許可を削除します。
 
@@ -96,7 +96,7 @@ $ rails db:create db:migrate db:seed
 $ rails db:migrate RAILS_ENV=test
 ```
 
-Rubocop Brakeman RSpecを実行する場合は、以下のシェルスクリプトでまとめて実行できます。
+Rubocop Brakeman RSpecを実行する場合は、以下のコマンドでまとめて実行できます。
 
 ```
 $ sh check.sh
