@@ -53,6 +53,7 @@ RSpec.describe 'FavoriteIndices', type: :system do
       end
 
       describe 'お気に入り登録機能' do
+        # 投稿のお気に入り削除
         before do
           click_button('Unfavorite')
         end
@@ -63,7 +64,7 @@ RSpec.describe 'FavoriteIndices', type: :system do
           }.to change(Favorite, :count).by(1)
         end
 
-        it 'お気に入り登録後ホーム画面が表示される', js: true do
+        it 'お気に入り登録後お気に入り一覧画面が表示される', js: true do
           click_button('Favorite')
           expect(page).to have_current_path favorites_path, ignore_query: true
         end
@@ -76,7 +77,7 @@ RSpec.describe 'FavoriteIndices', type: :system do
           }.to change(Favorite, :count).by(-1)
         end
 
-        it 'お気に入り削除後ホーム画面が表示される', js: true do
+        it 'お気に入り削除後お気に入り一覧画面が表示される', js: true do
           click_button('Unfavorite')
           expect(page).to have_current_path favorites_path, ignore_query: true
         end
