@@ -405,7 +405,7 @@ DEPENDENCIES
   puma (< 5)
   rack-attack
   rack-mini-profiler
-  rails (~> 6.0.3, >= 6.0.3.4)
+  rails (~> 6.0.3, >= 6.0.3.5)
   rails-i18n
   ransack
   recaptcha
@@ -421,6 +421,7 @@ DEPENDENCIES
   spring-watcher-listen
   sshkit-sudo
   turbolinks
+  tzinfo-data
   web-console
   webpacker
 
