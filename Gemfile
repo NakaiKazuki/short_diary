@@ -16,7 +16,7 @@ gem 'mysql2'
 gem 'pagy'
 gem 'puma', '< 5'
 gem 'rack-attack'
-gem 'rails', '~> 6.0.3', '>= 6.0.3.4'
+gem 'rails', '~> 6.0.3', '>= 6.0.3.5'
 gem 'rails-i18n'
 gem 'ransack'
 gem 'recaptcha', require: 'recaptcha/rails'
@@ -69,3 +69,5 @@ group :production do
   gem 'aws-sdk-s3', require: false
   gem 'google-analytics-rails'
 end
+
+gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
