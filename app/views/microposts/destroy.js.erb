@@ -1,2 +1,4 @@
 $("#micropost_<%= @micropost.id %>").remove();
+$('#flash-message').fadeIn();
 $('#flash-message').html("<%= j(render 'shared/flash') %>");
+setTimeout("$('#flash-message').fadeOut('slow')", 4000);
