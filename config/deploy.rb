@@ -60,4 +60,4 @@ namespace :deploy do
 end
 
 before 'bundler:install', 'deploy:config_bundler'
-after 'deploy:finishing', 'deploydb_seed'
+after 'deploy:finishing', 'deploy:db_seed'
