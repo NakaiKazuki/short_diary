@@ -48,6 +48,16 @@ namespace :deploy do
   end
 
   desc 'Create database'
+  task :db_migrate do
+    on roles(:db) do |_host|
+      with rails_env: fetch(:rails_env) do
+        within current_path do
+          execute :bundle, :exec, :rails, 'db:migrate'
+        end
+      end
+    end
+  end
+  desc 'Create database'
   task :db_seed do
     on roles(:db) do |_host|
       with rails_env: fetch(:rails_env) do
@@ -60,4 +70,5 @@ namespace :deploy do
 end
 
 before 'bundler:install', 'deploy:config_bundler'
-after 'deploy:finishing', 'deploy:db_seed'
+after 'deploy:finishing', 'deploy:db_migrate'
+after 'deploy:db_migrate', 'deploy:db_seed'
