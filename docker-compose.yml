@@ -23,7 +23,7 @@ services:
     tty: true
     depends_on:
       - db
-    command: bundle exec puma -C config/puma.rb
+    command: bash -c "yarn install && bundle exec puma -C config/puma.rb"
 
   nginx:
     build:
