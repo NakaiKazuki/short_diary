@@ -20,6 +20,7 @@ services:
       - public-data:/short_diary_docker/public
       - tmp-data:/short_diary_docker/tmp
       - log-data:/short_diary_docker/log
+      - node_modules:/short_diary_docker/node_modules
     tty: true
     depends_on:
       - db
@@ -50,3 +51,4 @@ volumes:
   tmp-data:
   log-data:
   db-data:
+  node_modules:
