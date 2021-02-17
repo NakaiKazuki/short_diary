@@ -21,9 +21,9 @@ services:
       - tmp-data:/short_diary_docker/tmp
       - log-data:/short_diary_docker/log
     tty: true
-    command: bundle exec puma -C config/puma.rb
     depends_on:
       - db
+    command: bundle exec puma -C config/puma.rb
 
   nginx:
     build:

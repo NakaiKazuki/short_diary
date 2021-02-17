@@ -27,9 +27,8 @@ COPY Gemfile.lock $APP_ROOT/Gemfile.lock
 RUN gem install bundler
 RUN bundle install
 
-COPY . $APP_ROOT
-
 RUN yarn install
-RUN yarn webpack --config ./config/webpack/development.js
+
+COPY . $APP_ROOT
 
 RUN mkdir -p tmp/sockets
