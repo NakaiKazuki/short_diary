@@ -92,12 +92,6 @@ $ docker-compose exec webapp bash
 $ rails db:create db:migrate db:seed
 ```
 
-その後test環境のデータベースへのマイグレーションを実行します。
-
-```
-$ rails db:migrate RAILS_ENV=test
-```
-
 Rubocop Brakeman RSpecを実行する場合は、以下のコマンドでまとめて実行できます。
 
 ```

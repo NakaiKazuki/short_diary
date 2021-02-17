@@ -29,7 +29,7 @@ RUN bundle install
 
 COPY . $APP_ROOT
 
-RUN yarn install --check-files
+RUN yarn install
 RUN yarn webpack --config ./config/webpack/development.js
 
 RUN mkdir -p tmp/sockets
