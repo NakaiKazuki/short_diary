@@ -9,9 +9,11 @@ RUN apt-get update -qq && apt-get install -y \
     imagemagick \
     vim \
     nodejs\
-    yarn \
- && apt-get clean \
- && rm -rf /var/lib/apt/lists/*
+    yarn
+
+RUN apt-get clean
+
+RUN rm -rf /var/lib/apt/lists/*
 
 RUN mkdir /short_diary_docker
 

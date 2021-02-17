@@ -421,7 +421,6 @@ DEPENDENCIES
   spring-watcher-listen
   sshkit-sudo
   turbolinks
-  tzinfo-data
   web-console
   webpacker
 
