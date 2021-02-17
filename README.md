@@ -4,6 +4,7 @@
  スマホからもご利用いただけます。
 <img width="1440" alt="スクリーンショット 2021-02-17 13 42 33" src="https://user-images.githubusercontent.com/62586169/108157535-51342580-7126-11eb-9452-8e4a9f429bda.png">
 <img width="1440" alt="スクリーンショット 2021-02-17 13 43 46" src="https://user-images.githubusercontent.com/62586169/108157540-54c7ac80-7126-11eb-9953-11a6a36571bd.png">
+<img width="426" alt="スクリーンショット 2021-02-17 13 54 12" src="https://user-images.githubusercontent.com/62586169/108158278-f1d71500-7127-11eb-95fc-31809cb7f602.png">
 # URL
 https://short-diary.com/ <br >
 画面中央やや左の「ゲストとしてログイン」のボタンから、メールアドレスとパスワードを入力せずにログインできます。
