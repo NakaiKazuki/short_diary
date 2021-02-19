@@ -106,4 +106,4 @@ $ sh check.sh
 
 # ライセンス
 
-Output Readingは[MITライセンス](https://en.wikipedia.org/wiki/MIT_License)のもとで公開されています。詳細は [LICENSE.md](https://github.com/NakaiKazuki/short_diary/blob/master/LICENSE.md) をご覧ください。
+Short Diaryは[MITライセンス](https://en.wikipedia.org/wiki/MIT_License)のもとで公開されています。詳細は [LICENSE.md](https://github.com/NakaiKazuki/short_diary/blob/master/LICENSE.md) をご覧ください。
