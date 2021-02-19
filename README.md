@@ -90,7 +90,7 @@ $ docker-compose exec webapp bash
 コンテナに入れたらデータベースへseedデータを作成します。
 
 ```
-$ rails db:create db:migrate db:seed
+$ rails db:create db:migrate db:seed && rails db:migrate RAILS_ENV=test
 ```
 
 Rubocop Brakeman RSpecを実行する場合は、以下のコマンドでまとめて実行できます。
